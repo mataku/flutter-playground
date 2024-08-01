@@ -25,6 +25,36 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class BigCard extends StatelessWidget {
+  final WordPair pair;
+
+  const BigCard({
+    super.key,
+    required this.pair,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    final style = theme.textTheme.displayMedium!
+        .copyWith(color: theme.colorScheme.onPrimary);
+
+    return Card(
+      color: theme.colorScheme.primary,
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Text(
+          pair.asLowerCase,
+          style: style,
+          // screen readers
+          semanticsLabel: "${pair.first} ${pair.second}",
+        ),
+      ),
+    );
+  }
+}
+
 // screen state
 class MyAppState extends ChangeNotifier {
   var current = WordPair.random();
@@ -39,12 +69,16 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
+    var pair = appState.current;
 
     return Scaffold(
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('A random AWESOME idea:'),
-          Text(appState.current.asLowerCase),
+          BigCard(pair: pair),
+          SizedBox(
+            height: 10,
+          ),
           ElevatedButton(
               onPressed: () {
                 appState.getNext();
