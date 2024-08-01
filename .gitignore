@@ -1,0 +1,128 @@
+# Built application files
+/build/
+*.apks
+
+# Crashlytics configuations
+com_crashlytics_export_strings.xml
+
+# Local configuration file (sdk path, etc)
+/local.properties
+
+# Gradle generated files
+/.gradle/
+
+# Signing files
+.signing/
+
+# User-specific configurations
+.idea/libraries/
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/.name
+.idea/compiler.xml
+.idea/copyright/profiles_settings.xml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/scopes/scope_settings.xml
+.idea/vcs.xml
+.idea/caches/
+.idea/assetWizardSettings.xml
+.idea/modules.xml
+.idea/gradle.xml
+.idea/kotlinScripting.xml
+.idea/jarRepositories.xml
+.idea/dictionaries/
+.idea/kotlinc.xml
+!.idea/codeStyles/
+.idea/inspectionProfiles/
+.idea/migrations.xml
+.idea/androidTestResultsUserPreferences.xml
+.idea/deploymentTargetDropDown.xml
+.idea/runConfigurations
+.idea/copilot/
+.idea/deploymentTargetSelector.xml
+.idea/other.xml
+
+*.iml
+.env
+
+# Keystore files
+*.jks
+
+# OS-specific files
+/.DS_Store
+/.DS_Store?
+/._*
+/.Spotlight-V100
+/.Trashes
+/ehthumbs.db
+/Thumbs.db
+
+# bundler
+/vendor/
+/.bundle
+
+# direnv
+/.envrc
+
+# others
+*.p12
+/app/*.json
+/fastlane/report.xml
+/fastlane/README.md
+/!fastlane/.env
+/google-services.json
+
+.kotlin/
+
+# Xcode
+#
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+
+## User settings
+xcuserdata/
+
+## Obj-C/Swift specific
+*.hmap
+
+## App packaging
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+## Playgrounds
+/timeline.xctimeline
+/playground.xcworkspace
+
+# Swift Package Manager
+#
+# Add this line if you want to avoid checking in source code from Swift Package Manager dependencies.
+# Packages/
+# Package.pins
+# Package.resolved
+# *.xcodeproj
+#
+# Xcode automatically generates this directory with a .xcworkspacedata file and xcuserdata
+# hence it is not needed unless you have added a package configuration file to your project
+# .swiftpm
+
+.build/
+
+# CocoaPods
+#
+# We recommend against adding the Pods directory to your .gitignore. However
+# you should judge for yourself, the pros and cons are mentioned at:
+# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
+#
+/Pods/
+#
+# Add this line if you want to avoid checking in source code from the Xcode workspace
+# *.xcworkspace
+
+# Carthage
+#
+# Add this line if you want to avoid checking in source code from Carthage dependencies.
+# Carthage/Checkouts
+
+/Carthage/Build/
