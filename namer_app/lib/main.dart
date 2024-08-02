@@ -1,6 +1,5 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -212,6 +211,7 @@ class FavoritesPage extends StatelessWidget {
   }
 }
 
+// https://docs.flutter.dev/ui/layout/tutorial
 class BuildingLayoutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
