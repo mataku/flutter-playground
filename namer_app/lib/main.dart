@@ -1,5 +1,6 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -92,6 +93,8 @@ class _MyHomePageState extends State<MyHomePage> {
         page = GeneratorPage();
       case 1:
         page = FavoritesPage();
+      case 2:
+        page = BuildingLayoutPage();
       default:
         throw UnimplementedError("no widget for $selectedIndex");
     }
@@ -110,6 +113,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 NavigationRailDestination(
                   icon: Icon(Icons.favorite),
                   label: Text('Favorites'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.star),
+                  label: Text('Building'),
                 ),
               ],
               selectedIndex: selectedIndex,
@@ -202,5 +209,155 @@ class FavoritesPage extends StatelessWidget {
           )
       ],
     );
+  }
+}
+
+class BuildingLayoutPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          ImageSection(image: 'images/kota.jpg'),
+          TitleSection(
+              name: "Oeschinen Lake Campground",
+              location: 'Kandersteg, Switzerland'),
+          ButtonSection(),
+          TextSection(
+            description:
+                'Lake Oeschinen lies at the foot of the Blüemlisalp in the '
+                'Bernese Alps. Situated 1,578 meters above sea level, it '
+                'is one of the larger Alpine Lakes. A gondola ride from '
+                'Kandersteg, followed by a half-hour walk through pastures '
+                'and pine forest, leads you to the lake, which warms to 20 '
+                'degrees Celsius in the summer. Activities enjoyed here '
+                'include rowing, and riding the summer toboggan run.',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class TitleSection extends StatelessWidget {
+  final String name;
+  final String location;
+
+  const TitleSection({super.key, required this.name, required this.location});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(32),
+      child: Row(
+        children: [
+          // Expanded: fill remaining space
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Text(
+                    name,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Text(
+                  location,
+                  style: TextStyle(
+                    color: Colors.grey[500],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Icon(
+            Icons.star,
+            color: Colors.red[500],
+          ),
+          const Text('41'),
+        ],
+      ),
+    );
+  }
+}
+
+class ButtonSection extends StatelessWidget {
+  const ButtonSection({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final Color color = Theme.of(context).primaryColor;
+
+    return SizedBox(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          ButtonWithText(color: color, iconData: Icons.call, label: 'CALL'),
+          ButtonWithText(color: color, iconData: Icons.near_me, label: 'ROUTE'),
+          ButtonWithText(color: color, iconData: Icons.share, label: 'SHARE'),
+        ],
+      ),
+    );
+  }
+}
+
+class ButtonWithText extends StatelessWidget {
+  final Color color;
+  final IconData iconData;
+  final String label;
+
+  const ButtonWithText(
+      {super.key,
+      required this.color,
+      required this.iconData,
+      required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(iconData, color: color),
+        Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: Text(
+            label,
+            style: TextStyle(
+                fontSize: 12, fontWeight: FontWeight.w400, color: color),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class TextSection extends StatelessWidget {
+  final String description;
+
+  const TextSection({super.key, required this.description});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(32),
+      child: Text(
+        description,
+        softWrap: true,
+      ),
+    );
+  }
+}
+
+class ImageSection extends StatelessWidget {
+  final String image;
+
+  const ImageSection({super.key, required this.image});
+
+  @override
+  Widget build(BuildContext context) {
+    return Image.asset(image, width: 600, height: 240, fit: BoxFit.cover);
   }
 }
