@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -60,21 +62,45 @@ class FirstScreen extends StatelessWidget {
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           ElevatedButton(
+              child: const Text('Go to first'),
+              onPressed: () {
+                // Navigator.of(context).pushNamed('/second');
+                // MaterialPageRoute: iOS: slideIn, Android: zoonIn
+                // .push(MaterialPageRoute(builder: (_) => const SecondScreen()));
+                GoRouter.of(context).push('/');
+              }),
+          ElevatedButton(
               child: const Text('Go to second'),
               onPressed: () {
                 // Navigator.of(context).pushNamed('/second');
                 // MaterialPageRoute: iOS: slideIn, Android: zoonIn
                 // .push(MaterialPageRoute(builder: (_) => const SecondScreen()));
-                GoRouter.of(context).go('/second');
+                GoRouter.of(context).push('/second');
               }),
           ElevatedButton(
-            child: const Text('Go to third'),
+            child: const Text('Go to third via SecondScreen (go)'),
             onPressed: () {
               // Navigator.of(context) .pushNamed('/second/third');
               // MaterialPageRoute: iOS: slideIn, Android: zoonIn
               // .push(MaterialPageRoute(builder: (_) => const SecondScreen()));
 
+              // go: Go to ThirdScreen via SecondScreen
+              // push: Go to ThirdScreen, back to FirstScreen
+
               GoRouter.of(context).go('/second/third');
+            },
+          ),
+          ElevatedButton(
+            child: const Text('Go to third directly (push)'),
+            onPressed: () {
+              // Navigator.of(context) .pushNamed('/second/third');
+              // MaterialPageRoute: iOS: slideIn, Android: zoonIn
+              // .push(MaterialPageRoute(builder: (_) => const SecondScreen()));
+
+              // go: Go to ThirdScreen via SecondScreen
+              // push: Go to ThirdScreen, back to FirstScreen
+
+              GoRouter.of(context).push('/second/third');
             },
           )
         ]),
@@ -107,7 +133,7 @@ class SecondScreen extends StatelessWidget {
             onPressed: () {
               // Navigator.of(context).pushNamed('/second/third');
               // .push(MaterialPageRoute(builder: (_) => const ThirdScreen()));
-              GoRouter.of(context).go('/second/third');
+              GoRouter.of(context).push('/second/third');
             },
           ),
         ],
