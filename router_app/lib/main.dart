@@ -31,7 +31,12 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const FirstScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const FirstScreen(),
+        '/second': (context) => const SecondScreen(),
+        '/second/third': (context) => const ThirdScreen()
+      },
     );
   }
 }
@@ -46,14 +51,25 @@ class FirstScreen extends StatelessWidget {
         title: const Text('First screen'),
       ),
       body: Center(
-        child: ElevatedButton(
-          child: const Text('Next'),
-          onPressed: () {
-            Navigator.of(context)
-                // MaterialPageRoute: iOS: slideIn, Android: zoonIn
-                .push(MaterialPageRoute(builder: (_) => const SecondScreen()));
-          },
-        ),
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          ElevatedButton(
+              child: const Text('Go to second'),
+              onPressed: () {
+                Navigator.of(context)
+                    // MaterialPageRoute: iOS: slideIn, Android: zoonIn
+                    // .push(MaterialPageRoute(builder: (_) => const SecondScreen()));
+                    .pushNamed('/second');
+              }),
+          ElevatedButton(
+            child: const Text('Go to third'),
+            onPressed: () {
+              Navigator.of(context)
+                  // MaterialPageRoute: iOS: slideIn, Android: zoonIn
+                  // .push(MaterialPageRoute(builder: (_) => const SecondScreen()));
+                  .pushNamed('/second/third');
+            },
+          )
+        ]),
       ),
     );
   }
@@ -82,7 +98,8 @@ class SecondScreen extends StatelessWidget {
             child: const Text('Go to third'),
             onPressed: () {
               Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (_) => const ThirdScreen()));
+                  // .push(MaterialPageRoute(builder: (_) => const ThirdScreen()));
+                  .pushNamed('/second/third');
             },
           ),
         ],
