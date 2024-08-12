@@ -21,6 +21,8 @@ jobs:
           pub-cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
       - name: Install packages
         run: flutter pub get
+      - name: Run build_runner
+        run: dart run build_runner build
       - name: Linter
         run: flutter analyze
       - name: Run tests
