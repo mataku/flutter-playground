@@ -20,7 +20,8 @@ class RecentTracksRepositoryImpl implements RecentTracksRepository {
 
   @override
   Future<Result<List<RecentTrack>>> getRecentTracks(int page) async {
-    final endpoint = RecentTracksEndpoint(params: {'page': page.toString()});
+    final endpoint = RecentTracksEndpoint(
+        params: {'page': page.toString(), 'user': 'matakucom'});
     try {
       final result = await lastFmApiService.request(endpoint);
       return Result.success(result.toRecentTrackList());
