@@ -1,5 +1,8 @@
-class CommonName {
-  final String name;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  CommonName({required this.name});
+part 'common_name.freezed.dart';
+
+@freezed
+class CommonName with _$CommonName {
+  const factory CommonName({required String name}) = _CommonName;
 }

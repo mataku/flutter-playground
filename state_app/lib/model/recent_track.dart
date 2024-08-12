@@ -1,18 +1,16 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:state_app/model/common_name.dart';
 import 'package:state_app/model/artwork.dart';
 
-class RecentTrack {
-  final CommonName artist;
-  final CommonName album;
-  final List<Artwork> images;
-  final String name;
-  final String url;
+part 'recent_track.freezed.dart';
 
-  RecentTrack({
-    required this.artist,
-    required this.album,
-    required this.images,
-    required this.name,
-    required this.url,
-  });
+@freezed
+class RecentTrack with _$RecentTrack {
+  const factory RecentTrack({
+    required CommonName artist,
+    required CommonName album,
+    required List<Artwork> images,
+    required String name,
+    required String url,
+  }) = _RecentTrack;
 }
