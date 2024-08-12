@@ -8,4 +8,4 @@ final _options = BaseOptions(
   queryParameters: {'format': 'json'},
 );
 
-final dioProvider = Provider((ref) => {Dio(_options)});
+final dioProvider = Provider((ref) => Dio(_options));
