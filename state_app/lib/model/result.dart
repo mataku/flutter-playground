@@ -3,7 +3,7 @@ sealed class Result<T> {
 
   factory Result.progress(bool loading) = Progress<T>;
   factory Result.success(T data) = Success<T>;
-  factory Result.failure(Error throwable) = Failure<T>;
+  factory Result.failure(Exception exception) = Failure<T>;
 
   T? getOrNull() {
     if (this is Success<T>) {
@@ -12,9 +12,9 @@ sealed class Result<T> {
     return null;
   }
 
-  Error? exceptionOrNull() {
+  Exception? exceptionOrNull() {
     if (this is Failure<T>) {
-      return (this as Failure<T>).throwable;
+      return (this as Failure<T>).exception;
     }
     return null;
   }
@@ -33,7 +33,7 @@ class Success<T> extends Result<T> {
 }
 
 class Failure<T> extends Result<T> {
-  final Error throwable;
+  final Exception exception;
 
-  Failure(this.throwable);
+  Failure(this.exception);
 }
