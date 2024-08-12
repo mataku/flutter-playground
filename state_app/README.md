@@ -1,16 +1,12 @@
-# state_app
+# State Sample App
 
-A new Flutter project.
+Flutter Architecture Sample like Model-View-ViewModel
 
-## Getting Started
+## Architecture
 
-This project is a starting point for a Flutter application.
+TODO
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- View (Flutter Widget)
+- Presentation layer: ChangeNotifier
+- Data layer: Repository (or use UseCase if there are complex business logic, various data type, or something
+- Domain layer: Dart Class with json_serializable
