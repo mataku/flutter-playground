@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "router_app" "\0"
+            VALUE "FileDescription", "state_app" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "router_app" "\0"
+            VALUE "InternalName", "state_app" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "router_app.exe" "\0"
-            VALUE "ProductName", "router_app" "\0"
+            VALUE "OriginalFilename", "state_app.exe" "\0"
+            VALUE "ProductName", "state_app" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
