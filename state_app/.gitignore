@@ -45,3 +45,6 @@ app.*.map.json
 # freezed
 **/*.g.dart
 **/*.freezed.dart
+
+# mockito
+**/*.mocks.dart
