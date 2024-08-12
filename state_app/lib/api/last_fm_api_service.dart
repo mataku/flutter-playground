@@ -1,5 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_app/api/endpoint/endpoint.dart';
+import 'package:state_app/api/http_provider.dart';
+
+final lastFmApiServiceProvider =
+    Provider((ref) => LastFmApiService(dio: ref.read(dioProvider)));
 
 class LastFmApiService {
   final Dio dio;

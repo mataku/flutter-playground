@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:state_app/repository/recent_tracks_repository.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+final homeNotifierProvider = ChangeNotifierProvider((ref) => HomeNotifier(
+    recentTracksRepository: ref.read(recentTracksRepositoryProvider)));
+
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -31,8 +36,41 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Scaffold(
+        appBar: AppBar(title: const Text('News')),
+        body: const MyHomePage2(title: 'Flutter Demo Home Page'),
+      ),
     );
+  }
+}
+
+class MyHomePage2 extends ConsumerWidget {
+  const MyHomePage2({super.key, required this.title});
+
+  // This widget is the home page of your application. It is stateful, meaning
+  // that it has a State object (defined below) that contains fields that affect
+  // how it looks.
+
+  // This class is the configuration for the state. It holds the values (in this
+  // case the title) provided by the parent (in this case the App widget) and
+  // used by the build method of the State. Fields in a Widget subclass are
+  // always marked "final".
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final notifier = ref.watch(homeNotifierProvider);
+
+    return ListView(children: [
+      MaterialButton(
+        onPressed: () {
+          debugPrint("MATAKUDEBUG button");
+          notifier.fetchData();
+        },
+        child: const Text('Push!!!!!!!'),
+      )
+    ]);
   }
 }
 
@@ -52,6 +90,19 @@ class MyHomePage extends StatefulWidget {
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class HomeNotifier extends ChangeNotifier {
+  final RecentTracksRepository recentTracksRepository;
+
+  HomeNotifier({required this.recentTracksRepository});
+
+  Future fetchData() async {
+    debugPrint("MATAKUDEBUG push!!!!!!!!!!!!!");
+
+    final result = await recentTracksRepository.getRecentTracks(1);
+    debugPrint("MATAKUDEBUG ${result.getOrNull()}");
+  }
 }
 
 class _MyHomePageState extends State<MyHomePage> {
