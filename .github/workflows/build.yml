@@ -2,6 +2,10 @@ name: Build and test
 on:
   push:
 
+env:
+  API_KEY: api_key
+  SHARED_SECRET: shared_secret
+
 jobs:
   build:
     runs-on: ubuntu-latest
