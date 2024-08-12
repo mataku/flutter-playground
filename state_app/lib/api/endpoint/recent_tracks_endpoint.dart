@@ -1,4 +1,3 @@
-import 'package:dio/src/response.dart';
 import 'package:state_app/api/endpoint/endpoint.dart';
 import 'package:state_app/api/response/recent_tracks_api_response.dart';
 

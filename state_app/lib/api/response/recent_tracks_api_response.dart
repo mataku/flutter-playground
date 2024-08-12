@@ -9,6 +9,7 @@ part 'recent_tracks_api_response.g.dart';
 @freezed
 class RecentTracksApiResponse with _$RecentTracksApiResponse {
   const factory RecentTracksApiResponse({
+    // ignore: invalid_annotation_target
     @JsonKey(name: 'recenttracks') required RecentTracksResponse response,
   }) = _RecentTracksApiResponse;
 
@@ -42,6 +43,7 @@ class RecentTracksResponse {
 class RecentTrackResponse with _$RecentTrackResponse {
   const factory RecentTrackResponse({
     required CommonTextResponse artist,
+    // ignore: invalid_annotation_target
     @JsonKey(name: 'image') required List<ImageResponse> images,
     required CommonTextResponse album,
     required String name,
@@ -55,6 +57,7 @@ class RecentTrackResponse with _$RecentTrackResponse {
 @freezed
 class RecentTrackArtist with _$RecentTrackArtist {
   const factory RecentTrackArtist({
+    // ignore: invalid_annotation_target
     @JsonKey(name: '#text') required String name,
   }) = _RecentTrackArtist;
 

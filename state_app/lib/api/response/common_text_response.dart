@@ -6,8 +6,10 @@ part 'common_text_response.g.dart';
 
 @freezed
 class CommonTextResponse with _$CommonTextResponse {
+  // ignore: invalid_annotation_target
   @JsonSerializable(explicitToJson: true)
   factory CommonTextResponse({
+    // ignore: invalid_annotation_target
     @JsonKey(name: '#text') required String name,
   }) = _CommonTextResponse;
 
