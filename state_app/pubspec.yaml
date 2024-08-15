@@ -44,6 +44,7 @@ dependencies:
   json_annotation: ^4.9.0
   json_serializable: ^6.8.0
   envied: ^0.5.4+1
+  collection: ^1.18.0
 
 dev_dependencies:
   flutter_test:
