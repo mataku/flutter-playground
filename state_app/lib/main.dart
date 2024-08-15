@@ -69,16 +69,12 @@ class MyHomePage2 extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.watch(homeNotifierProvider);
     final tracks = notifier.tracks;
-    return ListView.separated(
-        itemBuilder: (context, index) {
-          return RecentTrackComponent(recentTrack: tracks[index], onTap: () {});
-        },
-        separatorBuilder: (context, index) {
-          return const SizedBox(
-            height: 8,
-          );
-        },
-        itemCount: tracks.length);
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return RecentTrackComponent(recentTrack: tracks[index], onTap: () {});
+      },
+      itemCount: tracks.length,
+    );
   }
 }
 
