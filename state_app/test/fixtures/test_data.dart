@@ -1,6 +1,7 @@
 import 'package:state_app/api/response/common_text_response.dart';
 import 'package:state_app/api/response/image_response.dart';
 import 'package:state_app/api/response/recent_tracks_api_response.dart';
+import 'package:state_app/model/artwork.dart';
 
 final testImageResponse = ImageResponse(
   "https://example.com/image.png",
@@ -22,3 +23,13 @@ final testRecentTracksResponse =
 
 final testRecentTrackApiResponse =
     RecentTracksApiResponse(response: testRecentTracksResponse);
+
+final artworks = [
+  const Artwork(size: "extralarge", url: "https://example.com/extralarge.png"),
+  const Artwork(size: "large", url: "https://example.com/large.png"),
+];
+
+const extraLargeArtwork =
+    Artwork(size: "extralarge", url: "https://example.com/extralarge.png");
+const largeArtwork =
+    Artwork(size: "large", url: "https://example.com/large.png");
