@@ -9,13 +9,12 @@ import 'package:state_app/model/result.dart';
 import 'package:state_app/repository/recent_tracks_repository.dart';
 
 import '../fixtures/test_data.dart';
-
 // avoid conflict with original MockDioException implementation in dio package
 import 'recent_tracks_repository_test.mocks.dart' as app_mock;
 
 @GenerateMocks([LastFmApiService, DioException])
 void main() {
-  group('getRcentTracks', () {
+  group('getRecentTracks', () {
     late app_mock.MockLastFmApiService apiService;
     late app_mock.MockDioException dioException;
 
