@@ -64,6 +64,7 @@ dev_dependencies:
   http_mock_adapter: ^0.6.1
   mockito: ^5.4.4
   envied_generator: ^0.5.4+1
+  go_router_builder: ^2.7.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
