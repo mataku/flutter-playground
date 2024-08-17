@@ -6,28 +6,41 @@ import 'package:state_app/page/top_screen.dart';
 
 part 'router.g.dart';
 
-final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();
-final GlobalKey<NavigatorState> shellNavigatorKey = GlobalKey<NavigatorState>();
+final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
+final GlobalKey<NavigatorState> _shellNavigatorKey =
+    GlobalKey<NavigatorState>();
+final GlobalKey<NavigatorState> _homeNavigatorKey = GlobalKey<NavigatorState>();
+final GlobalKey<NavigatorState> _discoverNavigatorKey =
+    GlobalKey<NavigatorState>();
 
 final router = GoRouter(
-  routes: $appRoutes,
-  initialLocation: HomeRoute.path,
-);
+    routes: $appRoutes,
+    initialLocation: HomeRoute.path,
+    navigatorKey: _rootNavigatorKey);
 
-@TypedShellRoute<TopShellRoute>(
-  routes: <TypedRoute<RouteData>>[
-    TypedGoRoute<HomeRoute>(path: HomeRoute.path),
-    TypedGoRoute<DiscoverRoute>(path: DiscoverRoute.path),
+@TypedStatefulShellRoute<TopShellRoute>(
+  branches: <TypedStatefulShellBranch<StatefulShellBranchData>>[
+    TypedStatefulShellBranch<HomeShellBranchData>(
+      routes: <TypedRoute<RouteData>>[
+        TypedGoRoute<HomeRoute>(path: HomeRoute.path),
+      ],
+    ),
+    TypedStatefulShellBranch<DiscoverShellBranchData>(
+      routes: <TypedRoute<RouteData>>[
+        TypedGoRoute<DiscoverRoute>(path: DiscoverRoute.path),
+      ],
+    ),
   ],
 )
-class TopShellRoute extends ShellRouteData {
+class TopShellRoute extends StatefulShellRouteData {
   const TopShellRoute();
 
-  static final GlobalKey<NavigatorState> $navigatorKey = shellNavigatorKey;
+  static final GlobalKey<NavigatorState> $navigatorKey = _shellNavigatorKey;
 
   @override
-  Widget builder(BuildContext context, GoRouterState state, Widget navigator) {
-    return TopScreen(child: navigator);
+  Widget builder(BuildContext context, GoRouterState state,
+      StatefulNavigationShell navigationShell) {
+    return TopScreen(navigationShell: navigationShell);
   }
 }
 
@@ -53,4 +66,16 @@ class DiscoverRoute extends GoRouteData {
   Widget build(BuildContext context, GoRouterState state) {
     return const DiscoverScreen();
   }
+}
+
+class HomeShellBranchData extends StatefulShellBranchData {
+  const HomeShellBranchData();
+
+  static final GlobalKey<NavigatorState> $navigatorKey = _homeNavigatorKey;
+}
+
+class DiscoverShellBranchData extends StatefulShellBranchData {
+  const DiscoverShellBranchData();
+
+  static final GlobalKey<NavigatorState> $navigatorKey = _discoverNavigatorKey;
 }
