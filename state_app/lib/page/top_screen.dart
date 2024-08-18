@@ -21,6 +21,7 @@ class _TopPageState extends State<TopScreen> {
     );
   }
 
+  // tapping area
   BottomNavigationBar _bottomNavigationBar(BuildContext context) {
     return BottomNavigationBar(
       currentIndex: widget.navigationShell.currentIndex,
@@ -41,5 +42,25 @@ class _TopPageState extends State<TopScreen> {
         );
       },
     );
+    // NavigationBar
+    // return NavigationBar(
+    //   selectedIndex: widget.navigationShell.currentIndex,
+    //   destinations: const [
+    //     NavigationDestination(
+    //       icon: Icon(Icons.home),
+    //       label: 'Home',
+    //     ),
+    //     NavigationDestination(
+    //       icon: Icon(Icons.search),
+    //       label: 'Discover',
+    //     ),
+    //   ],
+    //   onDestinationSelected: (index) {
+    //     widget.navigationShell.goBranch(
+    //       index,
+    //       initialLocation: index == widget.navigationShell.currentIndex,
+    //     );
+    //   },
+    // );
   }
 }
