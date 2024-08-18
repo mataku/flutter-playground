@@ -4,12 +4,16 @@ import 'package:state_app/api/response/chart_top_tracks_api_response.dart';
 import 'package:state_app/api/response/common_text_response.dart';
 import 'package:state_app/api/response/image_response.dart';
 import 'package:state_app/api/response/recent_tracks_api_response.dart';
+import 'package:state_app/api/response/track_info_api_response.dart';
 import 'package:state_app/model/artwork.dart';
 import 'package:state_app/model/chart_artist.dart';
 import 'package:state_app/model/chart_track.dart';
 import 'package:state_app/model/common_name.dart';
+import 'package:state_app/model/common_name_and_url.dart';
 import 'package:state_app/model/recent_track.dart';
 import 'package:state_app/model/tag.dart';
+import 'package:state_app/model/track.dart';
+import 'package:state_app/model/wiki.dart';
 
 extension RecentTracksApiResponseExt on RecentTracksApiResponse {
   List<RecentTrack> toRecentTrackList() {
@@ -107,5 +111,56 @@ extension ChartTrackResponseExt on ChartTrackResponse {
 extension ChartTopTracksApiResponseExt on ChartTopTracksApiResponse {
   List<ChartTrack> toChartTrackList() {
     return body.tracks.map((track) => track.toChartTrack()).toList();
+  }
+}
+
+extension TrackInfoArtistExt on TrackInfoArtist {
+  CommonNameAndUrl toTrackArtist() {
+    return CommonNameAndUrl(
+      name: name,
+      url: url,
+    );
+  }
+}
+
+extension WikiResponseExt on WikiResponse {
+  Wiki toWiki() {
+    return Wiki(
+      published: published,
+      summary: summary,
+      content: content,
+    );
+  }
+}
+
+extension TrackAlbumResponseExt on TrackAlbumResponse {
+  TrackAlbum toTrackAlbum() {
+    return TrackAlbum(
+      artist: artist,
+      title: title,
+      mbid: mbid,
+      url: url,
+      images: images.toImageList(),
+    );
+  }
+}
+
+extension TrackInfoResponseExt on TrackInfoResponse {
+  Track toTrack() {
+    return Track(
+      name: name,
+      mbid: mbid,
+      url: url,
+      duration: duration,
+      listeners: listeners,
+      playcount: playcount,
+      artist: artist.toTrackArtist(),
+    );
+  }
+}
+
+extension TrackInfoApiResponseExt on TrackInfoApiResponse {
+  Track toTrack() {
+    return response.toTrack();
   }
 }
