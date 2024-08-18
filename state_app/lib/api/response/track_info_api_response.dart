@@ -1,6 +1,10 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:state_app/api/response/image_response.dart';
+import 'package:state_app/api/response/mapper/response_mapper.dart';
 import 'package:state_app/api/response/top_tags_response.dart';
+import 'package:state_app/model/common_name_and_url.dart';
+import 'package:state_app/model/track.dart';
+import 'package:state_app/model/wiki.dart';
 
 part 'track_info_api_response.freezed.dart';
 part 'track_info_api_response.g.dart';
@@ -14,6 +18,10 @@ class TrackInfoApiResponse with _$TrackInfoApiResponse {
 
   factory TrackInfoApiResponse.fromJson(Map<String, dynamic> json) =>
       _$TrackInfoApiResponseFromJson(json);
+
+  Track toTrack() {
+    return response.toTrack();
+  }
 }
 
 @freezed
@@ -34,6 +42,18 @@ class TrackInfoResponse with _$TrackInfoResponse {
 
   factory TrackInfoResponse.fromJson(Map<String, dynamic> json) =>
       _$TrackInfoResponseFromJson(json);
+
+  Track toTrack() {
+    return Track(
+      name: name,
+      mbid: mbid,
+      url: url,
+      duration: duration,
+      listeners: listeners,
+      playcount: playcount,
+      artist: artist.toTrackArtist(),
+    );
+  }
 }
 
 @JsonSerializable(explicitToJson: true)
@@ -57,6 +77,16 @@ class TrackAlbumResponse {
       _$TrackAlbumResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$TrackAlbumResponseToJson(this);
+
+  TrackAlbum toTrackAlbum() {
+    return TrackAlbum(
+      artist: artist,
+      title: title,
+      mbid: mbid,
+      url: url,
+      images: images.toImageList(),
+    );
+  }
 }
 
 @freezed
@@ -69,15 +99,31 @@ class WikiResponse with _$WikiResponse {
 
   factory WikiResponse.fromJson(Map<String, dynamic> json) =>
       _$WikiResponseFromJson(json);
+
+  Wiki toWiki() {
+    return Wiki(
+      published: published,
+      summary: summary,
+      content: content,
+    );
+  }
 }
 
 @freezed
 class TrackInfoArtist with _$TrackInfoArtist {
-  const factory TrackInfoArtist(
-      {required String name,
-      required String mbid,
-      required String url}) = _TrackInfoArtist;
+  const factory TrackInfoArtist({
+    required String name,
+    required String mbid,
+    required String url,
+  }) = _TrackInfoArtist;
 
   factory TrackInfoArtist.fromJson(Map<String, dynamic> json) =>
       _$TrackInfoArtistFromJson(json);
+
+  CommonNameAndUrl toTrackArtist() {
+    return CommonNameAndUrl(
+      name: name,
+      url: url,
+    );
+  }
 }
