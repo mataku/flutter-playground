@@ -81,7 +81,7 @@ flutter:
   assets:
     - .env
     - asset/image/no_image.png
-    - asset/recent_tracks.json
+    - asset/json/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
