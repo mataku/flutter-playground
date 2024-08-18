@@ -39,7 +39,7 @@ class RecentTracksRepositoryImpl implements RecentTracksRepository {
   @override
   Future<Result<List<RecentTrack>>> getRecentTracksSample(int page) async {
     try {
-      final data = await rootBundle.loadString("asset/recent_tracks.json");
+      final data = await rootBundle.loadString("asset/json/recent_tracks.json");
       final result = json.decode(data) as Map<String, dynamic>;
       final tracks = RecentTracksApiResponse.fromJson(result);
       debugPrint("MATAKUDEBUG fetch sample!!!!!!!!!!!!");

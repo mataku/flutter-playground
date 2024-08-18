@@ -11,16 +11,16 @@ class ArtworkComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     final Widget imageComponent;
 
-    if (imageUrl == null) {
+    if (imageUrl == null || imageUrl?.isEmpty == true) {
       imageComponent = Image.asset(
-        "asset/no_image.png",
+        "asset/image/no_image.png",
         fit: BoxFit.cover,
       );
     } else {
       imageComponent = Image.network(imageUrl!, fit: BoxFit.cover,
           errorBuilder: (BuildContext context, error, stacktrace) {
         return Image.asset(
-          "asset/no_image.png",
+          "asset/image/no_image.png",
           fit: BoxFit.cover,
         );
       });
