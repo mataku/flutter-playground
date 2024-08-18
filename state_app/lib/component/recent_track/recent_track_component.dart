@@ -14,23 +14,26 @@ class RecentTrackComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     final imageUrl = recentTrack.images.imageUrl();
     return Material(
-        child: InkWell(
-            onTap: () {},
-            child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ArtworkComponent(imageUrl: imageUrl, size: 96),
-                    const SizedBox(
-                      width: 16,
-                    ),
-                    RecentTrackTitle(
-                      trackName: recentTrack.name,
-                      artistName: recentTrack.artist.name,
-                    )
-                  ],
-                ))));
+      child: InkWell(
+        onTap: () {},
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              ArtworkComponent(imageUrl: imageUrl, size: 96),
+              const SizedBox(
+                width: 16,
+              ),
+              RecentTrackTitle(
+                trackName: recentTrack.name,
+                artistName: recentTrack.artist.name,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -43,15 +46,23 @@ class RecentTrackTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          trackName,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-        Text(artistName)
-      ],
+    return Flexible(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            trackName,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          Text(
+            artistName,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          )
+        ],
+      ),
     );
   }
 }
