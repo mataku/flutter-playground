@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:state_app/component/artwork_component.dart';
 import 'package:state_app/model/track.dart';
 
 class TrackMetadataComponent extends StatelessWidget {
@@ -11,6 +12,21 @@ class TrackMetadataComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox();
+    return const SizedBox(
+      width: double.infinity,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              child: ArtworkComponent(
+                imageUrl: null,
+                size: 360,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
