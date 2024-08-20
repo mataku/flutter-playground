@@ -15,7 +15,7 @@ class RecentTrackComponent extends StatelessWidget {
     final imageUrl = recentTrack.images.imageUrl();
     return Material(
       child: InkWell(
-        onTap: () {},
+        onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Row(

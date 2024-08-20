@@ -4,6 +4,7 @@ import 'package:state_app/component/recent_track/recent_track_component.dart';
 import 'package:state_app/model/recent_track.dart';
 import 'package:state_app/model/result.dart';
 import 'package:state_app/repository/recent_tracks_repository.dart';
+import 'package:state_app/router/router.dart';
 
 final homeNotifierProvider = ChangeNotifierProvider.autoDispose((ref) {
   final HomeNotifier notifier = HomeNotifier(
@@ -23,7 +24,12 @@ class HomeScreen extends ConsumerWidget {
       child: ListView.builder(
         shrinkWrap: true,
         itemBuilder: (context, index) {
-          return RecentTrackComponent(recentTrack: tracks[index], onTap: () {});
+          return RecentTrackComponent(
+            recentTrack: tracks[index],
+            onTap: () {
+              const TrackDetailRoute().go(context);
+            },
+          );
         },
         itemCount: tracks.length,
       ),
