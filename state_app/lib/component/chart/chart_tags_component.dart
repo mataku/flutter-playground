@@ -21,7 +21,7 @@ class ChartTagsComponent extends StatelessWidget {
             title: 'Top Tags',
           ),
           Expanded(
-            child: _ChartTagsCarousel(
+            child: ChartTagsCarousel(
               tags: tags,
             ),
           ),
@@ -31,10 +31,10 @@ class ChartTagsComponent extends StatelessWidget {
   }
 }
 
-class _ChartTagsCarousel extends StatelessWidget {
+class ChartTagsCarousel extends StatelessWidget {
   final List<Tag> tags;
 
-  const _ChartTagsCarousel({required this.tags});
+  const ChartTagsCarousel({super.key, required this.tags});
 
   @override
   Widget build(BuildContext context) {
