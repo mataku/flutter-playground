@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:state_app/page/discover_screen.dart';
 import 'package:state_app/page/home_screen.dart';
 import 'package:state_app/page/top_screen.dart';
+import 'package:state_app/page/track_detail_screen.dart';
 
 part 'router.g.dart';
 
@@ -22,7 +23,14 @@ final router = GoRouter(
   branches: <TypedStatefulShellBranch<StatefulShellBranchData>>[
     TypedStatefulShellBranch<HomeShellBranchData>(
       routes: <TypedRoute<RouteData>>[
-        TypedGoRoute<HomeRoute>(path: HomeRoute.path),
+        TypedGoRoute<HomeRoute>(
+          path: HomeRoute.path,
+          routes: [
+            TypedGoRoute<TrackDetailRoute>(
+              path: TrackDetailRoute.path,
+            ),
+          ],
+        ),
       ],
     ),
     TypedStatefulShellBranch<DiscoverShellBranchData>(
@@ -65,6 +73,17 @@ class DiscoverRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const DiscoverScreen();
+  }
+}
+
+class TrackDetailRoute extends GoRouteData {
+  const TrackDetailRoute();
+
+  static const path = 'track_detail2';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const TrackDetailScreen();
   }
 }
 
