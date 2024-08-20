@@ -1,6 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:state_app/model/artwork.dart';
 import 'package:state_app/model/common_name_and_url.dart';
+import 'package:state_app/model/tag.dart';
+import 'package:state_app/model/wiki.dart';
 
 part 'track.freezed.dart';
 
@@ -13,7 +15,10 @@ class Track with _$Track {
     required String duration,
     required String listeners,
     required String playcount,
+    required TrackAlbum album,
     required CommonNameAndUrl artist,
+    required List<Tag> tags,
+    required Wiki wiki,
   }) = _Track;
 }
 

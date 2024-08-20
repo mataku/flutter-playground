@@ -4,6 +4,7 @@ import 'package:state_app/api/response/chart_top_tracks_api_response.dart';
 import 'package:state_app/api/response/common_text_response.dart';
 import 'package:state_app/api/response/image_response.dart';
 import 'package:state_app/api/response/recent_tracks_api_response.dart';
+import 'package:state_app/api/response/top_tags_response.dart';
 import 'package:state_app/api/response/track_info_api_response.dart';
 import 'package:state_app/model/artwork.dart';
 import 'package:state_app/model/chart_artist.dart';
@@ -68,6 +69,12 @@ extension ChartArtistResponseExt on ChartArtistResponse {
 extension ChartTopArtistsApiResponseExt on ChartTopArtistsApiResponse {
   List<ChartArtist> toChartArtistList() {
     return body.artists.map((artist) => artist.toChartArtist()).toList();
+  }
+}
+
+extension TagResponseExt on TagResponse {
+  Tag toTag() {
+    return Tag(name: name, url: url);
   }
 }
 
@@ -155,6 +162,9 @@ extension TrackInfoResponseExt on TrackInfoResponse {
       listeners: listeners,
       playcount: playcount,
       artist: artist.toTrackArtist(),
+      album: album.toTrackAlbum(),
+      tags: tags.tagsResponse.map((tag) => tag.toTag()).toList(),
+      wiki: wiki.toWiki(),
     );
   }
 }
