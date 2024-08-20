@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_app/api/endpoint/track_info_endpoint.dart';
 import 'package:state_app/api/last_fm_api_service.dart';
 import 'package:state_app/api/response/mapper/response_mapper.dart';
@@ -9,6 +10,9 @@ import 'package:state_app/api/response/track_info_api_response.dart';
 import 'package:state_app/model/app_error.dart';
 import 'package:state_app/model/result.dart';
 import 'package:state_app/model/track.dart';
+
+final trackRepositoryProvider = Provider((ref) =>
+    TrackRepositoryImpl(lastFmApiService: ref.read(lastFmApiServiceProvider)));
 
 abstract class TrackRepository {
   Future<Result<Track>> getTrack(String track, String artist);
