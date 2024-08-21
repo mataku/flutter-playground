@@ -6,4 +6,4 @@
 
 ## App playground
 
-[state_app](./state_app): App using router, state management, repository pattern, etc.
+[lastfm_app](./lastfm_app): App using router, state management, repository pattern, etc.
