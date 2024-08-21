@@ -12,34 +12,31 @@ class TrackAlbumComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Album',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Album',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        const Padding(padding: EdgeInsets.only(top: 8)),
+        Row(
+          children: [
+            const ArtworkComponent(
+              imageUrl: null,
+              size: 96,
             ),
-          ),
-          const Padding(padding: EdgeInsets.only(top: 8)),
-          Row(
-            children: [
-              const ArtworkComponent(
-                imageUrl: null,
-                size: 96,
-              ),
-              const Padding(padding: EdgeInsets.only(left: 16)),
-              AlbumTitleComponent(
-                title: album.title,
-                artist: album.artist,
-              )
-            ],
-          ),
-        ],
-      ),
+            const Padding(padding: EdgeInsets.only(left: 16)),
+            AlbumTitleComponent(
+              title: album.title,
+              artist: album.artist,
+            )
+          ],
+        ),
+      ],
     );
   }
 }
@@ -61,7 +58,10 @@ class AlbumTitleComponent extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(fontWeight: FontWeight.w500),
+          style: const TextStyle(
+            fontWeight: FontWeight.w500,
+            fontSize: 16,
+          ),
         ),
         Text(
           artist,
