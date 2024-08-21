@@ -121,6 +121,7 @@ const _testTrackResponse = TrackInfoResponse(
 );
 
 const testTrackApiResponse = TrackInfoApiResponse(response: _testTrackResponse);
+final testTrack = testTrackApiResponse.toTrack();
 
 final artworks = [
   const Artwork(size: "extralarge", url: "https://example.com/extralarge.png"),

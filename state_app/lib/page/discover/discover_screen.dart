@@ -10,8 +10,8 @@ import 'package:state_app/model/tag.dart';
 import 'package:state_app/repository/chart_repository.dart';
 
 final discoverNotifierProvider = ChangeNotifierProvider.autoDispose((ref) {
-  final _DiscoverNotifier notifier =
-      _DiscoverNotifier(chartRepository: ref.read(chartRepositoryProvider));
+  final DiscoverNotifier notifier =
+      DiscoverNotifier(chartRepository: ref.read(chartRepositoryProvider));
   notifier.fetchCharts();
   return notifier;
 });
@@ -45,10 +45,10 @@ class DiscoverScreen extends ConsumerWidget {
   }
 }
 
-class _DiscoverNotifier extends ChangeNotifier {
+class DiscoverNotifier extends ChangeNotifier {
   final ChartRepository chartRepository;
 
-  _DiscoverNotifier({required this.chartRepository});
+  DiscoverNotifier({required this.chartRepository});
 
   List<ChartTrack> tracks = List.empty();
   List<ChartArtist> artists = List.empty();
