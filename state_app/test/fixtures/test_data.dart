@@ -4,8 +4,11 @@ import 'package:state_app/api/response/chart_top_tags_api_response.dart';
 import 'package:state_app/api/response/chart_top_tracks_api_response.dart';
 import 'package:state_app/api/response/common_text_response.dart';
 import 'package:state_app/api/response/image_response.dart';
+import 'package:state_app/api/response/mapper/response_mapper.dart';
 import 'package:state_app/api/response/paging_attr_body_response.dart';
 import 'package:state_app/api/response/recent_tracks_api_response.dart';
+import 'package:state_app/api/response/top_tags_response.dart';
+import 'package:state_app/api/response/track_info_api_response.dart';
 import 'package:state_app/model/artwork.dart';
 
 const pagingAttrResponse = PagingAttrBodyResponse(
@@ -69,6 +72,9 @@ final testChartTrackApiResponse = ChartTopTracksApiResponse(
   pagingAttrBodyResponse: pagingAttrResponse,
 ));
 
+final testChartArtistList = testChartArtistApiResponse.toChartArtistList();
+final testChartTrackList = testChartTrackApiResponse.toChartTrackList();
+
 const testChartTagApiResponse = ChartTopTagsApiResponse(
   body: ChartTopTagsApiBody(
     tags: [
@@ -80,6 +86,41 @@ const testChartTagApiResponse = ChartTopTagsApiResponse(
     pagingAttrBodyResponse: pagingAttrResponse,
   ),
 );
+
+final testChartTagList = testChartTagApiResponse.toTagList();
+
+const _testTrackResponse = TrackInfoResponse(
+  name: 'Supernova',
+  mbid: 'trackmbid',
+  url: 'https://example.com/supernova',
+  duration: '300000',
+  listeners: '100000',
+  playcount: '200000',
+  album: TrackAlbumResponse(
+    artist: 'aespa',
+    title: 'Armageddon',
+    mbid: 'mbid',
+    url: 'https://example.com/armageddon',
+    images: [],
+  ),
+  artist: TrackInfoArtist(
+    name: 'aespa',
+    mbid: 'mbid',
+    url: 'https://example.com/aespa',
+  ),
+  wiki: WikiResponse(
+    published: 'published',
+    summary: 'summary',
+    content: 'content',
+  ),
+  tags: TopTagsResponse(
+    tagsResponse: [
+      TagResponse(name: 'tag', url: 'https://example.com/tag'),
+    ],
+  ),
+);
+
+const testTrackApiResponse = TrackInfoApiResponse(response: _testTrackResponse);
 
 final artworks = [
   const Artwork(size: "extralarge", url: "https://example.com/extralarge.png"),
