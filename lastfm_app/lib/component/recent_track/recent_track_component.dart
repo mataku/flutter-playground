@@ -17,11 +17,19 @@ class RecentTrackComponent extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.only(
+            left: 16,
+            right: 16,
+            top: 8,
+            bottom: 8,
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              ArtworkComponent(imageUrl: imageUrl, size: 96),
+              ArtworkComponent(
+                imageUrl: imageUrl,
+                size: 56,
+              ),
               const SizedBox(
                 width: 16,
               ),
@@ -52,7 +60,7 @@ class RecentTrackTitle extends StatelessWidget {
         children: [
           Text(
             trackName,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
@@ -60,6 +68,7 @@ class RecentTrackTitle extends StatelessWidget {
             artistName,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
+            style: const TextStyle(fontSize: 12),
           )
         ],
       ),
