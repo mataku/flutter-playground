@@ -26,20 +26,32 @@ class DiscoverScreen extends ConsumerWidget {
     final artists = notifier.artists;
     final tags = notifier.tags;
     return SafeArea(
-      child: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: ChartTracksComponent(tracks: tracks),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'Discover',
           ),
-          const SliverPadding(padding: EdgeInsets.only(top: 8, bottom: 8)),
-          SliverToBoxAdapter(
-            child: ChartArtistsComponent(artists: artists),
+          surfaceTintColor: Colors.white,
+          bottom: const PreferredSize(
+            preferredSize: Size.fromHeight(12),
+            child: Divider(),
           ),
-          const SliverPadding(padding: EdgeInsets.only(top: 8, bottom: 8)),
-          SliverToBoxAdapter(
-            child: ChartTagsComponent(tags: tags),
-          ),
-        ],
+        ),
+        body: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: ChartTracksComponent(tracks: tracks),
+            ),
+            const SliverPadding(padding: EdgeInsets.only(top: 8, bottom: 8)),
+            SliverToBoxAdapter(
+              child: ChartArtistsComponent(artists: artists),
+            ),
+            const SliverPadding(padding: EdgeInsets.only(top: 8, bottom: 8)),
+            SliverToBoxAdapter(
+              child: ChartTagsComponent(tags: tags),
+            ),
+          ],
+        ),
       ),
     );
   }
