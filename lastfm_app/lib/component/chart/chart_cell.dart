@@ -17,12 +17,14 @@ class ChartCell extends StatelessWidget {
     return SizedBox(
       width: 140,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ArtworkComponent(
             imageUrl: artworkUrl,
             size: 140,
           ),
+          const Padding(padding: EdgeInsets.only(top: 8)),
           Flexible(
             child: Text(
               title,
