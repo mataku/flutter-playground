@@ -78,7 +78,7 @@ class RecentTracksEndpoint extends Endpoint<RecentTracksApiResponse> {
 
 // usage
 final recentEndpoint = RecentTrackEndpoint(params: {'username': 'mataku'});
-final response = lastFmApiService.request(recentEndpoint); // RecentTracksApiResponse type
+final response = await lastFmApiService.request(recentEndpoint); // RecentTracksApiResponse type
 ```
 
 
