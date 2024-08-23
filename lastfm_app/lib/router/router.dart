@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:state_app/page/detail/track_detail_screen.dart';
-import 'package:state_app/page/discover/discover_screen.dart';
-import 'package:state_app/page/home/home_screen.dart';
-import 'package:state_app/page/top_screen.dart';
+import 'package:state_app/ui/detail/track_detail_screen.dart';
+import 'package:state_app/ui/discover/discover_screen.dart';
+import 'package:state_app/ui/home/home_screen.dart';
+import 'package:state_app/ui/top_screen.dart';
 
 part 'router.g.dart';
 

@@ -7,8 +7,8 @@ import 'package:state_app/model/chart_artist.dart';
 import 'package:state_app/model/chart_track.dart';
 import 'package:state_app/model/result.dart';
 import 'package:state_app/model/tag.dart';
-import 'package:state_app/page/discover/discover_screen.dart';
 import 'package:state_app/repository/chart_repository.dart';
+import 'package:state_app/ui/discover/discover_screen.dart';
 
 import '../../fixtures/test_data.dart';
 import 'discover_notifier_test.mocks.dart';

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:state_app/component/artwork_component.dart';
-import 'package:state_app/component/chart/chart_tags_component.dart';
-import 'package:state_app/component/details/track_album_component.dart';
-import 'package:state_app/component/details/track_metadata.dart';
-import 'package:state_app/component/details/track_title.dart';
-import 'package:state_app/component/wiki_component.dart';
 import 'package:state_app/model/track.dart';
+import 'package:state_app/ui/common/artwork_component.dart';
+import 'package:state_app/ui/common/wiki_component.dart';
+import 'package:state_app/ui/detail/component/track_album_component.dart';
+import 'package:state_app/ui/detail/component/track_metadata.dart';
+import 'package:state_app/ui/detail/component/track_title.dart';
+import 'package:state_app/ui/discover/component/chart_tags_component.dart';
 
 class TrackContentComponent extends StatelessWidget {
   final Track track;

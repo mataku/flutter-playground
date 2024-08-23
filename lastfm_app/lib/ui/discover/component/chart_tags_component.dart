@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:state_app/component/header.dart';
-import 'package:state_app/component/tag_component.dart';
+import 'package:state_app/ui/common/header.dart';
+import 'package:state_app/ui/common/tag_component.dart';
 import 'package:state_app/model/tag.dart';
 
 class ChartTagsComponent extends StatelessWidget {

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:state_app/component/chart/chart_artists_component.dart';
-import 'package:state_app/component/chart/chart_tags_component.dart';
-import 'package:state_app/component/chart/chart_tracks_component.dart';
 import 'package:state_app/model/chart_artist.dart';
 import 'package:state_app/model/chart_track.dart';
 import 'package:state_app/model/result.dart';
 import 'package:state_app/model/tag.dart';
 import 'package:state_app/repository/chart_repository.dart';
+import 'package:state_app/ui/discover/component/chart_artists_component.dart';
+import 'package:state_app/ui/discover/component/chart_tags_component.dart';
+import 'package:state_app/ui/discover/component/chart_tracks_component.dart';
 
 final discoverNotifierProvider = ChangeNotifierProvider.autoDispose((ref) {
   final DiscoverNotifier notifier =

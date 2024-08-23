@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:state_app/component/recent_track/recent_track_component.dart';
 import 'package:state_app/model/recent_track.dart';
 import 'package:state_app/model/result.dart';
 import 'package:state_app/repository/recent_tracks_repository.dart';
 import 'package:state_app/router/router.dart';
+import 'package:state_app/ui/home/component/recent_track_component.dart';
 
 final scrobbleNotifierProvider = ChangeNotifierProvider.autoDispose((ref) {
   final ScrobbleNotifier notifier = ScrobbleNotifier(

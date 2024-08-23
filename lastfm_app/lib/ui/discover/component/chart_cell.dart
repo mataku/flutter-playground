@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:state_app/component/artwork_component.dart';
+import 'package:state_app/ui/common/artwork_component.dart';
 
 class ChartCell extends StatelessWidget {
   final String title;

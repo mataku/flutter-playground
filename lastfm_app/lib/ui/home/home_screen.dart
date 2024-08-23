@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:state_app/page/home/scrobble_screen.dart';
+import 'package:state_app/ui/home/scrobble_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});

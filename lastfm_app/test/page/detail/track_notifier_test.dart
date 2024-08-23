@@ -5,8 +5,8 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:state_app/model/result.dart';
 import 'package:state_app/model/track.dart';
-import 'package:state_app/page/detail/track_detail_screen.dart';
 import 'package:state_app/repository/track_repository.dart';
+import 'package:state_app/ui/detail/track_detail_screen.dart';
 
 import '../../fixtures/test_data.dart';
 import 'track_notifier_test.mocks.dart';
