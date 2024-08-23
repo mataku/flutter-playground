@@ -1,4 +1,4 @@
-import 'package:dio/src/response.dart';
+import 'package:dio/dio.dart';
 import 'package:state_app/api/endpoint/endpoint.dart';
 import 'package:state_app/api/response/user/top_albums_api_response.dart';
 
