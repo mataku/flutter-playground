@@ -6,6 +6,7 @@ import 'package:state_app/api/response/image_response.dart';
 import 'package:state_app/api/response/recent_track/recent_tracks_api_response.dart';
 import 'package:state_app/api/response/top_tags_response.dart';
 import 'package:state_app/api/response/track/track_info_api_response.dart';
+import 'package:state_app/api/response/user/top_albums_api_response.dart';
 import 'package:state_app/model/artwork.dart';
 import 'package:state_app/model/chart_artist.dart';
 import 'package:state_app/model/chart_track.dart';
@@ -14,6 +15,7 @@ import 'package:state_app/model/common_name_and_url.dart';
 import 'package:state_app/model/recent_track.dart';
 import 'package:state_app/model/tag.dart';
 import 'package:state_app/model/track.dart';
+import 'package:state_app/model/user/top_album.dart';
 import 'package:state_app/model/wiki.dart';
 
 extension RecentTracksApiResponseExt on RecentTracksApiResponse {
@@ -172,5 +174,23 @@ extension TrackInfoResponseExt on TrackInfoResponse {
 extension TrackInfoApiResponseExt on TrackInfoApiResponse {
   Track toTrack() {
     return response.toTrack();
+  }
+}
+
+extension AlbumResponseExt on AlbumResponse {
+  TopAlbum toTopAlbum() {
+    return TopAlbum(
+        name: name,
+        playcount: playcount,
+        mbid: mbid,
+        url: url,
+        artist: artist.toTrackArtist(),
+        images: images.toImageList());
+  }
+}
+
+extension TopAlbumsApiResponseExt on TopAlbumsApiResponse {
+  List<TopAlbum> toTopAlbumList() {
+    return response.albums.map((album) => album.toTopAlbum()).toList();
   }
 }
