@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:state_app/api/response/track_info_api_response.dart';
+import 'package:state_app/api/response/track/track_info_api_response.dart';
 
 import '../../fixture.dart';
 

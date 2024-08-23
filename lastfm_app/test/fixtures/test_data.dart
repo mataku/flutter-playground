@@ -1,14 +1,14 @@
 import 'package:dio/dio.dart';
-import 'package:state_app/api/response/chart_top_artists_api_response.dart';
-import 'package:state_app/api/response/chart_top_tags_api_response.dart';
-import 'package:state_app/api/response/chart_top_tracks_api_response.dart';
+import 'package:state_app/api/response/chart/chart_top_artists_api_response.dart';
+import 'package:state_app/api/response/chart/chart_top_tags_api_response.dart';
+import 'package:state_app/api/response/chart/chart_top_tracks_api_response.dart';
 import 'package:state_app/api/response/common_text_response.dart';
 import 'package:state_app/api/response/image_response.dart';
 import 'package:state_app/api/response/mapper/response_mapper.dart';
 import 'package:state_app/api/response/paging_attr_body_response.dart';
-import 'package:state_app/api/response/recent_tracks_api_response.dart';
+import 'package:state_app/api/response/recent_track/recent_tracks_api_response.dart';
 import 'package:state_app/api/response/top_tags_response.dart';
-import 'package:state_app/api/response/track_info_api_response.dart';
+import 'package:state_app/api/response/track/track_info_api_response.dart';
 import 'package:state_app/model/artwork.dart';
 
 const pagingAttrResponse = PagingAttrBodyResponse(
