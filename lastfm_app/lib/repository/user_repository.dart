@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_app/api/endpoint/user_top_albums_endpoint.dart';
 import 'package:state_app/api/last_fm_api_service.dart';
 import 'package:state_app/api/response/mapper/response_mapper.dart';
@@ -8,6 +10,9 @@ import 'package:state_app/api/response/user/top_albums_api_response.dart';
 import 'package:state_app/model/app_error.dart';
 import 'package:state_app/model/result.dart';
 import 'package:state_app/model/user/top_album.dart';
+
+final userRepositoryProvider = Provider((ref) =>
+    UserRepositoryImpl(lastFmApiService: ref.read(lastFmApiServiceProvider)));
 
 abstract class UserRepository {
   Future<Result<List<TopAlbum>>> getTopAlbums(int page);
@@ -37,6 +42,7 @@ class UserRepositoryImpl implements UserRepository {
     final data = await rootBundle.loadString("asset/json/user_top_albums.json");
     final result = json.decode(data) as Map<String, dynamic>;
     final albums = TopAlbumsApiResponse.fromJson(result);
+    debugPrint("MATAKUDEBUG $albums");
     return Result.success(albums.toTopAlbumList());
   }
 }
