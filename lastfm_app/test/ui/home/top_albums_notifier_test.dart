@@ -32,7 +32,7 @@ void main() {
           .thenAnswer((_) async => Result.success(topAlbums));
       final notifier = TopAlbumsNotifier(userRepository: userRepository);
       await notifier.fetchData();
-      expect(notifier.albums.isNotEmpty, true);
+      expect(notifier.topAlbumsState.topAlbums.isNotEmpty, true);
     });
 
     test('request failed', () async {
@@ -41,7 +41,7 @@ void main() {
           .thenAnswer((_) async => Result.failure(mockException));
       final notifier = TopAlbumsNotifier(userRepository: userRepository);
       await notifier.fetchData();
-      expect(notifier.albums.isEmpty, true);
+      expect(notifier.topAlbumsState.topAlbums.isEmpty, true);
     });
   });
 }
