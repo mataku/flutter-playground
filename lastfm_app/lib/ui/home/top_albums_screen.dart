@@ -116,6 +116,8 @@ class _TopAlbumsPageState extends ConsumerState<TopAlbumsScreen>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     final nofifier = ref.watch(topAlbumsNotifier);
     final topAlbumsState = nofifier.topAlbumsState;
 
