@@ -22,7 +22,7 @@ class TopAlbumsComponent extends StatelessWidget {
       child: GridView.builder(
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 0.75,
+          childAspectRatio: 0.72,
         ),
         itemCount: albums.length,
         itemBuilder: (BuildContext context, int index) {
