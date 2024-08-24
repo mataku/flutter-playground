@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class ArtworkComponent extends StatelessWidget {
   final String? imageUrl;
@@ -57,13 +57,23 @@ class ArtworkSquareComponent extends StatelessWidget {
         fit: BoxFit.cover,
       );
     } else {
-      imageComponent = Image.network(imageUrl!, fit: BoxFit.cover,
-          errorBuilder: (BuildContext context, error, stacktrace) {
-        return Image.asset(
-          "asset/image/no_image.png",
-          fit: BoxFit.cover,
-        );
-      });
+      imageComponent = Image.network(
+        imageUrl!,
+        fit: BoxFit.cover,
+        errorBuilder: (BuildContext context, error, stacktrace) {
+          return Image.asset(
+            "asset/image/no_image.png",
+            fit: BoxFit.cover,
+          );
+        },
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress != null) {
+            return Container(color: Colors.white);
+          } else {
+            return child;
+          }
+        },
+      );
     }
 
     return SizedBox(
