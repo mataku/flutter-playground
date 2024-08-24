@@ -7,6 +7,7 @@ import 'package:state_app/api/response/recent_track/recent_tracks_api_response.d
 import 'package:state_app/api/response/top_tags_response.dart';
 import 'package:state_app/api/response/track/track_info_api_response.dart';
 import 'package:state_app/api/response/user/top_albums_api_response.dart';
+import 'package:state_app/api/response/user/top_artists_api_response.dart';
 import 'package:state_app/model/artwork.dart';
 import 'package:state_app/model/chart/chart_artist.dart';
 import 'package:state_app/model/chart/chart_track.dart';
@@ -16,6 +17,7 @@ import 'package:state_app/model/recent_track/recent_track.dart';
 import 'package:state_app/model/tag.dart';
 import 'package:state_app/model/track.dart';
 import 'package:state_app/model/user/top_album.dart';
+import 'package:state_app/model/user/top_artist.dart';
 import 'package:state_app/model/wiki.dart';
 
 extension RecentTracksApiResponseExt on RecentTracksApiResponse {
@@ -192,5 +194,22 @@ extension AlbumResponseExt on AlbumResponse {
 extension TopAlbumsApiResponseExt on TopAlbumsApiResponse {
   List<TopAlbum> toTopAlbumList() {
     return response.albums.map((album) => album.toTopAlbum()).toList();
+  }
+}
+
+extension ArtistResponseExt on ArtistResponse {
+  TopArtist toTopArtist() {
+    return TopArtist(
+      name: name,
+      url: url,
+      playcount: playcount,
+      images: images.toImageList(),
+    );
+  }
+}
+
+extension TopArtistsApiResponseExt on TopArtistsApiResponse {
+  List<TopArtist> toTopArtistList() {
+    return response.artists.map((artist) => artist.toTopArtist()).toList();
   }
 }

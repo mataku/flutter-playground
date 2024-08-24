@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:state_app/model/artwork.dart';
-import 'package:state_app/model/user/top_album.dart';
-import 'package:state_app/ui/home/component/top_album_component.dart';
+import 'package:state_app/model/user/top_artist.dart';
+import 'package:state_app/ui/home/component/top_artist_component.dart';
 
-class TopAlbumsComponent extends StatelessWidget {
-  final List<TopAlbum> albums;
+class TopArtistsComponent extends StatelessWidget {
+  final List<TopArtist> artists;
   final bool hasMore;
   final bool isLoading;
+
   final ScrollController scrollController;
 
-  const TopAlbumsComponent({
+  const TopArtistsComponent({
     super.key,
-    required this.albums,
+    required this.artists,
     required this.hasMore,
     required this.isLoading,
     required this.scrollController,
@@ -28,27 +29,26 @@ class TopAlbumsComponent extends StatelessWidget {
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 200,
             crossAxisSpacing: 8,
-            childAspectRatio: 0.72,
+            childAspectRatio: 0.75,
             mainAxisSpacing: 4,
           ),
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
-              final album = albums[index];
-              return TopAlbumComponent(
-                imageUrl: album.images.imageUrl() ?? '',
-                album: album.name,
-                artist: album.artist.name,
-                playcount: album.playcount,
+              final artist = artists[index];
+              return TopArtistComponent(
+                imageUrl: artist.images.imageUrl() ?? '',
+                artist: artist.name,
+                playcount: artist.playcount,
               );
             },
-            childCount: albums.length,
+            childCount: artists.length,
           ),
         ),
-        if (albums.isNotEmpty && isLoading)
+        if (artists.isNotEmpty && isLoading)
           const SliverToBoxAdapter(
             child: CircularProgressIndicator(),
           ),
-        if (albums.isNotEmpty && !isLoading)
+        if (artists.isNotEmpty && !isLoading)
           const SliverPadding(padding: EdgeInsets.only(top: 24)),
       ],
       controller: scrollController,

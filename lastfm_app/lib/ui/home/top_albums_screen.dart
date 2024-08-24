@@ -39,7 +39,7 @@ class TopAlbumsNotifier extends ChangeNotifier {
   );
 
   Future fetchData() async {
-    debugPrint("MATAKUDEBUG fetchData page: $_page $hashCode");
+    debugPrint("MATAKUDEBUG album fetchData page: $_page $hashCode");
     if (!topAlbumsState.hasMore) return;
     topAlbumsState = TopAlbumsState(
       topAlbums: topAlbumsState.topAlbums,
@@ -59,8 +59,14 @@ class TopAlbumsNotifier extends ChangeNotifier {
       if (albums.isNotEmpty) {
         _page++;
       }
-      notifyListeners();
+    } else {
+      topAlbumsState = TopAlbumsState(
+        topAlbums: topAlbumsState.topAlbums,
+        hasMore: false,
+        isLoading: false,
+      );
     }
+    notifyListeners();
   }
 
   @override
@@ -91,7 +97,7 @@ class _TopAlbumsPageState extends ConsumerState<TopAlbumsScreen>
 
   @override
   void initState() {
-    debugPrint("MATAKUDEBUG init! ${_scrollController.hashCode}");
+    debugPrint("MATAKUDEBUG topAlbumsPage init! ${_scrollController.hashCode}");
     _scrollController.addListener(_onScrollListener);
     super.initState();
   }
@@ -123,13 +129,14 @@ class _TopAlbumsPageState extends ConsumerState<TopAlbumsScreen>
 
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.only(top: 8, bottom: 8),
+        padding: const EdgeInsets.only(left: 8, right: 8),
         child: topAlbumsState.topAlbums.isEmpty
             ? const Text('empty')
             : TopAlbumsComponent(
                 albums: topAlbumsState.topAlbums,
                 hasMore: topAlbumsState.hasMore,
                 scrollController: _scrollController,
+                isLoading: topAlbumsState.isLoading,
               ),
       ),
     );

@@ -33,6 +33,8 @@ void main() {
       final notifier = TopAlbumsNotifier(userRepository: userRepository);
       await notifier.fetchData();
       expect(notifier.topAlbumsState.topAlbums.isNotEmpty, true);
+      expect(notifier.topAlbumsState.isLoading, false);
+      expect(notifier.topAlbumsState.hasMore, true);
     });
 
     test('request failed', () async {
@@ -42,6 +44,8 @@ void main() {
       final notifier = TopAlbumsNotifier(userRepository: userRepository);
       await notifier.fetchData();
       expect(notifier.topAlbumsState.topAlbums.isEmpty, true);
+      expect(notifier.topAlbumsState.isLoading, false);
+      expect(notifier.topAlbumsState.hasMore, false);
     });
   });
 }
