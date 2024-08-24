@@ -1,0 +1,14 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:state_app/model/artwork.dart';
+
+part 'top_artist.freezed.dart';
+
+@freezed
+class TopArtist with _$TopArtist {
+  const factory TopArtist({
+    required String name,
+    required String url,
+    required String playcount,
+    required List<Artwork> images,
+  }) = _TopArtist;
+}
