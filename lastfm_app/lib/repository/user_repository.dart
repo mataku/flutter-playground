@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_app/api/endpoint/user_top_albums_endpoint.dart';
@@ -39,10 +38,12 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<Result<List<TopAlbum>>> getTopAlbumsSample(int page) async {
+    if (page == 3) {
+      return Result.success(List.empty());
+    }
     final data = await rootBundle.loadString("asset/json/user_top_albums.json");
     final result = json.decode(data) as Map<String, dynamic>;
     final albums = TopAlbumsApiResponse.fromJson(result);
-    debugPrint("MATAKUDEBUG $albums");
     return Result.success(albums.toTopAlbumList());
   }
 }
