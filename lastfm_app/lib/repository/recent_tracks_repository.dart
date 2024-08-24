@@ -8,7 +8,7 @@ import 'package:state_app/api/last_fm_api_service.dart';
 import 'package:state_app/api/response/mapper/response_mapper.dart';
 import 'package:state_app/api/response/recent_track/recent_tracks_api_response.dart';
 import 'package:state_app/model/app_error.dart';
-import 'package:state_app/model/recent_track.dart';
+import 'package:state_app/model/recent_track/recent_track.dart';
 import 'package:state_app/model/result.dart';
 
 abstract class RecentTracksRepository {

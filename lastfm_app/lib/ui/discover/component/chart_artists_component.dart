@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:state_app/model/chart_artist.dart';
+import 'package:state_app/model/chart/chart_artist.dart';
 import 'package:state_app/ui/common/header.dart';
 import 'package:state_app/ui/discover/component/chart_cell.dart';
 

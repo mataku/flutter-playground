@@ -12,8 +12,8 @@ import 'package:state_app/api/response/chart/chart_top_tags_api_response.dart';
 import 'package:state_app/api/response/chart/chart_top_tracks_api_response.dart';
 import 'package:state_app/api/response/mapper/response_mapper.dart';
 import 'package:state_app/model/app_error.dart';
-import 'package:state_app/model/chart_artist.dart';
-import 'package:state_app/model/chart_track.dart';
+import 'package:state_app/model/chart/chart_artist.dart';
+import 'package:state_app/model/chart/chart_track.dart';
 import 'package:state_app/model/result.dart';
 import 'package:state_app/model/tag.dart';
 

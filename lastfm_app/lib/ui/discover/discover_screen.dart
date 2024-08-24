@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:state_app/model/chart_artist.dart';
-import 'package:state_app/model/chart_track.dart';
+import 'package:state_app/model/chart/chart_artist.dart';
+import 'package:state_app/model/chart/chart_track.dart';
 import 'package:state_app/model/result.dart';
 import 'package:state_app/model/tag.dart';
 import 'package:state_app/repository/chart_repository.dart';

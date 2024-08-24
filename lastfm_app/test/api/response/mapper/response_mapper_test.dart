@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:state_app/api/response/mapper/response_mapper.dart';
 import 'package:state_app/model/artwork.dart';
 import 'package:state_app/model/common_name.dart';
-import 'package:state_app/model/recent_track.dart';
+import 'package:state_app/model/recent_track/recent_track.dart';
 
 import '../../../fixtures/test_data.dart';
 
