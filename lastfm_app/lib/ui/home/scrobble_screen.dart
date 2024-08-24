@@ -6,7 +6,7 @@ import 'package:state_app/repository/recent_tracks_repository.dart';
 import 'package:state_app/router/router.dart';
 import 'package:state_app/ui/home/component/recent_track_component.dart';
 
-final scrobbleNotifierProvider = ChangeNotifierProvider.autoDispose((ref) {
+final scrobbleNotifierProvider = ChangeNotifierProvider((ref) {
   final ScrobbleNotifier notifier = ScrobbleNotifier(
       recentTracksRepository: ref.read(recentTracksRepositoryProvider));
   notifier.fetchData();

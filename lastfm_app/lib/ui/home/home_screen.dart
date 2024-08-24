@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_app/ui/home/scrobble_screen.dart';
+import 'package:state_app/ui/home/top_albums_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -26,7 +27,7 @@ class HomeScreen extends ConsumerWidget {
                 ),
                 Tab(
                   child: Text(
-                    'Track',
+                    'Album',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -48,7 +49,7 @@ class HomeScreen extends ConsumerWidget {
           body: const TabBarView(
             children: [
               ScrobbleScreen(),
-              Text('Track'),
+              TopAlbumsScreen(),
               Text('Artist'),
             ],
           ),
