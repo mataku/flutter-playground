@@ -19,7 +19,7 @@ class TopAlbumComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.only(left: 8, right: 8, top: 12, bottom: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
