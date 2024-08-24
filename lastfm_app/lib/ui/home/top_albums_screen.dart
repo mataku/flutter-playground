@@ -129,13 +129,14 @@ class _TopAlbumsPageState extends ConsumerState<TopAlbumsScreen>
 
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.only(top: 8, bottom: 8),
+        padding: const EdgeInsets.only(left: 8, right: 8),
         child: topAlbumsState.topAlbums.isEmpty
             ? const Text('empty')
             : TopAlbumsComponent(
                 albums: topAlbumsState.topAlbums,
                 hasMore: topAlbumsState.hasMore,
                 scrollController: _scrollController,
+                isLoading: topAlbumsState.isLoading,
               ),
       ),
     );

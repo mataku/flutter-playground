@@ -126,13 +126,14 @@ class _TopArtistsPageState extends ConsumerState<TopArtistsScreen>
 
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.only(top: 8, bottom: 8),
+        padding: const EdgeInsets.only(left: 8, right: 8),
         child: topArtistsState.topArtists.isEmpty
             ? const Text('empty')
             : TopArtistsComponent(
                 artists: topArtistsState.topArtists,
                 hasMore: topArtistsState.hasMore,
                 scrollController: _scrollController,
+                isLoading: topArtistsState.isLoading,
               ),
       ),
     );
