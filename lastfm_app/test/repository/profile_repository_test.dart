@@ -28,7 +28,7 @@ void main() {
       final jsonMap = fixture('user_get_info.json');
       final userInfo = UserGetInfoApiResponse.fromJson(json.decode(jsonMap));
       when(apiService.request(any)).thenAnswer((_) async => userInfo);
-      final repo = ProfileRepositoryImpl(apiService: apiService);
+      final repo = ProfileRepositoryImpl(apiService);
       final result = await repo.getUserInfo();
       expect(result is Success, true);
       expect(result.getOrNull()!.name, 'matakucom');
@@ -37,7 +37,7 @@ void main() {
     test('request failed', () async {
       when(dioException.type).thenReturn(DioExceptionType.connectionError);
       when(apiService.request(any)).thenThrow(dioException);
-      final repo = ProfileRepositoryImpl(apiService: apiService);
+      final repo = ProfileRepositoryImpl(apiService);
       final result = await repo.getUserInfo();
       expect(result is Failure, true);
       expect(result.exceptionOrNull(), const AppError.serverError());

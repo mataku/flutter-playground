@@ -13,8 +13,8 @@ import 'package:state_app/model/result.dart';
 import 'package:state_app/model/user/top_album.dart';
 import 'package:state_app/model/user/top_artist.dart';
 
-final userRepositoryProvider = Provider((ref) =>
-    UserRepositoryImpl(lastFmApiService: ref.read(lastFmApiServiceProvider)));
+final userRepositoryProvider =
+    Provider((ref) => UserRepositoryImpl(ref.read(lastFmApiServiceProvider)));
 
 abstract class UserRepository {
   Future<Result<List<TopAlbum>>> getTopAlbums(int page);
@@ -24,9 +24,9 @@ abstract class UserRepository {
 }
 
 class UserRepositoryImpl implements UserRepository {
-  final LastFmApiService lastFmApiService;
+  final LastFmApiService _lastFmApiService;
 
-  const UserRepositoryImpl({required this.lastFmApiService});
+  const UserRepositoryImpl(this._lastFmApiService);
 
   @override
   Future<Result<List<TopAlbum>>> getTopAlbums(int page) async {
@@ -35,7 +35,7 @@ class UserRepositoryImpl implements UserRepository {
       params: {'page': page.toString()},
     );
     try {
-      final response = await lastFmApiService.request(endpoint);
+      final response = await _lastFmApiService.request(endpoint);
       return Result.success(response.toTopAlbumList());
     } on Exception catch (error) {
       return Result.failure(AppError.getApiError(error));
@@ -60,7 +60,7 @@ class UserRepositoryImpl implements UserRepository {
       params: {'page': page.toString()},
     );
     try {
-      final response = await lastFmApiService.request(endpoint);
+      final response = await _lastFmApiService.request(endpoint);
       return Result.success(response.toTopArtistList());
     } on Exception catch (error) {
       return Result.failure(AppError.getApiError(error));

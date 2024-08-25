@@ -11,8 +11,8 @@ import 'package:state_app/model/app_error.dart';
 import 'package:state_app/model/result.dart';
 import 'package:state_app/model/track.dart';
 
-final trackRepositoryProvider = Provider((ref) =>
-    TrackRepositoryImpl(lastFmApiService: ref.read(lastFmApiServiceProvider)));
+final trackRepositoryProvider =
+    Provider((ref) => TrackRepositoryImpl(ref.read(lastFmApiServiceProvider)));
 
 abstract class TrackRepository {
   Future<Result<Track>> getTrack(String track, String artist);
@@ -20,9 +20,9 @@ abstract class TrackRepository {
 }
 
 class TrackRepositoryImpl implements TrackRepository {
-  final LastFmApiService lastFmApiService;
+  final LastFmApiService _lastFmApiService;
 
-  TrackRepositoryImpl({required this.lastFmApiService});
+  const TrackRepositoryImpl(this._lastFmApiService);
 
   @override
   Future<Result<Track>> getTrack(String track, String artist) async {
@@ -33,7 +33,7 @@ class TrackRepositoryImpl implements TrackRepository {
       },
     );
     try {
-      final response = await lastFmApiService.request(endpoint);
+      final response = await _lastFmApiService.request(endpoint);
       return Result.success(response.toTrack());
     } on Exception catch (error) {
       return Result.failure(AppError.getApiError(error));

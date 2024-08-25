@@ -24,7 +24,7 @@ void main() {
     test('request succeeded', () async {
       when(apiService.request(any))
           .thenAnswer((_) async => testChartTrackApiResponse);
-      final repo = ChartRepositoryImpl(lastFmApiService: apiService);
+      final repo = ChartRepositoryImpl(apiService);
       final result = await repo.getChartTracks(1);
       expect(result is Success, true);
       expect(result.getOrNull()!.isNotEmpty, true);
@@ -33,7 +33,7 @@ void main() {
     test('request failed', () async {
       when(dioException.type).thenReturn(DioExceptionType.connectionError);
       when(apiService.request(any)).thenThrow(dioException);
-      final repo = ChartRepositoryImpl(lastFmApiService: apiService);
+      final repo = ChartRepositoryImpl(apiService);
       final result = await repo.getChartTracks(1);
       expect(result is Failure, true);
       expect(result.exceptionOrNull(), const AppError.serverError());
@@ -49,7 +49,7 @@ void main() {
     test('request succeeded', () async {
       when(apiService.request(any))
           .thenAnswer((_) async => testChartArtistApiResponse);
-      final repo = ChartRepositoryImpl(lastFmApiService: apiService);
+      final repo = ChartRepositoryImpl(apiService);
       final result = await repo.getChartArtists(1);
       expect(result is Success, true);
       expect(result.getOrNull()!.isNotEmpty, true);
@@ -58,7 +58,7 @@ void main() {
     test('request failed', () async {
       when(dioException.type).thenReturn(DioExceptionType.connectionError);
       when(apiService.request(any)).thenThrow(dioException);
-      final repo = ChartRepositoryImpl(lastFmApiService: apiService);
+      final repo = ChartRepositoryImpl(apiService);
       final result = await repo.getChartArtists(1);
       expect(result is Failure, true);
       expect(result.exceptionOrNull(), const AppError.serverError());
@@ -74,7 +74,7 @@ void main() {
     test('request succeeded', () async {
       when(apiService.request(any))
           .thenAnswer((_) async => testChartTagApiResponse);
-      final repo = ChartRepositoryImpl(lastFmApiService: apiService);
+      final repo = ChartRepositoryImpl(apiService);
       final result = await repo.getChartTags(1);
       expect(result is Success, true);
       expect(result.getOrNull()!.isNotEmpty, true);
@@ -83,7 +83,7 @@ void main() {
     test('request failed', () async {
       when(dioException.type).thenReturn(DioExceptionType.connectionError);
       when(apiService.request(any)).thenThrow(dioException);
-      final repo = ChartRepositoryImpl(lastFmApiService: apiService);
+      final repo = ChartRepositoryImpl(apiService);
       final result = await repo.getChartTags(1);
       expect(result is Failure, true);
       expect(result.exceptionOrNull(), const AppError.serverError());

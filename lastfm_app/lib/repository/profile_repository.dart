@@ -10,11 +10,9 @@ abstract class ProfileRepository {
 }
 
 class ProfileRepositoryImpl implements ProfileRepository {
-  final LastFmApiService apiService;
+  final LastFmApiService _apiService;
 
-  const ProfileRepositoryImpl({
-    required this.apiService,
-  });
+  ProfileRepositoryImpl(this._apiService);
 
   @override
   Future<Result<UserInfo>> getUserInfo() async {
@@ -23,7 +21,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
       params: {'user': 'matakucom'},
     );
     try {
-      final response = await apiService.request(endpoint);
+      final response = await _apiService.request(endpoint);
       return Result.success(response.response.toUserInfo());
     } on Exception catch (error) {
       return Result.failure(AppError.getApiError(error));

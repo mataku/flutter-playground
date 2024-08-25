@@ -26,7 +26,7 @@ void main() {
       when(apiService.request(any))
           .thenAnswer((_) async => testTrackApiResponse);
 
-      final repo = TrackRepositoryImpl(lastFmApiService: apiService);
+      final repo = TrackRepositoryImpl(apiService);
       final result = await repo.getTrack('Supernova', 'aespa');
       expect(result is Success, true);
       expect(result.getOrNull() != null, true);
@@ -36,7 +36,7 @@ void main() {
       when(dioException.type).thenReturn(DioExceptionType.connectionError);
       when(apiService.request(any)).thenThrow(dioException);
 
-      final repo = TrackRepositoryImpl(lastFmApiService: apiService);
+      final repo = TrackRepositoryImpl(apiService);
       final result = await repo.getTrack('Supernova', 'aespa');
       expect(result is Failure, true);
       expect(result.exceptionOrNull(), const AppError.serverError());
