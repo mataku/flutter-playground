@@ -19,9 +19,6 @@ final GlobalKey<NavigatorState> _discoverNavigatorKey =
 final GlobalKey<NavigatorState> _accountNavigatorKey =
     GlobalKey<NavigatorState>();
 
-final GlobalKey<NavigatorState> _loginNavigatotKey =
-    GlobalKey<NavigatorState>();
-
 final router = GoRouter(
     routes: $appRoutes,
     initialLocation: HomeRoute.path,
