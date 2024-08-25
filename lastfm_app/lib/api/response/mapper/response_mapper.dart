@@ -3,6 +3,7 @@ import 'package:state_app/api/response/chart/chart_top_tags_api_response.dart';
 import 'package:state_app/api/response/chart/chart_top_tracks_api_response.dart';
 import 'package:state_app/api/response/common_text_response.dart';
 import 'package:state_app/api/response/image_response.dart';
+import 'package:state_app/api/response/profile/user_get_info_api_response.dart';
 import 'package:state_app/api/response/recent_track/recent_tracks_api_response.dart';
 import 'package:state_app/api/response/top_tags_response.dart';
 import 'package:state_app/api/response/track/track_info_api_response.dart';
@@ -13,6 +14,7 @@ import 'package:state_app/model/chart/chart_artist.dart';
 import 'package:state_app/model/chart/chart_track.dart';
 import 'package:state_app/model/common_name.dart';
 import 'package:state_app/model/common_name_and_url.dart';
+import 'package:state_app/model/profile/user_info.dart';
 import 'package:state_app/model/recent_track/recent_track.dart';
 import 'package:state_app/model/tag.dart';
 import 'package:state_app/model/track.dart';
@@ -211,5 +213,20 @@ extension ArtistResponseExt on ArtistResponse {
 extension TopArtistsApiResponseExt on TopArtistsApiResponse {
   List<TopArtist> toTopArtistList() {
     return response.artists.map((artist) => artist.toTopArtist()).toList();
+  }
+}
+
+extension UserGetInfoResponseExt on UserGetInfoResponse {
+  UserInfo toUserInfo() {
+    return UserInfo(
+      name: name,
+      isSubscriber: subscriber == '1',
+      playcount: playcount,
+      artistCount: artistCount,
+      trackCount: trackCount,
+      albumCount: albumCount,
+      images: images.toImageList(),
+      url: url,
+    );
   }
 }
