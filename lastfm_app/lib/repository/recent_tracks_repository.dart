@@ -16,20 +16,19 @@ abstract class RecentTracksRepository {
   Future<Result<List<RecentTrack>>> getRecentTracksSample(int page);
 }
 
-final recentTracksRepositoryProvider = Provider((ref) =>
-    RecentTracksRepositoryImpl(
-        lastFmApiService: ref.read(lastFmApiServiceProvider)));
+final recentTracksRepositoryProvider = Provider(
+    (ref) => RecentTracksRepositoryImpl(ref.read(lastFmApiServiceProvider)));
 
 class RecentTracksRepositoryImpl implements RecentTracksRepository {
-  final LastFmApiService lastFmApiService;
-  RecentTracksRepositoryImpl({required this.lastFmApiService});
+  final LastFmApiService _lastFmApiService;
+  const RecentTracksRepositoryImpl(this._lastFmApiService);
 
   @override
   Future<Result<List<RecentTrack>>> getRecentTracks(int page) async {
     final endpoint = RecentTracksEndpoint(
         params: {'page': page.toString(), 'user': 'matakucom'});
     try {
-      final result = await lastFmApiService.request(endpoint);
+      final result = await _lastFmApiService.request(endpoint);
       return Result.success(result.toRecentTrackList());
     } on Exception catch (error) {
       return Result.failure(AppError.getApiError(error));

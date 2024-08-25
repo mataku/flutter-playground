@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-enum PageIndex { home, discover }
-
 class TopScreen extends StatefulWidget {
   final StatefulNavigationShell navigationShell;
 
@@ -33,6 +31,10 @@ class _TopPageState extends State<TopScreen> {
         BottomNavigationBarItem(
           icon: Icon(Icons.search),
           label: "Discover",
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.account_circle),
+          label: "Account",
         ),
       ],
       onTap: (int index) {

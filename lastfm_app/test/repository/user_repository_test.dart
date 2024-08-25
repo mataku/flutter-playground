@@ -28,7 +28,7 @@ void main() {
       final response = fixture("user_top_albums.json");
       final albums = TopAlbumsApiResponse.fromJson(json.decode(response));
       when(apiService.request(any)).thenAnswer((_) async => albums);
-      final repo = UserRepositoryImpl(lastFmApiService: apiService);
+      final repo = UserRepositoryImpl(apiService);
       final result = await repo.getTopAlbums(1);
       expect(result is Success, true);
       expect(result.getOrNull()!.isNotEmpty, true);
@@ -37,7 +37,7 @@ void main() {
     test('request failed', () async {
       when(dioException.type).thenReturn(DioExceptionType.connectionError);
       when(apiService.request(any)).thenThrow(dioException);
-      final repo = UserRepositoryImpl(lastFmApiService: apiService);
+      final repo = UserRepositoryImpl(apiService);
       final result = await repo.getTopAlbums(1);
       expect(result is Failure, true);
       expect(result.exceptionOrNull(), const AppError.serverError());
@@ -54,7 +54,7 @@ void main() {
       final response = fixture("user_top_artists.json");
       final albums = TopArtistsApiResponse.fromJson(json.decode(response));
       when(apiService.request(any)).thenAnswer((_) async => albums);
-      final repo = UserRepositoryImpl(lastFmApiService: apiService);
+      final repo = UserRepositoryImpl(apiService);
       final result = await repo.getTopArtists(1);
       expect(result is Success, true);
       expect(result.getOrNull()!.isNotEmpty, true);
@@ -63,7 +63,7 @@ void main() {
     test('request failed', () async {
       when(dioException.type).thenReturn(DioExceptionType.connectionError);
       when(apiService.request(any)).thenThrow(dioException);
-      final repo = UserRepositoryImpl(lastFmApiService: apiService);
+      final repo = UserRepositoryImpl(apiService);
       final result = await repo.getTopArtists(1);
       expect(result is Failure, true);
       expect(result.exceptionOrNull(), const AppError.serverError());

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:state_app/ui/account/account_screen.dart';
+import 'package:state_app/ui/auth/login_screen.dart';
 import 'package:state_app/ui/detail/track_detail_screen.dart';
 import 'package:state_app/ui/discover/discover_screen.dart';
 import 'package:state_app/ui/home/home_screen.dart';
@@ -12,6 +14,9 @@ final GlobalKey<NavigatorState> _shellNavigatorKey =
     GlobalKey<NavigatorState>();
 final GlobalKey<NavigatorState> _homeNavigatorKey = GlobalKey<NavigatorState>();
 final GlobalKey<NavigatorState> _discoverNavigatorKey =
+    GlobalKey<NavigatorState>();
+
+final GlobalKey<NavigatorState> _accountNavigatorKey =
     GlobalKey<NavigatorState>();
 
 final router = GoRouter(
@@ -38,6 +43,11 @@ final router = GoRouter(
         TypedGoRoute<DiscoverRoute>(path: DiscoverRoute.path),
       ],
     ),
+    TypedStatefulShellBranch<AccountShellBranchData>(
+      routes: [
+        TypedGoRoute<AccountRoute>(path: AccountRoute.path),
+      ],
+    )
   ],
 )
 class TopShellRoute extends StatefulShellRouteData {
@@ -76,14 +86,40 @@ class DiscoverRoute extends GoRouteData {
   }
 }
 
+@TypedGoRoute<AccountRoute>(path: AccountRoute.path)
+class AccountRoute extends GoRouteData {
+  const AccountRoute();
+
+  static const path = '/account';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const AccountScreen();
+  }
+}
+
 class TrackDetailRoute extends GoRouteData {
   const TrackDetailRoute();
 
-  static const path = 'track_detail2';
+  static const path = 'track_detail';
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const TrackDetailScreen();
+  }
+}
+
+@TypedGoRoute<LoginRoute>(
+  path: LoginRoute.path,
+)
+class LoginRoute extends GoRouteData {
+  const LoginRoute();
+
+  static const path = '/login';
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const LoginScreen();
   }
 }
 
@@ -97,4 +133,10 @@ class DiscoverShellBranchData extends StatefulShellBranchData {
   const DiscoverShellBranchData();
 
   static final GlobalKey<NavigatorState> $navigatorKey = _discoverNavigatorKey;
+}
+
+class AccountShellBranchData extends StatefulShellBranchData {
+  const AccountShellBranchData();
+
+  static final GlobalKey<NavigatorState> $navigatorKey = _accountNavigatorKey;
 }

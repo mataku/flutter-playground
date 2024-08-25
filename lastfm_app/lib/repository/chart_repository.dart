@@ -27,13 +27,13 @@ abstract class ChartRepository {
   Future<Result<List<Tag>>> getChartTagsSample(int page);
 }
 
-final chartRepositoryProvider = Provider((ref) =>
-    ChartRepositoryImpl(lastFmApiService: ref.read(lastFmApiServiceProvider)));
+final chartRepositoryProvider =
+    Provider((ref) => ChartRepositoryImpl(ref.read(lastFmApiServiceProvider)));
 
 class ChartRepositoryImpl implements ChartRepository {
-  final LastFmApiService lastFmApiService;
+  final LastFmApiService _lastFmApiService;
 
-  ChartRepositoryImpl({required this.lastFmApiService});
+  const ChartRepositoryImpl(this._lastFmApiService);
 
   @override
   Future<Result<List<ChartArtist>>> getChartArtists(int page) async {
@@ -44,7 +44,7 @@ class ChartRepositoryImpl implements ChartRepository {
       },
     );
     try {
-      final result = await lastFmApiService.request(endpoint);
+      final result = await _lastFmApiService.request(endpoint);
       return Result.success(result.toChartArtistList());
     } on Exception catch (error) {
       debugPrint("MATAKUDEBUG $error");
@@ -70,7 +70,7 @@ class ChartRepositoryImpl implements ChartRepository {
       },
     );
     try {
-      final result = await lastFmApiService.request(endpoint);
+      final result = await _lastFmApiService.request(endpoint);
       return Result.success(result.toChartTrackList());
     } on Exception catch (error) {
       debugPrint("MATAKUDEBUG $error");
@@ -96,7 +96,7 @@ class ChartRepositoryImpl implements ChartRepository {
       },
     );
     try {
-      final result = await lastFmApiService.request(endpoint);
+      final result = await _lastFmApiService.request(endpoint);
       return Result.success(result.toTagList());
     } on Exception catch (error) {
       debugPrint("MATAKUDEBUG $error");

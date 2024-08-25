@@ -19,12 +19,14 @@ class ValueDescription extends StatelessWidget {
           IntRepresentation.toReadableValue(value),
           style: const TextStyle(
             fontWeight: FontWeight.w600,
+            fontSize: 15,
           ),
         ),
+        const Padding(padding: EdgeInsets.only(top: 4)),
         Text(
           IntRepresentation.toReadableValue(label),
           style: const TextStyle(
-            fontSize: 12,
+            fontSize: 14,
             color: Color(0xFF757575),
           ),
         ),

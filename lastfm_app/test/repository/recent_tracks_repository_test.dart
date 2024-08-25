@@ -25,7 +25,7 @@ void main() {
     test('request succeeded', () async {
       when(apiService.request(any))
           .thenAnswer((_) async => testRecentTrackApiResponse);
-      final repo = RecentTracksRepositoryImpl(lastFmApiService: apiService);
+      final repo = RecentTracksRepositoryImpl(apiService);
       final result = await repo.getRecentTracks(1);
       expect(result is Success, true);
       expect(
@@ -35,7 +35,7 @@ void main() {
     test('request failed', () async {
       when(dioException.type).thenReturn(DioExceptionType.connectionError);
       when(apiService.request(any)).thenThrow(dioException);
-      final repo = RecentTracksRepositoryImpl(lastFmApiService: apiService);
+      final repo = RecentTracksRepositoryImpl(apiService);
       final result = await repo.getRecentTracks(1);
       expect(result is Failure, true);
       expect(result.exceptionOrNull(), const AppError.serverError());
