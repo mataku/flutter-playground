@@ -21,7 +21,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
 
   @override
   Future<Result<UserInfo>> getUserInfo() async {
-    // Fetch username from local
+    // TODO: Fetch username from local
     final endpoint = UserGetInfoEndpoint(
       params: {'user': 'matakucom'},
     );
