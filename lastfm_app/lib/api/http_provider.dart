@@ -8,6 +8,7 @@ final _options = BaseOptions(
   connectTimeout: const Duration(seconds: 5),
   receiveTimeout: const Duration(seconds: 3),
   queryParameters: {'format': 'json'},
+  headers: {'charset': 'utf-8'},
 );
 
 final dioProvider = Provider<Dio>((ref) {
