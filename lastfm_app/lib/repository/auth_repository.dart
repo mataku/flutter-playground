@@ -4,9 +4,15 @@ import 'package:state_app/api/last_fm_api_service.dart';
 import 'package:state_app/api/lastfm_api_signature.dart';
 import 'package:state_app/model/app_error.dart';
 import 'package:state_app/model/result.dart';
+import 'package:state_app/store/session_store.dart';
 
-final authRepositoryProvider =
-    Provider((ref) => AuthRepositoryImpl(ref.read(lastFmApiServiceProvider)));
+final authRepositoryProvider = Provider(
+  (ref) => AuthRepositoryImpl(
+    ref.read(lastFmApiServiceProvider),
+    ref.read(sessionStoreProvider),
+    ref.read(sessionChangeNotifierProvider),
+  ),
+);
 
 abstract class AuthRepository {
   Future<Result<String>> authorize({
@@ -17,8 +23,14 @@ abstract class AuthRepository {
 
 class AuthRepositoryImpl implements AuthRepository {
   final LastFmApiService _apiService;
+  final SessionStore _sessionStore;
+  final SessionChangeNotifier _notifier;
 
-  AuthRepositoryImpl(this._apiService);
+  AuthRepositoryImpl(
+    this._apiService,
+    this._sessionStore,
+    this._notifier,
+  );
 
   @override
   Future<Result<String>> authorize(
@@ -36,6 +48,8 @@ class AuthRepositoryImpl implements AuthRepository {
     );
     try {
       final result = await _apiService.request(endpoint);
+      _sessionStore.setSessionKey(result.sessionBody.key);
+      _notifier.login();
       return Result.success(result.sessionBody.name);
     } on Exception catch (error) {
       return Result.failure(AppError.getApiError(error));
