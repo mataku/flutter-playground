@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:state_app/store/session_store.dart';
 import 'package:state_app/ui/account/account_screen.dart';
 import 'package:state_app/ui/auth/login_screen.dart';
 import 'package:state_app/ui/detail/track_detail_screen.dart';
@@ -19,10 +21,23 @@ final GlobalKey<NavigatorState> _discoverNavigatorKey =
 final GlobalKey<NavigatorState> _accountNavigatorKey =
     GlobalKey<NavigatorState>();
 
-final router = GoRouter(
+final routerProvider = Provider((ref) {
+  final sessionStore = ref.read(sessionStoreProvider);
+  return GoRouter(
     routes: $appRoutes,
     initialLocation: HomeRoute.path,
-    navigatorKey: _rootNavigatorKey);
+    navigatorKey: _rootNavigatorKey,
+    redirect: (BuildContext context, GoRouterState state) {
+      final bool loggedIn = sessionStore.getSessionKey()?.isNotEmpty ?? false;
+      final toHome = state.matchedLocation == const HomeRoute().location;
+      if (toHome && !loggedIn) {
+        return const LoginRoute().location;
+      }
+      return null;
+    },
+    refreshListenable: ref.watch(sessionChangeNotifierProvider),
+  );
+});
 
 @TypedStatefulShellRoute<TopShellRoute>(
   branches: <TypedStatefulShellBranch<StatefulShellBranchData>>[
