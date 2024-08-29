@@ -119,7 +119,7 @@ class LoginRoute extends GoRouteData {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const LoginScreen();
+    return LoginScreen();
   }
 }
 
