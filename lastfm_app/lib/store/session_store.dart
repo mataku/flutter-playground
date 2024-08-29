@@ -26,12 +26,12 @@ class SessionStore {
 }
 
 class SessionChangeNotifier extends ChangeNotifier {
+  // ignore: unused_field
   bool _isLoggedIn = false;
 
   SessionChangeNotifier();
 
   void login() {
-    debugPrint("MATAKUDEBUG send login");
     _isLoggedIn = true;
     notifyListeners();
   }
