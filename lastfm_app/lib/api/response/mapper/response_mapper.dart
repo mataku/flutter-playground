@@ -1,3 +1,4 @@
+import 'package:state_app/api/response/auth/auth_mobile_session_api_response.dart';
 import 'package:state_app/api/response/chart/chart_top_artists_api_response.dart';
 import 'package:state_app/api/response/chart/chart_top_tags_api_response.dart';
 import 'package:state_app/api/response/chart/chart_top_tracks_api_response.dart';
@@ -10,6 +11,7 @@ import 'package:state_app/api/response/track/track_info_api_response.dart';
 import 'package:state_app/api/response/user/top_albums_api_response.dart';
 import 'package:state_app/api/response/user/top_artists_api_response.dart';
 import 'package:state_app/model/artwork.dart';
+import 'package:state_app/model/auth/mobile_session.dart';
 import 'package:state_app/model/chart/chart_artist.dart';
 import 'package:state_app/model/chart/chart_track.dart';
 import 'package:state_app/model/common_name.dart';
@@ -227,6 +229,15 @@ extension UserGetInfoResponseExt on UserGetInfoResponse {
       albumCount: albumCount,
       images: images.toImageList(),
       url: url,
+    );
+  }
+}
+
+extension AuthMobileSessionApiResponseExt on AuthMobileSessionApiResponse {
+  MobileSession toMobileSession() {
+    return MobileSession(
+      name: sessionBody.name,
+      key: sessionBody.key,
     );
   }
 }
