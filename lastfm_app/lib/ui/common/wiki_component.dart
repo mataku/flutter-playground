@@ -44,7 +44,6 @@ class WikiComponent extends StatelessWidget {
             text: body,
             style: const TextStyle(
               fontWeight: FontWeight.w600,
-              color: Colors.black,
             ),
           ),
         );
@@ -67,7 +66,6 @@ class WikiComponent extends StatelessWidget {
           TextSpan(
             text: body,
             style: const TextStyle(
-              color: Colors.black,
               fontSize: 14,
             ),
           ),

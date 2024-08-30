@@ -49,6 +49,8 @@ class ArtworkSquareComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     final Widget imageComponent;
 
     if (imageUrl == null || imageUrl?.isEmpty == true) {
@@ -68,7 +70,7 @@ class ArtworkSquareComponent extends StatelessWidget {
         },
         loadingBuilder: (context, child, loadingProgress) {
           if (loadingProgress != null) {
-            return Container(color: Colors.white);
+            return Container(color: theme.colorScheme.surface);
           } else {
             return child;
           }

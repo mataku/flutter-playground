@@ -9,41 +9,21 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final theme = Theme.of(context);
     return SafeArea(
       child: DefaultTabController(
         length: 3,
         child: Scaffold(
           appBar: AppBar(
             title: const Text('Home'),
-            bottom: const TabBar(
-              tabs: [
-                Tab(
-                  child: Text(
-                    'Scrobble',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Tab(
-                  child: Text(
-                    'Album',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Tab(
-                  child: Text(
-                    'Artist',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+            bottom: TabBar(
+              labelColor: theme.colorScheme.onSurface,
+              unselectedLabelColor: theme.colorScheme.onSecondary,
+              indicatorColor: theme.colorScheme.onSurface,
+              tabs: const [
+                Tab(text: 'Scrobble'),
+                Tab(text: 'Album'),
+                Tab(text: 'Artist'),
               ],
             ),
           ),

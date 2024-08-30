@@ -13,6 +13,8 @@ class ValueDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Column(
       children: [
         Text(
@@ -25,9 +27,9 @@ class ValueDescription extends StatelessWidget {
         const Padding(padding: EdgeInsets.only(top: 4)),
         Text(
           IntRepresentation.toReadableValue(label),
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 14,
-            color: Color(0xFF757575),
+            color: theme.colorScheme.onSecondary,
           ),
         ),
       ],

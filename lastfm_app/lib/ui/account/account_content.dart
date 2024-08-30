@@ -172,6 +172,8 @@ class _AccountCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return InkWell(
       onTap: onTapCell,
       child: SizedBox(
@@ -192,9 +194,9 @@ class _AccountCell extends StatelessWidget {
               const Padding(padding: EdgeInsets.only(top: 8)),
               Text(
                 description,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 14,
-                  color: Color(0xFF757575),
+                  color: theme.colorScheme.onSecondary,
                 ),
               ),
             ],

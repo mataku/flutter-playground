@@ -1,21 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_app/router/router.dart';
+import 'package:state_app/store/kv_store.dart';
+import 'package:state_app/ui/common/theme_notifier.dart';
+import 'package:state_app/ui/theme/app_theme.dart';
 
-void main() {
-  runApp(const ProviderScope(child: MyApp()));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // TODO: reconsider
+  await KVStore().init();
+  runApp(
+    ProviderScope(
+      child: Consumer(builder: (context, ref, child) {
+        return FutureBuilder(
+          future: ref.watch(themeNotifierProvider.notifier).getCurrentTheme(),
+          builder: (context, AsyncSnapshot<AppTheme> snapshot) {
+            return snapshot.hasData
+                ? const MyApp()
+                : const CircularProgressIndicator();
+          },
+        );
+      }),
+    ),
+  );
 }
 
 class MyApp extends ConsumerWidget {
-  const MyApp({super.key});
+  const MyApp({
+    super.key,
+  });
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
+    final themeNotifier = ref.watch(themeNotifierProvider);
+    final theme = themeNotifier.appTheme ?? AppTheme.dark;
 
     return MaterialApp.router(
-      title: 'Flutter Demo',
+      title: '',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -32,7 +55,7 @@ class MyApp extends ConsumerWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: theme.colorScheme,
         useMaterial3: true,
         pageTransitionsTheme: const PageTransitionsTheme(
           builders: <TargetPlatform, PageTransitionsBuilder>{
@@ -40,10 +63,11 @@ class MyApp extends ConsumerWidget {
             TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
           },
         ),
+        brightness: theme.brightness,
       ),
       builder: (context, child) {
         return ColoredBox(
-          color: Colors.white,
+          color: theme.colorScheme.surface,
           child: child,
         );
       },

@@ -17,6 +17,8 @@ class TopAlbumComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Card(
       child: Padding(
         padding: const EdgeInsets.only(left: 8, right: 8, top: 12, bottom: 8),
@@ -47,9 +49,9 @@ class TopAlbumComponent extends StatelessWidget {
               "$playcount times",
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 12,
-                color: Color(0xFF757575),
+                color: theme.colorScheme.onSecondary,
               ),
             ),
           ],
