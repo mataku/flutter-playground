@@ -1,14 +1,23 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:state_app/model/result.dart';
 import 'package:state_app/repository/auth_repository.dart';
+import 'package:state_app/ui/common/app_button.dart';
+import 'package:state_app/ui/common/app_dialog.dart';
 
 final loginNotifierProvider = ChangeNotifierProvider.autoDispose(
-    (ref) => LoginNotifier(authRepository: ref.read(authRepositoryProvider)));
+  (ref) => LoginNotifier(
+    authRepository: ref.read(authRepositoryProvider),
+  ),
+);
 
 class LoginScreen extends ConsumerWidget {
   final usernameTextEditController = TextEditingController();
   final passwordTextEditController = TextEditingController();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   LoginScreen({
     super.key,
@@ -17,8 +26,17 @@ class LoginScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.watch(loginNotifierProvider);
+    final errorMessage = notifier.error;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (errorMessage?.isNotEmpty == true) {
+        _showErrorMessage(context, errorMessage!, () {
+          notifier.consume();
+        });
+      }
+    });
 
     return Scaffold(
+      key: _scaffoldKey,
       body: Padding(
         padding: const EdgeInsets.only(left: 16, right: 16),
         child: Column(
@@ -71,26 +89,16 @@ class LoginScreen extends ConsumerWidget {
               ),
             ),
             const Padding(padding: EdgeInsets.only(top: 48)),
-            ElevatedButton(
-              onPressed: () {
-                notifier.login(
-                  username: usernameTextEditController.text,
-                  password: passwordTextEditController.text,
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(32),
-                ),
-              ),
-              child: const Padding(
-                padding: EdgeInsets.all(16),
-                child: Text(
-                  'Let me in!',
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: AppButton(
+                text: 'Let me in!',
+                onTap: () {
+                  notifier.login(
+                    username: usernameTextEditController.text,
+                    password: passwordTextEditController.text,
+                  );
+                },
               ),
             ),
           ],
@@ -100,15 +108,50 @@ class LoginScreen extends ConsumerWidget {
   }
 }
 
+void _showErrorMessage(
+    BuildContext context, String message, VoidCallback onConfirm) {
+  if (Platform.isAndroid) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(message),
+    ));
+  } else {
+    showDialog(
+      context: context,
+      builder: (context) => AppDialog(
+        title: message,
+        description: 'Invalid username or password',
+        dismissOnTap: null,
+        confirmOnTap: () {
+          GoRouter.of(context).pop();
+          onConfirm();
+        },
+      ),
+    );
+  }
+}
+
 class LoginNotifier extends ChangeNotifier {
   final AuthRepository _authRepository;
+  String? error;
 
-  LoginNotifier({required AuthRepository authRepository})
-      : _authRepository = authRepository;
+  LoginNotifier({
+    required AuthRepository authRepository,
+  }) : _authRepository = authRepository;
 
   Future login({required String username, required String password}) async {
-    final result =
-        _authRepository.authorize(username: username, password: password);
-    if (result is Success<String>) {}
+    error = null;
+    final result = _authRepository.authorize(
+      username: username,
+      password: password,
+    );
+    if (result is Failure<String>) {
+      error = 'Failed to login';
+    }
+    notifyListeners();
+  }
+
+  void consume() {
+    error = null;
+    notifyListeners();
   }
 }

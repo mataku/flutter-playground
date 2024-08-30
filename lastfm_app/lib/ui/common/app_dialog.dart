@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class AppDialog extends StatelessWidget {
   final String title;
   final String? description;
-  final VoidCallback dismissOnTap;
+  final VoidCallback? dismissOnTap;
   final VoidCallback confirmOnTap;
 
   const AppDialog({
@@ -24,12 +24,14 @@ class AppDialog extends StatelessWidget {
         title: Text(title),
         content: Text(description ?? ''),
         actions: [
-          GestureDetector(
-            onTap: dismissOnTap,
-            child: const Text('Cancel'),
-          ),
-          GestureDetector(
-            onTap: confirmOnTap,
+          if (dismissOnTap != null)
+            CupertinoDialogAction(
+              isDestructiveAction: true,
+              onPressed: dismissOnTap,
+              child: const Text('Cancel'),
+            ),
+          CupertinoDialogAction(
+            onPressed: confirmOnTap,
             child: const Text('OK'),
           ),
         ],
@@ -39,10 +41,11 @@ class AppDialog extends StatelessWidget {
         title: Text(title),
         content: Text(description ?? ''),
         actions: [
-          GestureDetector(
-            onTap: dismissOnTap,
-            child: const Text('Cancel'),
-          ),
+          if (dismissOnTap != null)
+            GestureDetector(
+              onTap: dismissOnTap,
+              child: const Text('Cancel'),
+            ),
           GestureDetector(
             onTap: confirmOnTap,
             child: const Text('OK'),
