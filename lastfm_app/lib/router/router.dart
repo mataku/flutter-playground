@@ -27,8 +27,9 @@ final routerProvider = Provider((ref) {
     routes: $appRoutes,
     initialLocation: HomeRoute.path,
     navigatorKey: _rootNavigatorKey,
-    redirect: (BuildContext context, GoRouterState state) {
-      final bool loggedIn = sessionStore.getSessionKey()?.isNotEmpty ?? false;
+    redirect: (BuildContext context, GoRouterState state) async {
+      final sessionKey = await sessionStore.getSessionKey();
+      final bool loggedIn = sessionKey?.isNotEmpty ?? false;
       final toHome = state.matchedLocation == const HomeRoute().location;
       if (toHome && !loggedIn) {
         return const LoginRoute().location;

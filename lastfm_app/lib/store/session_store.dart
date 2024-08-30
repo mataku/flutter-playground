@@ -1,27 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-final sessionStoreProvider = Provider((ref) {
-  final store = SessionStore();
-  store.init();
-  return store;
-});
+final sessionStoreProvider = Provider((ref) => SessionStore());
 
-// TODO: flutter_secure_storage
 class SessionStore {
-  static SharedPreferences? _pref;
+  final storage = const FlutterSecureStorage(
+    aOptions: AndroidOptions(
+      encryptedSharedPreferences: false,
+    ),
+  );
+
   static const _sessionKey = 'session_key';
-  Future<void> init() async {
-    _pref ??= await SharedPreferences.getInstance();
+
+  Future<String?> getSessionKey() async {
+    return await storage.read(key: _sessionKey);
   }
 
-  String? getSessionKey() {
-    return _pref?.getString(_sessionKey);
-  }
-
-  void setSessionKey(String sessionKey) {
-    _pref?.setString(_sessionKey, sessionKey);
+  Future<void> setSessionKey(String sessionKey) async {
+    await storage.write(key: _sessionKey, value: sessionKey);
   }
 }
 
