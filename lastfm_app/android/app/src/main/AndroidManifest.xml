@@ -6,8 +6,8 @@
         android:label="state_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        android:allowBackup="true"
-        android:fullBackupContent="@xml/backup_rules">
+        android:allowBackup="false">
+        <!-- android:fullBackupContent="@xml/backup_rules"> -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
