@@ -1,14 +1,157 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import 'package:state_app/model/result.dart';
+import 'package:state_app/repository/auth_repository.dart';
+import 'package:state_app/ui/common/app_button.dart';
+import 'package:state_app/ui/common/app_dialog.dart';
+
+final loginNotifierProvider = ChangeNotifierProvider.autoDispose(
+  (ref) => LoginNotifier(
+    authRepository: ref.read(authRepositoryProvider),
+  ),
+);
+
+class LoginScreen extends ConsumerWidget {
+  final usernameTextEditController = TextEditingController();
+  final passwordTextEditController = TextEditingController();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  LoginScreen({
     super.key,
   });
 
   @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Text('login!!'),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final notifier = ref.watch(loginNotifierProvider);
+    final errorMessage = notifier.error;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (errorMessage?.isNotEmpty == true) {
+        _showErrorMessage(context, errorMessage!, () {
+          notifier.consume();
+        });
+      }
+    });
+
+    return Scaffold(
+      key: _scaffoldKey,
+      body: Padding(
+        padding: const EdgeInsets.only(left: 16, right: 16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text(
+              'Login to Last.fm',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+            ),
+            const Padding(padding: EdgeInsets.only(top: 24)),
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: TextFormField(
+                controller: usernameTextEditController,
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Username',
+                ),
+                keyboardType: TextInputType.visiblePassword,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Username is empty';
+                  }
+                  return null;
+                },
+              ),
+            ),
+            const Padding(padding: EdgeInsets.only(top: 16)),
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: TextFormField(
+                controller: passwordTextEditController,
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                  border: OutlineInputBorder(),
+                ),
+                keyboardType: TextInputType.visiblePassword,
+                obscureText: true,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Password is empty';
+                  }
+
+                  return null;
+                },
+              ),
+            ),
+            const Padding(padding: EdgeInsets.only(top: 48)),
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: AppButton(
+                text: 'Let me in!',
+                onTap: () {
+                  notifier.login(
+                    username: usernameTextEditController.text,
+                    password: passwordTextEditController.text,
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
     );
+  }
+}
+
+void _showErrorMessage(
+    BuildContext context, String message, VoidCallback onConfirm) {
+  if (Platform.isAndroid) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text(message),
+    ));
+  } else {
+    showDialog(
+      context: context,
+      builder: (context) => AppDialog(
+        title: message,
+        description: 'Invalid username or password',
+        dismissOnTap: null,
+        confirmOnTap: () {
+          GoRouter.of(context).pop();
+          onConfirm();
+        },
+      ),
+    );
+  }
+}
+
+class LoginNotifier extends ChangeNotifier {
+  final AuthRepository _authRepository;
+  String? error;
+
+  LoginNotifier({
+    required AuthRepository authRepository,
+  }) : _authRepository = authRepository;
+
+  Future login({required String username, required String password}) async {
+    error = null;
+    final result = _authRepository.authorize(
+      username: username,
+      password: password,
+    );
+    if (result is Failure<String>) {
+      error = 'Failed to login';
+    }
+    notifyListeners();
+  }
+
+  void consume() {
+    error = null;
+    notifyListeners();
   }
 }
