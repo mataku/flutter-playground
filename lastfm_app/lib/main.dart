@@ -41,6 +41,12 @@ class MyApp extends ConsumerWidget {
           },
         ),
       ),
+      builder: (context, child) {
+        return ColoredBox(
+          color: Colors.white,
+          child: child,
+        );
+      },
       routerConfig: router,
     );
   }
