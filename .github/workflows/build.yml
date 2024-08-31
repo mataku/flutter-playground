@@ -6,6 +6,10 @@ env:
   API_KEY: api_key
   SHARED_SECRET: shared_secret
 
+concurrency:
+  group: build-${{ github.head_ref || 'develop' }}
+  cancel-in-progress: true
+
 jobs:
   ios:
     runs-on: macos-latest
