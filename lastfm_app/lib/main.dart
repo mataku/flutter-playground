@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,9 +21,7 @@ void main() async {
         return FutureBuilder(
           future: ref.watch(themeNotifierProvider.notifier).getCurrentTheme(),
           builder: (context, AsyncSnapshot<AppTheme> snapshot) {
-            return snapshot.hasData
-                ? const MyApp()
-                : const CircularProgressIndicator();
+            return snapshot.hasData ? const MyApp() : const SizedBox();
           },
         );
       }),
@@ -40,14 +40,19 @@ class MyApp extends ConsumerWidget {
     final themeNotifier = ref.watch(themeNotifierProvider);
     final theme = themeNotifier.appTheme ?? AppTheme.dark;
 
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarBrightness: theme.brightness,
-      statusBarIconBrightness: theme.brightness == Brightness.dark
-          ? Brightness.light
-          : Brightness.dark,
-      statusBarColor: Colors.transparent,
-      systemNavigationBarColor: Colors.transparent,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarBrightness: theme.brightness,
+        statusBarIconBrightness: theme.brightness == Brightness.dark
+            ? Brightness.light
+            : Brightness.dark,
+        statusBarColor: Colors.transparent,
+        systemNavigationBarColor: Colors.transparent,
+        systemNavigationBarIconBrightness: theme.brightness == Brightness.dark
+            ? Brightness.light
+            : Brightness.dark,
+      ),
+    );
 
     return MaterialApp.router(
       title: '',
@@ -75,6 +80,7 @@ class MyApp extends ConsumerWidget {
             TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
           },
         ),
+        fontFamily: Platform.isIOS ? 'CupertinoSystemText' : 'Roboto',
         brightness: theme.brightness,
       ),
       builder: (context, child) {
