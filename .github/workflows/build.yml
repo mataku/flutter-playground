@@ -6,31 +6,64 @@ env:
   API_KEY: api_key
   SHARED_SECRET: shared_secret
 
+concurrency:
+  group: build-${{ github.head_ref || 'develop' }}
+  cancel-in-progress: true
+
 jobs:
-  build:
+  ios:
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: lastfm_app
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare env
+        run: |
+          echo "API_KEY=${{ env.API_KEY }}" >> .env
+          echo "SHARED_SECRET=${{ env.SHARED_SECRET }}" >> .env
+      - name: Setup Flutter env
+        uses: ./.github/actions/setup-flutter-project
+
+      - name: Build binary
+        run: |
+          flutter build ipa --no-codesign
+
+  android:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: lastfm_app
     steps:
       - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
+      - name: Setup JDK
+        uses: actions/setup-java@v4
         with:
-          channel: stable
-          flutter-version: '3.24.0'
-          cache: true
-          cache-key: "flutter-:os:-:channel:-:version:-:arch:-:hash:" # optional, change this to force refresh cache
-          cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
-          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:-:hash:" # optional, change this to force refresh cache of dart pub get dependencies
-          pub-cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
-      - name: Install packages
-        run: flutter pub get
+          distribution: zulu
+          java-version: 17
       - name: Prepare env
         run: |
           echo "API_KEY=${{ env.API_KEY }}" >> .env
           echo "SHARED_SECRET=${{ env.SHARED_SECRET }}" >> .env
-      - name: Run build_runner
-        run: dart run build_runner build
+      - name: Setup Flutter env
+        uses: ./.github/actions/setup-flutter-project
+      - name: Build binary
+        run: |
+          flutter build appbundle --debug # --release is better
+
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: lastfm_app
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare env
+        run: |
+          echo "API_KEY=${{ env.API_KEY }}" >> .env
+          echo "SHARED_SECRET=${{ env.SHARED_SECRET }}" >> .env
+      - name: Setup Flutter env
+        uses: ./.github/actions/setup-flutter-project
       - name: Linter
         run: flutter analyze
       - name: Run tests
