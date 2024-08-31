@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:state_app/store/session_store.dart';
 import 'package:state_app/ui/account/account_screen.dart';
+import 'package:state_app/ui/account/theme_selection_screen.dart';
 import 'package:state_app/ui/auth/login_screen.dart';
 import 'package:state_app/ui/detail/track_detail_screen.dart';
 import 'package:state_app/ui/discover/discover_screen.dart';
@@ -61,7 +62,11 @@ final routerProvider = Provider((ref) {
     ),
     TypedStatefulShellBranch<AccountShellBranchData>(
       routes: [
-        TypedGoRoute<AccountRoute>(path: AccountRoute.path),
+        TypedGoRoute<AccountRoute>(path: AccountRoute.path, routes: [
+          TypedGoRoute<ThemeSelectionRoute>(
+            path: ThemeSelectionRoute.path,
+          )
+        ]),
       ],
     )
   ],
@@ -122,6 +127,17 @@ class TrackDetailRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const TrackDetailScreen();
+  }
+}
+
+class ThemeSelectionRoute extends GoRouteData {
+  const ThemeSelectionRoute();
+
+  static const path = "select_theme";
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const ThemeSelectionScreen();
   }
 }
 

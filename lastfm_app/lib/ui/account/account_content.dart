@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:state_app/model/artwork.dart';
 import 'package:state_app/model/presentation/int_representation.dart';
 import 'package:state_app/model/profile/user_info.dart';
+import 'package:state_app/router/router.dart';
 import 'package:state_app/ui/common/app_dialog.dart';
 import 'package:state_app/ui/common/artwork_component.dart';
 import 'package:state_app/ui/common/value_description.dart';
@@ -23,7 +24,7 @@ class AccountContent extends StatelessWidget {
           _AccountCell(
             title: 'Theme',
             description: 'dark',
-            onTapCell: () => {},
+            onTapCell: () => {const ThemeSelectionRoute().go(context)},
           ),
           _AccountCell(
             title: 'Logout',

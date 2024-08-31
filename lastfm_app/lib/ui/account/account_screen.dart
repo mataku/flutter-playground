@@ -18,6 +18,7 @@ class AccountScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.watch(accountNotifierProvider);
     final userInfo = notifier.userInfo;
+    final theme = Theme.of(context);
 
     return SafeArea(
       child: Scaffold(
@@ -26,9 +27,11 @@ class AccountScreen extends ConsumerWidget {
             'Account',
           ),
           surfaceTintColor: Colors.white,
-          bottom: const PreferredSize(
-            preferredSize: Size.fromHeight(12),
-            child: Divider(),
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(12),
+            child: Divider(
+              color: theme.colorScheme.onSecondary.withAlpha(128),
+            ),
           ),
         ),
         body: AccountContent(userInfo),
