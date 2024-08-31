@@ -22,6 +22,10 @@ class TopArtistsComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
+        SliverOverlapInjector(
+          // This is the flip side of the SliverOverlapAbsorber above.
+          handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+        ),
         const SliverPadding(
           padding: EdgeInsets.only(top: 12),
         ),
@@ -51,7 +55,7 @@ class TopArtistsComponent extends StatelessWidget {
         if (artists.isNotEmpty && !isLoading)
           const SliverPadding(padding: EdgeInsets.only(top: 24)),
       ],
-      controller: scrollController,
+      // controller: scrollController,
     );
   }
 }
