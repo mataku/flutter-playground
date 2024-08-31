@@ -7,12 +7,15 @@ import 'package:state_app/router/router.dart';
 import 'package:state_app/ui/common/app_dialog.dart';
 import 'package:state_app/ui/common/artwork_component.dart';
 import 'package:state_app/ui/common/value_description.dart';
+import 'package:state_app/ui/theme/app_theme.dart';
 
 class AccountContent extends StatelessWidget {
   final UserInfo? _userInfo;
+  final AppTheme? _appTheme;
   final VoidCallback onLogout;
 
-  const AccountContent(this._userInfo, this.onLogout, {super.key});
+  const AccountContent(this._userInfo, this._appTheme, this.onLogout,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class AccountContent extends StatelessWidget {
           ),
           _AccountCell(
             title: 'Theme',
-            description: 'dark',
+            description: _appTheme?.label ?? '',
             onTapCell: () => {const ThemeSelectionRoute().go(context)},
           ),
           _AccountCell(
