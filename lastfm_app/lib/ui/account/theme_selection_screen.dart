@@ -83,7 +83,9 @@ class _ThemeSelection extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(appTheme.name),
+        Text(
+          appTheme.label,
+        ),
         AppCheckbox(
           checked: selected,
           onTap: onTap,

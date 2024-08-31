@@ -3,27 +3,32 @@ import 'package:flutter/material.dart';
 enum AppTheme {
   light(
     'light',
+    'Light',
     lightColorScheme,
     Brightness.light,
   ),
   dark(
     'dark',
+    'Dark',
     darkColorScheme,
     Brightness.dark,
   ),
   lastfmDark(
     'lastfmdark',
+    'Last.fm Dark',
     lastfmDarkColorScheme,
     Brightness.dark,
   );
 
   const AppTheme(
     this.id,
+    this.label,
     this.colorScheme,
     this.brightness,
   );
 
   final String id;
+  final String label;
   final ColorScheme colorScheme;
   final Brightness brightness;
 }
