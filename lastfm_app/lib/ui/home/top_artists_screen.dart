@@ -36,7 +36,6 @@ class TopArtistsNotifier extends ChangeNotifier {
       const TopArtistsState(topArtists: [], hasMore: true, isLoading: false);
 
   Future fetchData() async {
-    debugPrint("MATAKUDEBUG artist fetchData page: $_page $hashCode");
     if (!topArtistsState.hasMore) return;
 
     topArtistsState = TopArtistsState(
@@ -93,8 +92,6 @@ class _TopArtistsPageState extends ConsumerState<TopArtistsScreen>
 
   @override
   void initState() {
-    debugPrint(
-        "MATAKUDEBUG topArtistsPage init! ${_scrollController.hashCode}");
     _scrollController.addListener(_onScrollListener);
     super.initState();
   }
