@@ -25,6 +25,7 @@ class DiscoverScreen extends ConsumerWidget {
     final tracks = notifier.tracks;
     final artists = notifier.artists;
     final tags = notifier.tags;
+    final theme = Theme.of(context);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -32,9 +33,11 @@ class DiscoverScreen extends ConsumerWidget {
             'Discover',
           ),
           surfaceTintColor: Colors.white,
-          bottom: const PreferredSize(
-            preferredSize: Size.fromHeight(12),
-            child: Divider(),
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(12),
+            child: Divider(
+              color: theme.colorScheme.onSecondary.withAlpha(128),
+            ),
           ),
         ),
         body: CustomScrollView(

@@ -27,6 +27,7 @@ class LoginScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.watch(loginNotifierProvider);
     final errorMessage = notifier.error;
+    final theme = Theme.of(context);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (errorMessage?.isNotEmpty == true) {
         _showErrorMessage(context, errorMessage!, () {
@@ -55,9 +56,25 @@ class LoginScreen extends ConsumerWidget {
               padding: const EdgeInsets.only(left: 16, right: 16),
               child: TextFormField(
                 controller: usernameTextEditController,
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
                   labelText: 'Username',
+                  labelStyle: TextStyle(color: theme.colorScheme.onSurface),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: theme.colorScheme.onSurface,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: theme.colorScheme.onSurface,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: theme.colorScheme.onSurface,
+                    ),
+                  ),
+                  focusColor: theme.colorScheme.onSurface,
                 ),
                 keyboardType: TextInputType.visiblePassword,
                 validator: (value) {
@@ -72,10 +89,29 @@ class LoginScreen extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.only(left: 16, right: 16),
               child: TextFormField(
+                style: TextStyle(
+                  color: theme.colorScheme.onSurface,
+                ),
                 controller: passwordTextEditController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   labelText: 'Password',
-                  border: OutlineInputBorder(),
+                  labelStyle: TextStyle(color: theme.colorScheme.onSurface),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: theme.colorScheme.onSurface,
+                    ),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: theme.colorScheme.onSurface,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: theme.colorScheme.onSurface,
+                    ),
+                  ),
+                  focusColor: theme.colorScheme.onSurface,
                 ),
                 keyboardType: TextInputType.visiblePassword,
                 obscureText: true,
@@ -99,6 +135,8 @@ class LoginScreen extends ConsumerWidget {
                     password: passwordTextEditController.text,
                   );
                 },
+                backgroundColor: const Color(0xFFC0CA33),
+                textColor: theme.colorScheme.surface,
               ),
             ),
           ],

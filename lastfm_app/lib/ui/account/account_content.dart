@@ -3,14 +3,16 @@ import 'package:go_router/go_router.dart';
 import 'package:state_app/model/artwork.dart';
 import 'package:state_app/model/presentation/int_representation.dart';
 import 'package:state_app/model/profile/user_info.dart';
+import 'package:state_app/router/router.dart';
 import 'package:state_app/ui/common/app_dialog.dart';
 import 'package:state_app/ui/common/artwork_component.dart';
 import 'package:state_app/ui/common/value_description.dart';
 
 class AccountContent extends StatelessWidget {
   final UserInfo? _userInfo;
+  final VoidCallback onLogout;
 
-  const AccountContent(this._userInfo, {super.key});
+  const AccountContent(this._userInfo, this.onLogout, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class AccountContent extends StatelessWidget {
           _AccountCell(
             title: 'Theme',
             description: 'dark',
-            onTapCell: () => {},
+            onTapCell: () => {const ThemeSelectionRoute().go(context)},
           ),
           _AccountCell(
             title: 'Logout',
@@ -39,6 +41,7 @@ class AccountContent extends StatelessWidget {
                   },
                   confirmOnTap: () {
                     context.pop();
+                    onLogout();
                   },
                 ),
               );
@@ -172,6 +175,8 @@ class _AccountCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return InkWell(
       onTap: onTapCell,
       child: SizedBox(
@@ -192,9 +197,9 @@ class _AccountCell extends StatelessWidget {
               const Padding(padding: EdgeInsets.only(top: 8)),
               Text(
                 description,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 14,
-                  color: Color(0xFF757575),
+                  color: theme.colorScheme.onSecondary,
                 ),
               ),
             ],
