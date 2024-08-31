@@ -10,8 +10,9 @@ import 'package:state_app/ui/common/value_description.dart';
 
 class AccountContent extends StatelessWidget {
   final UserInfo? _userInfo;
+  final VoidCallback onLogout;
 
-  const AccountContent(this._userInfo, {super.key});
+  const AccountContent(this._userInfo, this.onLogout, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +41,7 @@ class AccountContent extends StatelessWidget {
                   },
                   confirmOnTap: () {
                     context.pop();
+                    onLogout();
                   },
                 ),
               );

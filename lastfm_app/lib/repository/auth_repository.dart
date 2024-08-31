@@ -9,7 +9,6 @@ import 'package:state_app/store/session_store.dart';
 final authRepositoryProvider = Provider(
   (ref) => AuthRepositoryImpl(
     ref.read(lastFmApiServiceProvider),
-    ref.read(sessionStoreProvider),
     ref.read(sessionChangeNotifierProvider),
   ),
 );
@@ -23,12 +22,10 @@ abstract class AuthRepository {
 
 class AuthRepositoryImpl implements AuthRepository {
   final LastFmApiService _apiService;
-  final SessionStore _sessionStore;
   final SessionChangeNotifier _notifier;
 
   AuthRepositoryImpl(
     this._apiService,
-    this._sessionStore,
     this._notifier,
   );
 
@@ -48,8 +45,7 @@ class AuthRepositoryImpl implements AuthRepository {
     );
     try {
       final result = await _apiService.request(endpoint);
-      await _sessionStore.setSessionKey(result.sessionBody.key);
-      _notifier.login();
+      await _notifier.login(result.sessionBody.key);
       return Result.success(result.sessionBody.name);
     } on Exception catch (error) {
       return Result.failure(AppError.getApiError(error));

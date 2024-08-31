@@ -3,10 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_app/model/profile/user_info.dart';
 import 'package:state_app/model/result.dart';
 import 'package:state_app/repository/profile_repository.dart';
+import 'package:state_app/store/session_store.dart';
 import 'package:state_app/ui/account/account_content.dart';
 
 final accountNotifierProvider = ChangeNotifierProvider((ref) {
-  final notifier = AccountNotifier(ref.read(profileRepositoryProvider));
+  final notifier = AccountNotifier(
+    profileRepository: ref.read(profileRepositoryProvider),
+  );
   notifier.fetchUserInfo();
   return notifier;
 });
@@ -17,6 +20,7 @@ class AccountScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.watch(accountNotifierProvider);
+    final sessionChangeNotifier = ref.watch(sessionChangeNotifierProvider);
     final userInfo = notifier.userInfo;
     final theme = Theme.of(context);
 
@@ -34,7 +38,9 @@ class AccountScreen extends ConsumerWidget {
             ),
           ),
         ),
-        body: AccountContent(userInfo),
+        body: AccountContent(userInfo, () {
+          sessionChangeNotifier.logout();
+        }),
       ),
     );
   }
@@ -43,7 +49,9 @@ class AccountScreen extends ConsumerWidget {
 class AccountNotifier extends ChangeNotifier {
   final ProfileRepository _profileRepository;
 
-  AccountNotifier(this._profileRepository);
+  AccountNotifier({
+    required ProfileRepository profileRepository,
+  }) : _profileRepository = profileRepository;
 
   UserInfo? userInfo;
 

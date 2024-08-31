@@ -26,11 +26,13 @@ class AppDialog extends StatelessWidget {
         actions: [
           if (dismissOnTap != null)
             CupertinoDialogAction(
-              isDestructiveAction: true,
+              isDefaultAction: true,
               onPressed: dismissOnTap,
+              textStyle: const TextStyle(color: CupertinoColors.systemBlue),
               child: const Text('Cancel'),
             ),
           CupertinoDialogAction(
+            isDestructiveAction: true,
             onPressed: confirmOnTap,
             child: const Text('OK'),
           ),

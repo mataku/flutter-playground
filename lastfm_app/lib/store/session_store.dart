@@ -20,24 +20,34 @@ class SessionStore {
   Future<void> setSessionKey(String sessionKey) async {
     await storage.write(key: _sessionKey, value: sessionKey);
   }
+
+  Future<void> clearSessionKey() async {
+    await storage.delete(key: _sessionKey);
+  }
 }
 
 class SessionChangeNotifier extends ChangeNotifier {
+  final SessionStore _sessionStore;
+
   // ignore: unused_field
   bool _isLoggedIn = false;
 
-  SessionChangeNotifier();
+  SessionChangeNotifier({
+    required SessionStore sessionStore,
+  }) : _sessionStore = sessionStore;
 
-  void login() {
+  Future<void> login(String sessionKey) async {
     _isLoggedIn = true;
+    await _sessionStore.setSessionKey(sessionKey);
     notifyListeners();
   }
 
-  void logout() {
+  Future<void> logout() async {
     _isLoggedIn = false;
+    await _sessionStore.clearSessionKey();
     notifyListeners();
   }
 }
 
-final sessionChangeNotifierProvider =
-    ChangeNotifierProvider((ref) => SessionChangeNotifier());
+final sessionChangeNotifierProvider = ChangeNotifierProvider((ref) =>
+    SessionChangeNotifier(sessionStore: ref.read(sessionStoreProvider)));
