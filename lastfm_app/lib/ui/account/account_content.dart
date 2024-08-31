@@ -16,12 +16,16 @@ class AccountContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (_userInfo != null) _UserInfoComponent(_userInfo),
-          const Divider(),
+          Divider(
+            color: theme.colorScheme.onSecondary.withAlpha(192),
+          ),
           _AccountCell(
             title: 'Theme',
             description: 'dark',

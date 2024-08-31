@@ -29,6 +29,9 @@ class AccountScreen extends ConsumerWidget {
         appBar: AppBar(
           title: const Text(
             'Account',
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+            ),
           ),
           surfaceTintColor: Colors.white,
           bottom: PreferredSize(
@@ -37,10 +40,14 @@ class AccountScreen extends ConsumerWidget {
               color: theme.colorScheme.onSecondary.withAlpha(128),
             ),
           ),
+          centerTitle: false,
         ),
-        body: AccountContent(userInfo, () {
-          sessionChangeNotifier.logout();
-        }),
+        body: AccountContent(
+          userInfo,
+          () {
+            sessionChangeNotifier.logout();
+          },
+        ),
       ),
     );
   }
