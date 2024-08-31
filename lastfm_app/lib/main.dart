@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_app/router/router.dart';
 import 'package:state_app/store/kv_store.dart';
@@ -7,6 +8,8 @@ import 'package:state_app/ui/theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
   // TODO: reconsider
   await KVStore().init();
@@ -36,6 +39,15 @@ class MyApp extends ConsumerWidget {
     final router = ref.watch(routerProvider);
     final themeNotifier = ref.watch(themeNotifierProvider);
     final theme = themeNotifier.appTheme ?? AppTheme.dark;
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarBrightness: theme.brightness,
+      statusBarIconBrightness: theme.brightness == Brightness.dark
+          ? Brightness.light
+          : Brightness.dark,
+      statusBarColor: Colors.transparent,
+      systemNavigationBarColor: Colors.transparent,
+    ));
 
     return MaterialApp.router(
       title: '',
