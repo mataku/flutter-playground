@@ -20,6 +20,7 @@ class HomeScreen extends ConsumerWidget {
               labelColor: theme.colorScheme.onSurface,
               unselectedLabelColor: theme.colorScheme.onSecondary,
               indicatorColor: theme.colorScheme.onSurface,
+              dividerColor: theme.colorScheme.onSecondary.withAlpha(128),
               tabs: const [
                 Tab(text: 'Scrobble'),
                 Tab(text: 'Album'),

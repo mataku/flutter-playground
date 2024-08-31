@@ -21,6 +21,7 @@ class _TopPageState extends State<TopScreen> {
 
   // tapping area
   BottomNavigationBar _bottomNavigationBar(BuildContext context) {
+    final theme = Theme.of(context);
     return BottomNavigationBar(
       currentIndex: widget.navigationShell.currentIndex,
       items: const <BottomNavigationBarItem>[
@@ -31,6 +32,7 @@ class _TopPageState extends State<TopScreen> {
         BottomNavigationBarItem(
           icon: Icon(Icons.search),
           label: "Discover",
+          backgroundColor: Colors.blue,
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.account_circle),
@@ -43,6 +45,10 @@ class _TopPageState extends State<TopScreen> {
           initialLocation: index == widget.navigationShell.currentIndex,
         );
       },
+      selectedItemColor: theme.colorScheme.onSurface,
+      unselectedItemColor: theme.colorScheme.onSecondary.withAlpha(128),
+      showSelectedLabels: false,
+      showUnselectedLabels: false,
     );
     // NavigationBar
     // return NavigationBar(
