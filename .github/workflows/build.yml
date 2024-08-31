@@ -18,23 +18,12 @@ jobs:
         working-directory: lastfm_app
     steps:
       - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-          flutter-version: '3.24.0'
-          cache: true
-          cache-key: "flutter-:os:-:channel:-:version:-:arch:-:hash:" # optional, change this to force refresh cache
-          cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
-          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:-:hash:" # optional, change this to force refresh cache of dart pub get dependencies
-          pub-cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
-      - name: Install packages
-        run: flutter pub get
       - name: Prepare env
         run: |
           echo "API_KEY=${{ env.API_KEY }}" >> .env
           echo "SHARED_SECRET=${{ env.SHARED_SECRET }}" >> .env
-      - name: Run build_runner
-        run: dart run build_runner build
+      - name: Setup Flutter env
+        uses: ./.github/actions/setup-flutter-project
 
       - name: Build binary
         run: |
@@ -47,32 +36,20 @@ jobs:
         working-directory: lastfm_app
     steps:
       - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-          flutter-version: '3.24.0'
-          cache: true
-          cache-key: "flutter-:os:-:channel:-:version:-:arch:-:hash:" # optional, change this to force refresh cache
-          cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
-          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:-:hash:" # optional, change this to force refresh cache of dart pub get dependencies
-          pub-cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
       - name: Setup JDK
         uses: actions/setup-java@v4
         with:
           distribution: zulu
           java-version: 17
-      - name: Install packages
-        run: flutter pub get
       - name: Prepare env
         run: |
           echo "API_KEY=${{ env.API_KEY }}" >> .env
           echo "SHARED_SECRET=${{ env.SHARED_SECRET }}" >> .env
-      - name: Run build_runner
-        run: dart run build_runner build
+      - name: Setup Flutter env
+        uses: ./.github/actions/setup-flutter-project
       - name: Build binary
         run: |
-          # release is better
-          flutter build appbundle --debug
+          flutter build appbundle --debug # --release is better
 
   test:
     runs-on: ubuntu-latest
@@ -81,23 +58,12 @@ jobs:
         working-directory: lastfm_app
     steps:
       - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-          flutter-version: '3.24.0'
-          cache: true
-          cache-key: "flutter-:os:-:channel:-:version:-:arch:-:hash:" # optional, change this to force refresh cache
-          cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
-          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:-:hash:" # optional, change this to force refresh cache of dart pub get dependencies
-          pub-cache-path: "${{ runner.tool_cache }}/flutter/:channel:-:version:-:arch:" # optional, change this to specify the cache path
-      - name: Install packages
-        run: flutter pub get
       - name: Prepare env
         run: |
           echo "API_KEY=${{ env.API_KEY }}" >> .env
           echo "SHARED_SECRET=${{ env.SHARED_SECRET }}" >> .env
-      - name: Run build_runner
-        run: dart run build_runner build
+      - name: Setup Flutter env
+        uses: ./.github/actions/setup-flutter-project
       - name: Linter
         run: flutter analyze
       - name: Run tests
