@@ -64,9 +64,15 @@ class HomeScreen extends ConsumerWidget {
             },
             body: const TabBarView(
               children: [
-                ScrobbleScreen(),
-                TopAlbumsScreen(),
-                TopArtistsScreen(),
+                ScrobbleScreen(
+                  key: PageStorageKey('scrobble'),
+                ),
+                TopAlbumsScreen(
+                  key: PageStorageKey('top_albums'),
+                ),
+                TopArtistsScreen(
+                  key: PageStorageKey('top_artists'),
+                ),
               ],
             ),
           ),

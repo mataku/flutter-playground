@@ -39,7 +39,6 @@ class TopAlbumsNotifier extends ChangeNotifier {
   );
 
   Future fetchData() async {
-    debugPrint("MATAKUDEBUG album fetchData page: $_page $hashCode");
     if (!topAlbumsState.hasMore) return;
     topAlbumsState = TopAlbumsState(
       topAlbums: topAlbumsState.topAlbums,
@@ -97,7 +96,6 @@ class _TopAlbumsPageState extends ConsumerState<TopAlbumsScreen>
 
   @override
   void initState() {
-    debugPrint("MATAKUDEBUG topAlbumsPage init! ${_scrollController.hashCode}");
     _scrollController.addListener(_onScrollListener);
     super.initState();
   }
@@ -131,7 +129,7 @@ class _TopAlbumsPageState extends ConsumerState<TopAlbumsScreen>
       child: Padding(
         padding: const EdgeInsets.only(left: 8, right: 8),
         child: topAlbumsState.topAlbums.isEmpty
-            ? const Text('empty')
+            ? const SizedBox()
             : TopAlbumsComponent(
                 albums: topAlbumsState.topAlbums,
                 hasMore: topAlbumsState.hasMore,
