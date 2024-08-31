@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:state_app/ui/common/app_checkbox.dart';
 import 'package:state_app/ui/common/theme_notifier.dart';
 import 'package:state_app/ui/theme/app_theme.dart';
 
@@ -42,23 +41,15 @@ class _ThemeSelectionContent extends StatelessWidget {
     return Column(
       children: AppTheme.values
           .map(
-            (theme) => Padding(
-              padding: const EdgeInsets.only(
-                left: 16,
-                right: 16,
-                top: 8,
-                bottom: 8,
-              ),
-              child: _ThemeSelection(
-                appTheme: theme,
-                selected: currentTheme == theme,
-                onTap: () {
-                  if (currentTheme == theme) {
-                    return;
-                  }
-                  onTap(theme);
-                },
-              ),
+            (theme) => _ThemeSelection(
+              appTheme: theme,
+              selected: currentTheme == theme,
+              onTap: () {
+                if (currentTheme == theme) {
+                  return;
+                }
+                onTap(theme);
+              },
             ),
           )
           .toList(),
@@ -79,18 +70,33 @@ class _ThemeSelection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-          appTheme.label,
+    final theme = Theme.of(context);
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.only(
+          left: 16,
+          right: 16,
+          top: 8,
+          bottom: 8,
         ),
-        AppCheckbox(
-          checked: selected,
-          onTap: onTap,
-        )
-      ],
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              appTheme.label,
+            ),
+            if (selected)
+              Icon(
+                Icons.check,
+                size: 20,
+                color: theme.colorScheme.onSurface,
+              )
+          ],
+        ),
+      ),
     );
   }
 }
