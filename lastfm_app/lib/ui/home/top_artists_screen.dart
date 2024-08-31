@@ -85,52 +85,33 @@ class TopArtistsState {
 
 class _TopArtistsPageState extends ConsumerState<TopArtistsScreen>
     with AutomaticKeepAliveClientMixin {
-  final ScrollController _scrollController = ScrollController();
-
   @override
   bool get wantKeepAlive => true;
 
   @override
-  void initState() {
-    _scrollController.addListener(_onScrollListener);
-    super.initState();
-  }
-
-  @override
   void dispose() {
-    _scrollController.removeListener(_onScrollListener);
-    _scrollController.dispose();
     super.dispose();
-  }
-
-  void _onScrollListener() {
-    TopArtistsNotifier notifier = ref.read(topArtistsNotifier);
-    TopArtistsState topArtistsState = notifier.topArtistsState;
-    if (_scrollController.position.pixels >=
-            _scrollController.position.maxScrollExtent * 0.95 &&
-        !topArtistsState.isLoading &&
-        topArtistsState.hasMore) {
-      notifier.fetchData();
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
 
-    final nofifier = ref.watch(topArtistsNotifier);
-    final topArtistsState = nofifier.topArtistsState;
+    final notifier = ref.watch(topArtistsNotifier);
+    final topArtistsState = notifier.topArtistsState;
 
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.only(left: 8, right: 8),
         child: topArtistsState.topArtists.isEmpty
-            ? const Text('empty')
+            ? const SizedBox()
             : TopArtistsComponent(
                 artists: topArtistsState.topArtists,
                 hasMore: topArtistsState.hasMore,
-                scrollController: _scrollController,
                 isLoading: topArtistsState.isLoading,
+                fetchMore: () {
+                  notifier.fetchData();
+                },
               ),
       ),
     );

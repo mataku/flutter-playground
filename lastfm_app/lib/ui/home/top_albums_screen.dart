@@ -89,41 +89,20 @@ class TopAlbumsState {
 
 class _TopAlbumsPageState extends ConsumerState<TopAlbumsScreen>
     with AutomaticKeepAliveClientMixin {
-  final ScrollController _scrollController = ScrollController();
-
   @override
   bool get wantKeepAlive => true;
 
   @override
-  void initState() {
-    _scrollController.addListener(_onScrollListener);
-    super.initState();
-  }
-
-  @override
   void dispose() {
-    _scrollController.removeListener(_onScrollListener);
-    _scrollController.dispose();
     super.dispose();
-  }
-
-  void _onScrollListener() {
-    TopAlbumsNotifier notifier = ref.read(topAlbumsNotifier);
-    TopAlbumsState topAlbumsState = notifier.topAlbumsState;
-    if (_scrollController.position.pixels >=
-            _scrollController.position.maxScrollExtent * 0.95 &&
-        !topAlbumsState.isLoading &&
-        topAlbumsState.hasMore) {
-      notifier.fetchData();
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
 
-    final nofifier = ref.watch(topAlbumsNotifier);
-    final topAlbumsState = nofifier.topAlbumsState;
+    final notifier = ref.watch(topAlbumsNotifier);
+    final topAlbumsState = notifier.topAlbumsState;
 
     return SafeArea(
       child: Padding(
@@ -133,8 +112,10 @@ class _TopAlbumsPageState extends ConsumerState<TopAlbumsScreen>
             : TopAlbumsComponent(
                 albums: topAlbumsState.topAlbums,
                 hasMore: topAlbumsState.hasMore,
-                scrollController: _scrollController,
                 isLoading: topAlbumsState.isLoading,
+                fetchMore: () {
+                  notifier.fetchData();
+                },
               ),
       ),
     );
