@@ -1,4 +1,8 @@
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final appImageCacheManagerProvider =
+    Provider<CacheManager>((ref) => AppImageCacheManager());
 
 class AppImageCacheManager extends CacheManager with ImageCacheManager {
   static const key = 'appImageCache';
