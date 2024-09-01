@@ -32,3 +32,4 @@ analyzer:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
     - ".env"
+    - "**/*.mocks.dart"
