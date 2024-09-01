@@ -13,8 +13,8 @@ import 'package:state_app/model/result.dart';
 import 'package:state_app/model/user/top_album.dart';
 import 'package:state_app/model/user/top_artist.dart';
 
-final userRepositoryProvider =
-    Provider((ref) => UserRepositoryImpl(ref.read(lastFmApiServiceProvider)));
+final userRepositoryProvider = Provider<UserRepository>(
+    (ref) => UserRepositoryImpl(ref.read(lastFmApiServiceProvider)));
 
 abstract class UserRepository {
   Future<Result<List<TopAlbum>>> getTopAlbums(int page);
