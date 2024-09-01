@@ -26,8 +26,8 @@ abstract class ChartRepository {
   Future<Result<List<Tag>>> getChartTagsSample(int page);
 }
 
-final chartRepositoryProvider =
-    Provider((ref) => ChartRepositoryImpl(ref.read(lastFmApiServiceProvider)));
+final chartRepositoryProvider = Provider<ChartRepository>(
+    (ref) => ChartRepositoryImpl(ref.read(lastFmApiServiceProvider)));
 
 class ChartRepositoryImpl implements ChartRepository {
   final LastFmApiService _lastFmApiService;
