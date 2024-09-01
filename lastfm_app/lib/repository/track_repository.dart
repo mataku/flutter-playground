@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_app/api/endpoint/track_info_endpoint.dart';
@@ -49,7 +48,6 @@ class TrackRepositoryImpl implements TrackRepository {
       final track = TrackInfoApiResponse.fromJson(result);
       return Result.success(track.toTrack());
     } on Exception catch (error) {
-      debugPrint("MATAKUDEBUG error: $error");
       return Result.failure(AppError.getApiError(error));
     }
   }
