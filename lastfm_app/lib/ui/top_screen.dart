@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:state_app/ui/common/app_bottom_navigation_bar.dart';
 
 class TopScreen extends StatefulWidget {
   final StatefulNavigationShell navigationShell;
@@ -20,82 +21,10 @@ class _TopPageState extends State<TopScreen> {
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
         ),
-        child: _bottomNavigationBar(context),
-      ),
-    );
-  }
-
-  // tapping area
-  Container _bottomNavigationBar(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return Container(
-      decoration: const BoxDecoration(
-        border: Border(
-          top: BorderSide(
-            color: Colors.black,
-            width: 0.1,
-          ),
+        child: AppBottomNavigationBar(
+          navigationShell: widget.navigationShell,
         ),
       ),
-      child: BottomNavigationBar(
-        currentIndex: widget.navigationShell.currentIndex,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: "Discover",
-            backgroundColor: Colors.blue,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle),
-            label: "Account",
-          ),
-        ],
-        onTap: (int index) {
-          widget.navigationShell.goBranch(
-            index,
-            initialLocation: index == widget.navigationShell.currentIndex,
-          );
-        },
-        selectedItemColor: theme.colorScheme.onSurface,
-        unselectedItemColor: theme.colorScheme.onSecondary.withAlpha(128),
-        useLegacyColorScheme: false,
-        backgroundColor: theme.colorScheme.surface,
-        selectedFontSize: 12,
-        unselectedFontSize: 11,
-        iconSize: 28,
-      ),
     );
-    // NavigationBar
-    // return NavigationBar(
-    //   selectedIndex: widget.navigationShell.currentIndex,
-    //   destinations: const [
-    //     NavigationDestination(
-    //       icon: Icon(Icons.home),
-    //       label: 'Home',
-    //     ),
-    //     NavigationDestination(
-    //       icon: Icon(Icons.search),
-    //       label: 'Discover',
-    //     ),
-    //     NavigationDestination(
-    //       icon: Icon(Icons.account_circle),
-    //       label: 'Account',
-    //     ),
-    //   ],
-    //   onDestinationSelected: (index) {
-    //     widget.navigationShell.goBranch(
-    //       index,
-    //       initialLocation: index == widget.navigationShell.currentIndex,
-    //     );
-    //   },
-    //   labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
-    //   shadowColor: Colors.transparent,
-    //   surfaceTintColor: Colors.transparent,
-    // );
   }
 }

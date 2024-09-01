@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_app/api/endpoint/chart_top_artists_endpoint.dart';
@@ -27,8 +26,8 @@ abstract class ChartRepository {
   Future<Result<List<Tag>>> getChartTagsSample(int page);
 }
 
-final chartRepositoryProvider =
-    Provider((ref) => ChartRepositoryImpl(ref.read(lastFmApiServiceProvider)));
+final chartRepositoryProvider = Provider<ChartRepository>(
+    (ref) => ChartRepositoryImpl(ref.read(lastFmApiServiceProvider)));
 
 class ChartRepositoryImpl implements ChartRepository {
   final LastFmApiService _lastFmApiService;
@@ -47,7 +46,6 @@ class ChartRepositoryImpl implements ChartRepository {
       final result = await _lastFmApiService.request(endpoint);
       return Result.success(result.toChartArtistList());
     } on Exception catch (error) {
-      debugPrint("MATAKUDEBUG $error");
       return Result.failure(AppError.getApiError(error));
     }
   }
@@ -73,7 +71,6 @@ class ChartRepositoryImpl implements ChartRepository {
       final result = await _lastFmApiService.request(endpoint);
       return Result.success(result.toChartTrackList());
     } on Exception catch (error) {
-      debugPrint("MATAKUDEBUG $error");
       return Result.failure(AppError.getApiError(error));
     }
   }
@@ -99,7 +96,6 @@ class ChartRepositoryImpl implements ChartRepository {
       final result = await _lastFmApiService.request(endpoint);
       return Result.success(result.toTagList());
     } on Exception catch (error) {
-      debugPrint("MATAKUDEBUG $error");
       return Result.failure(AppError.getApiError(error));
     }
   }

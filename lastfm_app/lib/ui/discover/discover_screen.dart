@@ -89,9 +89,6 @@ class DiscoverNotifier extends ChangeNotifier {
     if (tagResult is Success) {
       tags = tagResult.getOrNull()!;
     }
-    debugPrint("MATAKUDEBUG $tracks");
-    // debugPrint("MATAKUDEBUG $artists");
-    // debugPrint("MATAKUDEBUG $tags");
 
     notifyListeners();
   }

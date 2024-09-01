@@ -81,4 +81,8 @@ final recentEndpoint = RecentTrackEndpoint(params: {'username': 'mataku'});
 final response = await lastFmApiService.request(recentEndpoint); // RecentTracksApiResponse type
 ```
 
+# Licenses
 
+See [LICENSE](./LICENSE).
+
+This app uses [Noto Sans Japanese](https://fonts.google.com/noto/specimen/Noto+Sans+JP).

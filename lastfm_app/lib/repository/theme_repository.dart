@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_app/store/kv_store.dart';
 import 'package:state_app/ui/theme/app_theme.dart';
 
-final themeRepositoryProvider =
-    Provider((ref) => ThemeRepositoryImpl(kvStore: ref.read(kvStoreProvider)));
+final themeRepositoryProvider = Provider<ThemeRepository>(
+    (ref) => ThemeRepositoryImpl(kvStore: ref.read(kvStoreProvider)));
 
 abstract class ThemeRepository {
   Future<AppTheme> getCurrentTheme();

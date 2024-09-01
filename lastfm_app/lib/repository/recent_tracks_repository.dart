@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_app/api/endpoint/recent_tracks_endpoint.dart';
@@ -16,7 +15,7 @@ abstract class RecentTracksRepository {
   Future<Result<List<RecentTrack>>> getRecentTracksSample(int page);
 }
 
-final recentTracksRepositoryProvider = Provider(
+final recentTracksRepositoryProvider = Provider<RecentTracksRepository>(
     (ref) => RecentTracksRepositoryImpl(ref.read(lastFmApiServiceProvider)));
 
 class RecentTracksRepositoryImpl implements RecentTracksRepository {
@@ -41,10 +40,8 @@ class RecentTracksRepositoryImpl implements RecentTracksRepository {
       final data = await rootBundle.loadString("asset/json/recent_tracks.json");
       final result = json.decode(data) as Map<String, dynamic>;
       final tracks = RecentTracksApiResponse.fromJson(result);
-      debugPrint("MATAKUDEBUG fetch sample!!!!!!!!!!!!");
       return Result.success(tracks.toRecentTrackList());
     } on Exception catch (error) {
-      debugPrint("MATAKUDEBUG error: $error");
       return Result.failure(AppError.getApiError(error));
     }
   }

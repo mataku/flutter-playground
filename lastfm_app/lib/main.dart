@@ -55,7 +55,6 @@ class MyApp extends ConsumerWidget {
     );
 
     return MaterialApp.router(
-      title: '',
       theme: ThemeData(
         // This is the theme of your application.
         //
