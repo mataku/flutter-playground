@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:state_app/model/profile/user_info.dart';
-import 'package:state_app/model/result.dart';
 import 'package:state_app/repository/profile_repository.dart';
 import 'package:state_app/store/session_store.dart';
 import 'package:state_app/ui/account/account_content.dart';
+import 'package:state_app/ui/common/theme_notifier.dart';
 
 final accountNotifierProvider = ChangeNotifierProvider((ref) {
   final notifier = AccountNotifier(
@@ -21,6 +21,7 @@ class AccountScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final notifier = ref.watch(accountNotifierProvider);
     final sessionChangeNotifier = ref.watch(sessionChangeNotifierProvider);
+    final themeNotifier = ref.watch(themeNotifierProvider);
     final userInfo = notifier.userInfo;
     final theme = Theme.of(context);
 
@@ -29,6 +30,9 @@ class AccountScreen extends ConsumerWidget {
         appBar: AppBar(
           title: const Text(
             'Account',
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+            ),
           ),
           surfaceTintColor: Colors.white,
           bottom: PreferredSize(
@@ -37,10 +41,15 @@ class AccountScreen extends ConsumerWidget {
               color: theme.colorScheme.onSecondary.withAlpha(128),
             ),
           ),
+          centerTitle: false,
         ),
-        body: AccountContent(userInfo, () {
-          sessionChangeNotifier.logout();
-        }),
+        body: AccountContent(
+          userInfo,
+          themeNotifier.appTheme,
+          () {
+            sessionChangeNotifier.logout();
+          },
+        ),
       ),
     );
   }
@@ -56,10 +65,8 @@ class AccountNotifier extends ChangeNotifier {
   UserInfo? userInfo;
 
   Future fetchUserInfo() async {
-    final result = await _profileRepository.getUserInfoSample();
-    if (result is Success) {
-      userInfo = (result as Success<UserInfo>).data;
-      notifyListeners();
-    }
+    final userInfoResult = await _profileRepository.getUserInfoSample();
+    userInfo = userInfoResult.getOrNull();
+    notifyListeners();
   }
 }

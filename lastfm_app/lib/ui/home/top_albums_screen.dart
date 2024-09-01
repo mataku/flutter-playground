@@ -4,6 +4,7 @@ import 'package:state_app/model/result.dart';
 import 'package:state_app/model/user/top_album.dart';
 import 'package:state_app/repository/user_repository.dart';
 import 'package:state_app/ui/home/component/top_albums_component.dart';
+import 'package:state_app/ui/home/state/top_albums_state.dart';
 
 final topAlbumsNotifier = ChangeNotifierProvider((ref) {
   final TopAlbumsNotifier notifier =
@@ -39,7 +40,6 @@ class TopAlbumsNotifier extends ChangeNotifier {
   );
 
   Future fetchData() async {
-    debugPrint("MATAKUDEBUG album fetchData page: $_page $hashCode");
     if (!topAlbumsState.hasMore) return;
     topAlbumsState = TopAlbumsState(
       topAlbums: topAlbumsState.topAlbums,
@@ -76,67 +76,35 @@ class TopAlbumsNotifier extends ChangeNotifier {
   }
 }
 
-class TopAlbumsState {
-  final List<TopAlbum> topAlbums;
-  final bool hasMore;
-  final bool isLoading;
-
-  const TopAlbumsState({
-    required this.topAlbums,
-    required this.hasMore,
-    required this.isLoading,
-  });
-}
-
 class _TopAlbumsPageState extends ConsumerState<TopAlbumsScreen>
     with AutomaticKeepAliveClientMixin {
-  final ScrollController _scrollController = ScrollController();
-
   @override
   bool get wantKeepAlive => true;
 
   @override
-  void initState() {
-    debugPrint("MATAKUDEBUG topAlbumsPage init! ${_scrollController.hashCode}");
-    _scrollController.addListener(_onScrollListener);
-    super.initState();
-  }
-
-  @override
   void dispose() {
-    _scrollController.removeListener(_onScrollListener);
-    _scrollController.dispose();
     super.dispose();
-  }
-
-  void _onScrollListener() {
-    TopAlbumsNotifier notifier = ref.read(topAlbumsNotifier);
-    TopAlbumsState topAlbumsState = notifier.topAlbumsState;
-    if (_scrollController.position.pixels >=
-            _scrollController.position.maxScrollExtent * 0.95 &&
-        !topAlbumsState.isLoading &&
-        topAlbumsState.hasMore) {
-      notifier.fetchData();
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
 
-    final nofifier = ref.watch(topAlbumsNotifier);
-    final topAlbumsState = nofifier.topAlbumsState;
+    final notifier = ref.watch(topAlbumsNotifier);
+    final topAlbumsState = notifier.topAlbumsState;
 
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.only(left: 8, right: 8),
         child: topAlbumsState.topAlbums.isEmpty
-            ? const Text('empty')
+            ? const SizedBox()
             : TopAlbumsComponent(
                 albums: topAlbumsState.topAlbums,
                 hasMore: topAlbumsState.hasMore,
-                scrollController: _scrollController,
                 isLoading: topAlbumsState.isLoading,
+                fetchMore: () {
+                  notifier.fetchData();
+                },
               ),
       ),
     );

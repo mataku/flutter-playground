@@ -14,26 +14,68 @@ class HomeScreen extends ConsumerWidget {
       child: DefaultTabController(
         length: 3,
         child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Home'),
-            bottom: TabBar(
-              labelColor: theme.colorScheme.onSurface,
-              unselectedLabelColor: theme.colorScheme.onSecondary,
-              indicatorColor: theme.colorScheme.onSurface,
-              dividerColor: theme.colorScheme.onSecondary.withAlpha(128),
-              tabs: const [
-                Tab(text: 'Scrobble'),
-                Tab(text: 'Album'),
-                Tab(text: 'Artist'),
+          // appBar: AppBar(
+          //   title: const Text(
+          //     'Home',
+          //     style: TextStyle(
+          //       fontWeight: FontWeight.w500,
+          //     ),
+          //   ),
+          //   bottom: TabBar(
+          //     labelColor: theme.colorScheme.onSurface,
+          //     unselectedLabelColor: theme.colorScheme.onSecondary,
+          //     indicatorColor: theme.colorScheme.onSurface,
+          //     dividerColor: theme.colorScheme.onSecondary.withAlpha(128),
+          //     tabs: const [
+          //       Tab(text: 'Scrobble'),
+          //       Tab(text: 'Album'),
+          //       Tab(text: 'Artist'),
+          //     ],
+          //   ),
+          //   centerTitle: false,
+          // ),
+          body: NestedScrollView(
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+              return [
+                SliverAppBar(
+                  title: const Text(
+                    'Home',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  pinned: true,
+                  floating: true,
+                  bottom: TabBar(
+                    tabs: const [
+                      Tab(text: 'Scrobble'),
+                      Tab(text: 'Album'),
+                      Tab(text: 'Artist'),
+                    ],
+                    labelColor: theme.colorScheme.onSurface,
+                    unselectedLabelColor:
+                        theme.colorScheme.onSecondary.withAlpha(128),
+                    indicatorColor: theme.colorScheme.onSurface,
+                    dividerColor: theme.colorScheme.onSecondary.withAlpha(128),
+                  ),
+                  centerTitle: false,
+                ),
+              ];
+            },
+            body: const TabBarView(
+              children: [
+                ScrobbleScreen(
+                  key: PageStorageKey('scrobble'),
+                ),
+                TopAlbumsScreen(
+                  key: PageStorageKey('top_albums'),
+                ),
+                TopArtistsScreen(
+                  key: PageStorageKey('top_artists'),
+                ),
               ],
             ),
-          ),
-          body: const TabBarView(
-            children: [
-              ScrobbleScreen(),
-              TopAlbumsScreen(),
-              TopArtistsScreen(),
-            ],
           ),
         ),
       ),

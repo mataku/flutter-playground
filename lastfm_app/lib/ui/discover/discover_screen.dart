@@ -31,6 +31,9 @@ class DiscoverScreen extends ConsumerWidget {
         appBar: AppBar(
           title: const Text(
             'Discover',
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+            ),
           ),
           surfaceTintColor: Colors.white,
           bottom: PreferredSize(
@@ -39,6 +42,7 @@ class DiscoverScreen extends ConsumerWidget {
               color: theme.colorScheme.onSecondary.withAlpha(128),
             ),
           ),
+          centerTitle: false,
         ),
         body: CustomScrollView(
           slivers: [

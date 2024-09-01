@@ -19,15 +19,17 @@ class WikiComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var hoge = parse(wiki.summary).nodes.first;
+    final theme = Theme.of(context);
+    var bodyNode = parse(wiki.summary).nodes.first;
 
-    var bodyNode = hoge.children.firstWhereOrNull((v) => v.localName == 'body');
-    var boldChildren = bodyNode?.children
+    var bodyElement =
+        bodyNode.children.firstWhereOrNull((v) => v.localName == 'body');
+    var boldChildren = bodyElement?.children
             .where((child) => child.localName == 'b')
             .map((child) => child.text)
             .toList() ??
         [];
-    var hrefChildren = bodyNode?.children
+    var hrefChildren = bodyElement?.children
             .where((child) => child.localName == 'a')
             .map((child) => child.text)
             .toList() ??
@@ -35,15 +37,16 @@ class WikiComponent extends StatelessWidget {
 
     List<TextSpan> annotatedStringList = [];
 
-    bodyNode?.nodes.forEach((node) {
+    bodyElement?.nodes.forEach((node) {
       String? body = node.text;
       if (body == null) {
       } else if (boldChildren.contains(body)) {
         annotatedStringList.add(
           TextSpan(
             text: body,
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.w600,
+              color: theme.colorScheme.onSurface,
             ),
           ),
         );
@@ -65,8 +68,9 @@ class WikiComponent extends StatelessWidget {
         annotatedStringList.add(
           TextSpan(
             text: body,
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 14,
+              color: theme.colorScheme.onSurface,
             ),
           ),
         );
