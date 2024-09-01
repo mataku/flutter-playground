@@ -54,7 +54,8 @@ class HomeScreen extends ConsumerWidget {
                       Tab(text: 'Artist'),
                     ],
                     labelColor: theme.colorScheme.onSurface,
-                    unselectedLabelColor: theme.colorScheme.onSecondary,
+                    unselectedLabelColor:
+                        theme.colorScheme.onSecondary.withAlpha(128),
                     indicatorColor: theme.colorScheme.onSurface,
                     dividerColor: theme.colorScheme.onSecondary.withAlpha(128),
                   ),
