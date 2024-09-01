@@ -14,26 +14,6 @@ class HomeScreen extends ConsumerWidget {
       child: DefaultTabController(
         length: 3,
         child: Scaffold(
-          // appBar: AppBar(
-          //   title: const Text(
-          //     'Home',
-          //     style: TextStyle(
-          //       fontWeight: FontWeight.w500,
-          //     ),
-          //   ),
-          //   bottom: TabBar(
-          //     labelColor: theme.colorScheme.onSurface,
-          //     unselectedLabelColor: theme.colorScheme.onSecondary,
-          //     indicatorColor: theme.colorScheme.onSurface,
-          //     dividerColor: theme.colorScheme.onSecondary.withAlpha(128),
-          //     tabs: const [
-          //       Tab(text: 'Scrobble'),
-          //       Tab(text: 'Album'),
-          //       Tab(text: 'Artist'),
-          //     ],
-          //   ),
-          //   centerTitle: false,
-          // ),
           body: NestedScrollView(
             headerSliverBuilder:
                 (BuildContext context, bool innerBoxIsScrolled) {
