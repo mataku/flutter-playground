@@ -84,16 +84,26 @@ class ArtworkSquareComponent extends ConsumerWidget {
       imageComponent = CachedNetworkImage(
         imageUrl: imageUrl!,
         placeholder: (context, url) {
-          return SizedBox(
-            width: size,
-            height: size,
-            child: ColoredBox(color: theme.colorScheme.onSecondary),
+          return AspectRatio(
+            aspectRatio: 1 / 1,
+            child: SizedBox(
+              width: size,
+              child: ColoredBox(
+                color: theme.colorScheme.onSecondary.withAlpha(128),
+              ),
+            ),
           );
         },
         errorWidget: (context, url, error) {
-          return Image.asset(
-            "asset/image/no_image.png",
-            fit: BoxFit.cover,
+          return AspectRatio(
+            aspectRatio: 1 / 1,
+            child: SizedBox(
+              width: size,
+              child: Image.asset(
+                "asset/image/no_image.png",
+                fit: BoxFit.cover,
+              ),
+            ),
           );
         },
         fadeInDuration: const Duration(
