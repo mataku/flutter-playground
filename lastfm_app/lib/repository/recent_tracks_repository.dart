@@ -16,7 +16,7 @@ abstract class RecentTracksRepository {
   Future<Result<List<RecentTrack>>> getRecentTracksSample(int page);
 }
 
-final recentTracksRepositoryProvider = Provider(
+final recentTracksRepositoryProvider = Provider<RecentTracksRepository>(
     (ref) => RecentTracksRepositoryImpl(ref.read(lastFmApiServiceProvider)));
 
 class RecentTracksRepositoryImpl implements RecentTracksRepository {
