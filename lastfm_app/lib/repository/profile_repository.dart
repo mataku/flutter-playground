@@ -10,7 +10,7 @@ import 'package:state_app/model/app_error.dart';
 import 'package:state_app/model/profile/user_info.dart';
 import 'package:state_app/model/result.dart';
 
-final profileRepositoryProvider = Provider(
+final profileRepositoryProvider = Provider<ProfileRepository>(
     (ref) => ProfileRepositoryImpl(ref.read(lastFmApiServiceProvider)));
 
 abstract class ProfileRepository {
