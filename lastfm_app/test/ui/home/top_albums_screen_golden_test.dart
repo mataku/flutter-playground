@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
@@ -32,13 +31,6 @@ void main() {
     late MockUserRepository mockUserRepository;
 
     setUp(() async {
-      TestWidgetsFlutterBinding.ensureInitialized();
-      await loadAppFonts();
-
-      final font = rootBundle.load('asset/font/NotoSansJP-Regular.ttf');
-      final fontLoader = FontLoader('Noto Sans JP')..addFont(font);
-      await fontLoader.load();
-
       mockRecentTracksRepository = MockRecentTracksRepository();
       provideDummy<Result<List<RecentTrack>>>(Success(List.empty()));
 

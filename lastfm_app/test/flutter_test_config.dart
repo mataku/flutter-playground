@@ -1,15 +1,19 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/services.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 
 Future<void> testExecutable(FutureOr<void> Function() testMain) async {
   return GoldenToolkit.runWithConfiguration(
     () async {
-      // final regular = rootBundle.load('asset/font/NotoSansJP-Regular.ttf');
+      TestWidgetsFlutterBinding.ensureInitialized();
+      await loadAppFonts();
 
-      // final loader = FontLoader('Noto Sans JP')..addFont(regular);
-      // await loader.load();
+      final font = rootBundle.load('asset/font/NotoSansJP-Regular.ttf');
+      final fontLoader = FontLoader('Noto Sans JP')..addFont(font);
+      await fontLoader.load();
       await loadAppFonts();
       await testMain();
     },
