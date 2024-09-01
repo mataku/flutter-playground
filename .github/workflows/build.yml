@@ -52,7 +52,8 @@ jobs:
           flutter build appbundle --debug # --release is better
 
   test:
-    runs-on: ubuntu-latest
+    # Align the environment for taking screenshots with the development environment.
+    runs-on: macos-latest
     defaults:
       run:
         working-directory: lastfm_app
