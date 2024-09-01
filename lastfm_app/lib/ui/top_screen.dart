@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:state_app/ui/common/app_bottom_navigation_bar.dart';
 
 class TopScreen extends StatefulWidget {
   final StatefulNavigationShell navigationShell;
@@ -20,13 +21,15 @@ class _TopPageState extends State<TopScreen> {
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
         ),
-        child: _bottomNavigationBar(context),
+        child: AppBottomNavigationBar(
+          navigationShell: widget.navigationShell,
+        ),
       ),
     );
   }
 
   // tapping area
-  Container _bottomNavigationBar(BuildContext context) {
+  Container bottomNavigationBar(BuildContext context) {
     final theme = Theme.of(context);
 
     return Container(
