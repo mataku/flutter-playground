@@ -4,6 +4,7 @@ import 'package:state_app/model/result.dart';
 import 'package:state_app/model/user/top_album.dart';
 import 'package:state_app/repository/user_repository.dart';
 import 'package:state_app/ui/home/component/top_albums_component.dart';
+import 'package:state_app/ui/home/state/top_albums_state.dart';
 
 final topAlbumsNotifier = ChangeNotifierProvider((ref) {
   final TopAlbumsNotifier notifier =
@@ -73,18 +74,6 @@ class TopAlbumsNotifier extends ChangeNotifier {
     _page = 1;
     super.dispose();
   }
-}
-
-class TopAlbumsState {
-  final List<TopAlbum> topAlbums;
-  final bool hasMore;
-  final bool isLoading;
-
-  const TopAlbumsState({
-    required this.topAlbums,
-    required this.hasMore,
-    required this.isLoading,
-  });
 }
 
 class _TopAlbumsPageState extends ConsumerState<TopAlbumsScreen>

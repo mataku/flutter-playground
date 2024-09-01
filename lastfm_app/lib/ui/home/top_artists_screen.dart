@@ -4,6 +4,7 @@ import 'package:state_app/model/result.dart';
 import 'package:state_app/model/user/top_artist.dart';
 import 'package:state_app/repository/user_repository.dart';
 import 'package:state_app/ui/home/component/top_artists_component.dart';
+import 'package:state_app/ui/home/state/top_artists_state.dart';
 
 final topArtistsNotifier = ChangeNotifierProvider((ref) {
   final TopArtistsNotifier notifier =
@@ -69,18 +70,6 @@ class TopArtistsNotifier extends ChangeNotifier {
     }
     notifyListeners();
   }
-}
-
-class TopArtistsState {
-  final List<TopArtist> topArtists;
-  final bool hasMore;
-  final bool isLoading;
-
-  const TopArtistsState({
-    required this.topArtists,
-    required this.hasMore,
-    required this.isLoading,
-  });
 }
 
 class _TopArtistsPageState extends ConsumerState<TopArtistsScreen>
