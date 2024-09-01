@@ -73,6 +73,8 @@ dev_dependencies:
   mockito: ^5.4.4
   envied_generator: ^0.5.4+1
   go_router_builder: ^2.7.1
+  golden_toolkit: ^0.15.0
+  file: ^7.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -90,6 +92,7 @@ flutter:
     - .env
     - asset/image/no_image.png
     - asset/json/
+    - asset/font/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -116,3 +119,12 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  
+  # for golden test
+  fonts:
+    - family: Noto Sans JP
+      fonts:
+        - asset: asset/font/NotoSansJP-Regular.ttf
+        - asset: asset/font/NotoSansJP-Bold.ttf
+          weight: 500
+       

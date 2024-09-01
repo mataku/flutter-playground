@@ -48,3 +48,6 @@ app.*.map.json
 
 # mockito
 **/*.mocks.dart
+
+# golden failure output
+**/failures/*.png
