@@ -6,7 +6,7 @@ import 'package:sunrisescrob/model/app_error.dart';
 import 'package:sunrisescrob/model/result.dart';
 import 'package:sunrisescrob/store/session_store.dart';
 
-final authRepositoryProvider = Provider(
+final authRepositoryProvider = Provider<AuthRepository>(
   (ref) => AuthRepositoryImpl(
     ref.read(lastFmApiServiceProvider),
     ref.read(sessionChangeNotifierProvider),
@@ -22,6 +22,7 @@ abstract class AuthRepository {
 
 class AuthRepositoryImpl implements AuthRepository {
   final LastFmApiService _apiService;
+  // TODO: reconsider
   final SessionChangeNotifier _notifier;
 
   AuthRepositoryImpl(
