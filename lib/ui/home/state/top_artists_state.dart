@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:state_app/model/user/top_artist.dart';
+import 'package:sunrisescrob/model/user/top_artist.dart';
 
 part 'top_artists_state.freezed.dart';
 

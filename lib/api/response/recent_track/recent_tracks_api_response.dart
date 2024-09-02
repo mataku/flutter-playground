@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:state_app/api/response/common_text_response.dart';
-import 'package:state_app/api/response/image_response.dart';
+import 'package:sunrisescrob/api/response/common_text_response.dart';
+import 'package:sunrisescrob/api/response/image_response.dart';
 
 part 'recent_tracks_api_response.freezed.dart';
 part 'recent_tracks_api_response.g.dart';

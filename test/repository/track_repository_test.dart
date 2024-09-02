@@ -2,10 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:state_app/api/last_fm_api_service.dart';
-import 'package:state_app/model/app_error.dart';
-import 'package:state_app/model/result.dart';
-import 'package:state_app/repository/track_repository.dart';
+import 'package:sunrisescrob/api/last_fm_api_service.dart';
+import 'package:sunrisescrob/model/app_error.dart';
+import 'package:sunrisescrob/model/result.dart';
+import 'package:sunrisescrob/repository/track_repository.dart';
 
 // avoid conflict with original MockDioException implementation in dio package
 import '../fixtures/test_data.dart';

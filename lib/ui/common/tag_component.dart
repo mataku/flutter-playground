@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:state_app/model/tag.dart';
+import 'package:sunrisescrob/model/tag.dart';
 
 class TagComponent extends StatelessWidget {
   final Tag tag;

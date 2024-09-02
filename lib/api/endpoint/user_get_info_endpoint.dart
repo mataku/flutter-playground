@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:state_app/api/endpoint/endpoint.dart';
-import 'package:state_app/api/response/profile/user_get_info_api_response.dart';
+import 'package:sunrisescrob/api/endpoint/endpoint.dart';
+import 'package:sunrisescrob/api/response/profile/user_get_info_api_response.dart';
 
 class UserGetInfoEndpoint extends Endpoint<UserGetInfoApiResponse> {
   UserGetInfoEndpoint({

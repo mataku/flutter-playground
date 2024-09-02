@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:state_app/ui/common/value_description.dart';
+import 'package:sunrisescrob/ui/common/value_description.dart';
 
 class TrackMetadata extends StatelessWidget {
   final String listeners;

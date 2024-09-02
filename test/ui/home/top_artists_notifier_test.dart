@@ -4,12 +4,12 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:state_app/api/response/mapper/response_mapper.dart';
-import 'package:state_app/api/response/user/top_artists_api_response.dart';
-import 'package:state_app/model/result.dart';
-import 'package:state_app/model/user/top_artist.dart';
-import 'package:state_app/repository/user_repository.dart';
-import 'package:state_app/ui/home/top_artists_screen.dart';
+import 'package:sunrisescrob/api/response/mapper/response_mapper.dart';
+import 'package:sunrisescrob/api/response/user/top_artists_api_response.dart';
+import 'package:sunrisescrob/model/result.dart';
+import 'package:sunrisescrob/model/user/top_artist.dart';
+import 'package:sunrisescrob/repository/user_repository.dart';
+import 'package:sunrisescrob/ui/home/top_artists_screen.dart';
 
 import '../../fixture.dart';
 import 'top_albums_notifier_test.mocks.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:state_app/model/artwork.dart';
-import 'package:state_app/model/user/top_album.dart';
-import 'package:state_app/ui/home/component/top_album_component.dart';
+import 'package:sunrisescrob/model/artwork.dart';
+import 'package:sunrisescrob/model/user/top_album.dart';
+import 'package:sunrisescrob/ui/home/component/top_album_component.dart';
 
 class TopAlbumsComponent extends StatelessWidget {
   final List<TopAlbum> albums;

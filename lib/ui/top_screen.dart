@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:state_app/ui/common/app_bottom_navigation_bar.dart';
+import 'package:sunrisescrob/ui/common/app_bottom_navigation_bar.dart';
 
 class TopScreen extends StatefulWidget {
   final StatefulNavigationShell navigationShell;

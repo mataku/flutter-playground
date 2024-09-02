@@ -1,6 +1,6 @@
 {
-    "name": "state_app",
-    "short_name": "state_app",
+    "name": "sunrisescrob",
+    "short_name": "sunrisescrob",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

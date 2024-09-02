@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:state_app/model/artwork.dart';
-import 'package:state_app/model/presentation/int_representation.dart';
-import 'package:state_app/model/profile/user_info.dart';
-import 'package:state_app/router/router.dart';
-import 'package:state_app/ui/common/app_dialog.dart';
-import 'package:state_app/ui/common/artwork_component.dart';
-import 'package:state_app/ui/common/value_description.dart';
-import 'package:state_app/ui/theme/app_theme.dart';
+import 'package:sunrisescrob/model/artwork.dart';
+import 'package:sunrisescrob/model/presentation/int_representation.dart';
+import 'package:sunrisescrob/model/profile/user_info.dart';
+import 'package:sunrisescrob/router/router.dart';
+import 'package:sunrisescrob/ui/common/app_dialog.dart';
+import 'package:sunrisescrob/ui/common/artwork_component.dart';
+import 'package:sunrisescrob/ui/common/value_description.dart';
+import 'package:sunrisescrob/ui/theme/app_theme.dart';
 
 class AccountContent extends StatelessWidget {
   final UserInfo? _userInfo;

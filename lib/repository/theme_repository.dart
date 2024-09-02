@@ -1,7 +1,7 @@
 import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:state_app/store/kv_store.dart';
-import 'package:state_app/ui/theme/app_theme.dart';
+import 'package:sunrisescrob/store/kv_store.dart';
+import 'package:sunrisescrob/ui/theme/app_theme.dart';
 
 final themeRepositoryProvider = Provider<ThemeRepository>(
     (ref) => ThemeRepositoryImpl(kvStore: ref.read(kvStoreProvider)));

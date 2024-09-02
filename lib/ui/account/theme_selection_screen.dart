@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:state_app/ui/common/theme_notifier.dart';
-import 'package:state_app/ui/theme/app_theme.dart';
+import 'package:sunrisescrob/ui/common/theme_notifier.dart';
+import 'package:sunrisescrob/ui/theme/app_theme.dart';
 
 class ThemeSelectionScreen extends ConsumerWidget {
   const ThemeSelectionScreen({super.key});

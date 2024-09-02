@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:state_app/store/session_store.dart';
-import 'package:state_app/ui/account/account_screen.dart';
-import 'package:state_app/ui/account/theme_selection_screen.dart';
-import 'package:state_app/ui/auth/login_screen.dart';
-import 'package:state_app/ui/detail/track_detail_screen.dart';
-import 'package:state_app/ui/discover/discover_screen.dart';
-import 'package:state_app/ui/home/home_screen.dart';
-import 'package:state_app/ui/top_screen.dart';
+import 'package:sunrisescrob/store/session_store.dart';
+import 'package:sunrisescrob/ui/account/account_screen.dart';
+import 'package:sunrisescrob/ui/account/theme_selection_screen.dart';
+import 'package:sunrisescrob/ui/auth/login_screen.dart';
+import 'package:sunrisescrob/ui/detail/track_detail_screen.dart';
+import 'package:sunrisescrob/ui/discover/discover_screen.dart';
+import 'package:sunrisescrob/ui/home/home_screen.dart';
+import 'package:sunrisescrob/ui/top_screen.dart';
 
 part 'router.g.dart';
 

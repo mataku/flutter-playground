@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:state_app/model/chart/chart_artist.dart';
-import 'package:state_app/model/chart/chart_track.dart';
-import 'package:state_app/model/result.dart';
-import 'package:state_app/model/tag.dart';
-import 'package:state_app/repository/chart_repository.dart';
-import 'package:state_app/ui/discover/discover_screen.dart';
+import 'package:sunrisescrob/model/chart/chart_artist.dart';
+import 'package:sunrisescrob/model/chart/chart_track.dart';
+import 'package:sunrisescrob/model/result.dart';
+import 'package:sunrisescrob/model/tag.dart';
+import 'package:sunrisescrob/repository/chart_repository.dart';
+import 'package:sunrisescrob/ui/discover/discover_screen.dart';
 
 import '../../fixtures/test_data.dart';
 import 'discover_notifier_test.mocks.dart';

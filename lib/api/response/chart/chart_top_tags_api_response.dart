@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:state_app/api/response/paging_attr_body_response.dart';
+import 'package:sunrisescrob/api/response/paging_attr_body_response.dart';
 
 part 'chart_top_tags_api_response.freezed.dart';
 part 'chart_top_tags_api_response.g.dart';

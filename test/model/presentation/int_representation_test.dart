@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:state_app/model/presentation/int_representation.dart';
+import 'package:sunrisescrob/model/presentation/int_representation.dart';
 
 void main() {
   group('toReadableValue', () {

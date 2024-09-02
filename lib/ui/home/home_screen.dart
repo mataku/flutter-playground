@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:state_app/ui/home/scrobble_screen.dart';
-import 'package:state_app/ui/home/top_albums_screen.dart';
-import 'package:state_app/ui/home/top_artists_screen.dart';
+import 'package:sunrisescrob/ui/home/scrobble_screen.dart';
+import 'package:sunrisescrob/ui/home/top_albums_screen.dart';
+import 'package:sunrisescrob/ui/home/top_artists_screen.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});

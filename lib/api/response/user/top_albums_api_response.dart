@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:state_app/api/response/image_response.dart';
-import 'package:state_app/api/response/track/track_info_api_response.dart';
+import 'package:sunrisescrob/api/response/image_response.dart';
+import 'package:sunrisescrob/api/response/track/track_info_api_response.dart';
 
 part 'top_albums_api_response.freezed.dart';
 part 'top_albums_api_response.g.dart';
