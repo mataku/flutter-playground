@@ -13,9 +13,6 @@ concurrency:
 jobs:
   ios:
     runs-on: macos-latest
-    defaults:
-      run:
-        working-directory: lastfm_app
     steps:
       - uses: actions/checkout@v4
       - name: Prepare env
@@ -31,9 +28,6 @@ jobs:
 
   android:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: lastfm_app
     steps:
       - uses: actions/checkout@v4
       - name: Setup JDK
@@ -54,9 +48,6 @@ jobs:
   test:
     # Align the environment for taking screenshots with the development environment.
     runs-on: macos-latest
-    defaults:
-      run:
-        working-directory: lastfm_app
     steps:
       - uses: actions/checkout@v4
       - name: Prepare env

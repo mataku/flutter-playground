@@ -16,8 +16,6 @@ runs:
     - name: Install packages
       run: flutter pub get
       shell: bash
-      working-directory: lastfm_app
     - name: Run build_runner
       run: dart run build_runner build
       shell: bash
-      working-directory: lastfm_app
