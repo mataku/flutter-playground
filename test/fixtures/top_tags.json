@@ -1,0 +1,26 @@
+{
+    "toptags": {
+        "tag": [
+            {
+                "name": "rock",
+                "url": "https://www.last.fm/tag/rock"
+            },
+            {
+                "name": "Coldplay",
+                "url": "https://www.last.fm/tag/Coldplay"
+            },
+            {
+                "name": "alternative",
+                "url": "https://www.last.fm/tag/alternative"
+            },
+            {
+                "name": "britpop",
+                "url": "https://www.last.fm/tag/britpop"
+            },
+            {
+                "name": "alternative rock",
+                "url": "https://www.last.fm/tag/alternative+rock"
+            }
+        ]
+    }
+}
