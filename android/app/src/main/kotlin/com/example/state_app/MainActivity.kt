@@ -1,4 +1,4 @@
-package com.example.sunrisescrob
+package com.mataku.sunrisescrob
 
 import io.flutter.embedding.android.FlutterActivity
 
