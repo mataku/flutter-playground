@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:state_app/ui/common/image/app_image_cache_manager.dart';
+import 'package:sunrisescrob/ui/common/image/app_image_cache_manager.dart';
 
 class ArtworkComponent extends ConsumerWidget {
   final String? imageUrl;

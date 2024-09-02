@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:state_app/api/response/image_response.dart';
+import 'package:sunrisescrob/api/response/image_response.dart';
 
 part 'top_artists_api_response.freezed.dart';
 part 'top_artists_api_response.g.dart';

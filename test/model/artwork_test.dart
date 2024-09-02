@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:state_app/model/artwork.dart';
+import 'package:sunrisescrob/model/artwork.dart';
 
 import '../fixtures/test_data.dart';
 

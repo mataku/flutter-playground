@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:state_app/repository/theme_repository.dart';
-import 'package:state_app/ui/theme/app_theme.dart';
+import 'package:sunrisescrob/repository/theme_repository.dart';
+import 'package:sunrisescrob/ui/theme/app_theme.dart';
 
 final themeNotifierProvider = ChangeNotifierProvider(
     (ref) => ThemeNotifier(ref.read(themeRepositoryProvider)));

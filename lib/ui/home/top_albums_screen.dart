@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:state_app/model/result.dart';
-import 'package:state_app/model/user/top_album.dart';
-import 'package:state_app/repository/user_repository.dart';
-import 'package:state_app/ui/home/component/top_albums_component.dart';
-import 'package:state_app/ui/home/state/top_albums_state.dart';
+import 'package:sunrisescrob/model/result.dart';
+import 'package:sunrisescrob/model/user/top_album.dart';
+import 'package:sunrisescrob/repository/user_repository.dart';
+import 'package:sunrisescrob/ui/home/component/top_albums_component.dart';
+import 'package:sunrisescrob/ui/home/state/top_albums_state.dart';
 
 final topAlbumsNotifier = ChangeNotifierProvider((ref) {
   final TopAlbumsNotifier notifier =

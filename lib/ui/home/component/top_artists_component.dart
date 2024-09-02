@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:state_app/model/artwork.dart';
-import 'package:state_app/model/user/top_artist.dart';
-import 'package:state_app/ui/home/component/top_artist_component.dart';
+import 'package:sunrisescrob/model/artwork.dart';
+import 'package:sunrisescrob/model/user/top_artist.dart';
+import 'package:sunrisescrob/ui/home/component/top_artist_component.dart';
 
 class TopArtistsComponent extends StatelessWidget {
   final List<TopArtist> artists;

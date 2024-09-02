@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:state_app/api/endpoint/endpoint.dart';
-import 'package:state_app/api/response/track/track_info_api_response.dart';
+import 'package:sunrisescrob/api/endpoint/endpoint.dart';
+import 'package:sunrisescrob/api/response/track/track_info_api_response.dart';
 
 class TrackInfoEndpoint extends Endpoint<TrackInfoApiResponse> {
   TrackInfoEndpoint({

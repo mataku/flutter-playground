@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:state_app/api/endpoint/endpoint.dart';
-import 'package:state_app/api/response/recent_track/recent_tracks_api_response.dart';
+import 'package:sunrisescrob/api/endpoint/endpoint.dart';
+import 'package:sunrisescrob/api/response/recent_track/recent_tracks_api_response.dart';
 
 class RecentTracksEndpoint extends Endpoint<RecentTracksApiResponse> {
   RecentTracksEndpoint({

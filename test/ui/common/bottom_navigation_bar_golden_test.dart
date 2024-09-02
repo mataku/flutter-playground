@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:state_app/ui/common/app_bottom_navigation_bar.dart';
-import 'package:state_app/ui/theme/app_theme.dart';
+import 'package:sunrisescrob/ui/common/app_bottom_navigation_bar.dart';
+import 'package:sunrisescrob/ui/theme/app_theme.dart';
 
 import '../../testable_app.dart';
 import 'bottom_navigation_bar_golden_test.mocks.dart';

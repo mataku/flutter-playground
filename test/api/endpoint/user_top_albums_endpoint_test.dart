@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
-import 'package:state_app/api/endpoint/user_top_albums_endpoint.dart';
-import 'package:state_app/api/last_fm_api_service.dart';
+import 'package:sunrisescrob/api/endpoint/user_top_albums_endpoint.dart';
+import 'package:sunrisescrob/api/last_fm_api_service.dart';
 
 import '../../fixture.dart';
 import '../../fixtures/test_data.dart';

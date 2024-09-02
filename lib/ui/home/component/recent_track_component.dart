@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:state_app/model/artwork.dart';
-import 'package:state_app/model/recent_track/recent_track.dart';
-import 'package:state_app/ui/common/artwork_component.dart';
+import 'package:sunrisescrob/model/artwork.dart';
+import 'package:sunrisescrob/model/recent_track/recent_track.dart';
+import 'package:sunrisescrob/ui/common/artwork_component.dart';
 
 class RecentTrackComponent extends StatelessWidget {
   final RecentTrack recentTrack;

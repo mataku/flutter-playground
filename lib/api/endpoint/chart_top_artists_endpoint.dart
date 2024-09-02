@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:state_app/api/endpoint/endpoint.dart';
-import 'package:state_app/api/response/chart/chart_top_artists_api_response.dart';
+import 'package:sunrisescrob/api/endpoint/endpoint.dart';
+import 'package:sunrisescrob/api/response/chart/chart_top_artists_api_response.dart';
 
 class ChartTopArtistsEndpoint extends Endpoint<ChartTopArtistsApiResponse> {
   ChartTopArtistsEndpoint({

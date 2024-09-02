@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:state_app/model/key.dart';
+import 'package:sunrisescrob/model/key.dart';
 
 final _options = BaseOptions(
   baseUrl: "https://ws.audioscrobbler.com",

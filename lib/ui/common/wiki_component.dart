@@ -2,8 +2,8 @@ import 'package:collection/collection.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
-import 'package:state_app/model/wiki.dart';
-import 'package:state_app/util/url_opener.dart';
+import 'package:sunrisescrob/model/wiki.dart';
+import 'package:sunrisescrob/util/url_opener.dart';
 
 class WikiComponent extends StatelessWidget {
   final String title;

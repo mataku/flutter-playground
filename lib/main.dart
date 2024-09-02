@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:state_app/router/router.dart';
-import 'package:state_app/store/kv_store.dart';
-import 'package:state_app/ui/common/theme_notifier.dart';
-import 'package:state_app/ui/theme/app_theme.dart';
+import 'package:sunrisescrob/router/router.dart';
+import 'package:sunrisescrob/store/kv_store.dart';
+import 'package:sunrisescrob/ui/common/theme_notifier.dart';
+import 'package:sunrisescrob/ui/theme/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

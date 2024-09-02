@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:state_app/model/chart/chart_artist.dart';
-import 'package:state_app/ui/common/header.dart';
-import 'package:state_app/ui/discover/component/chart_cell.dart';
+import 'package:sunrisescrob/model/chart/chart_artist.dart';
+import 'package:sunrisescrob/ui/common/header.dart';
+import 'package:sunrisescrob/ui/discover/component/chart_cell.dart';
 
 class ChartArtistsComponent extends StatelessWidget {
   final List<ChartArtist> artists;

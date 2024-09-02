@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:state_app/model/artwork.dart';
-import 'package:state_app/model/common_name_and_url.dart';
-import 'package:state_app/model/tag.dart';
-import 'package:state_app/model/wiki.dart';
+import 'package:sunrisescrob/model/artwork.dart';
+import 'package:sunrisescrob/model/common_name_and_url.dart';
+import 'package:sunrisescrob/model/tag.dart';
+import 'package:sunrisescrob/model/wiki.dart';
 
 part 'track.freezed.dart';
 

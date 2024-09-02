@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:state_app/model/recent_track/recent_track.dart';
-import 'package:state_app/model/result.dart';
-import 'package:state_app/repository/recent_tracks_repository.dart';
-import 'package:state_app/router/router.dart';
-import 'package:state_app/ui/home/component/recent_track_component.dart';
+import 'package:sunrisescrob/model/recent_track/recent_track.dart';
+import 'package:sunrisescrob/model/result.dart';
+import 'package:sunrisescrob/repository/recent_tracks_repository.dart';
+import 'package:sunrisescrob/router/router.dart';
+import 'package:sunrisescrob/ui/home/component/recent_track_component.dart';
 
 final scrobbleNotifierProvider = ChangeNotifierProvider((ref) {
   final ScrobbleNotifier notifier = ScrobbleNotifier(

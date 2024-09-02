@@ -2,7 +2,7 @@ import 'dart:collection';
 import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
-import 'package:state_app/model/key.dart';
+import 'package:sunrisescrob/model/key.dart';
 
 class LastfmApiSignature {
   static String generate(

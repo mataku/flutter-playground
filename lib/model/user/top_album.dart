@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:state_app/model/artwork.dart';
-import 'package:state_app/model/common_name_and_url.dart';
+import 'package:sunrisescrob/model/artwork.dart';
+import 'package:sunrisescrob/model/common_name_and_url.dart';
 
 part 'top_album.freezed.dart';
 

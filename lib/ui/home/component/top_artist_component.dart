@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:state_app/ui/common/artwork_component.dart';
+import 'package:sunrisescrob/ui/common/artwork_component.dart';
 
 class TopArtistComponent extends StatelessWidget {
   final String imageUrl;

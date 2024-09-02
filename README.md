@@ -35,8 +35,8 @@ abstract class Endpoint<T> {
 // api client
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:state_app/api/endpoint/endpoint.dart';
-import 'package:state_app/api/http_provider.dart';
+import 'package:sunrisescrob/api/endpoint/endpoint.dart';
+import 'package:sunrisescrob/api/http_provider.dart';
 
 class LastFmApiService {
   final Dio dio;

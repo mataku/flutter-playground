@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:state_app/api/endpoint/endpoint.dart';
-import 'package:state_app/api/response/user/top_albums_api_response.dart';
+import 'package:sunrisescrob/api/endpoint/endpoint.dart';
+import 'package:sunrisescrob/api/response/user/top_albums_api_response.dart';
 
 class UserTopAlbumsEndpoint extends Endpoint<TopAlbumsApiResponse> {
   UserTopAlbumsEndpoint({

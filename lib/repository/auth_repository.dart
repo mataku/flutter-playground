@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:state_app/api/endpoint/auth_get_mobile_session_endpoint.dart';
-import 'package:state_app/api/last_fm_api_service.dart';
-import 'package:state_app/api/lastfm_api_signature.dart';
-import 'package:state_app/model/app_error.dart';
-import 'package:state_app/model/result.dart';
-import 'package:state_app/store/session_store.dart';
+import 'package:sunrisescrob/api/endpoint/auth_get_mobile_session_endpoint.dart';
+import 'package:sunrisescrob/api/last_fm_api_service.dart';
+import 'package:sunrisescrob/api/lastfm_api_signature.dart';
+import 'package:sunrisescrob/model/app_error.dart';
+import 'package:sunrisescrob/model/result.dart';
+import 'package:sunrisescrob/store/session_store.dart';
 
 final authRepositoryProvider = Provider(
   (ref) => AuthRepositoryImpl(

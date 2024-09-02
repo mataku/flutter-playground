@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:state_app/model/profile/user_info.dart';
-import 'package:state_app/repository/profile_repository.dart';
-import 'package:state_app/store/session_store.dart';
-import 'package:state_app/ui/account/account_content.dart';
-import 'package:state_app/ui/common/theme_notifier.dart';
+import 'package:sunrisescrob/model/profile/user_info.dart';
+import 'package:sunrisescrob/repository/profile_repository.dart';
+import 'package:sunrisescrob/store/session_store.dart';
+import 'package:sunrisescrob/ui/account/account_content.dart';
+import 'package:sunrisescrob/ui/common/theme_notifier.dart';
 
 final accountNotifierProvider = ChangeNotifierProvider((ref) {
   final notifier = AccountNotifier(

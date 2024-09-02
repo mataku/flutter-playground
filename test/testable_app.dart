@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:state_app/ui/theme/app_theme.dart';
+import 'package:sunrisescrob/ui/theme/app_theme.dart';
 
 Widget testableApp({
   required Widget child,

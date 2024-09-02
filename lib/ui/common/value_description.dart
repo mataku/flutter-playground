@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:state_app/model/presentation/int_representation.dart';
+import 'package:sunrisescrob/model/presentation/int_representation.dart';
 
 class ValueDescription extends StatelessWidget {
   final String value;

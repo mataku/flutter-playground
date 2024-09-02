@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:state_app/model/result.dart';
-import 'package:state_app/model/user/top_artist.dart';
-import 'package:state_app/repository/user_repository.dart';
-import 'package:state_app/ui/home/component/top_artists_component.dart';
-import 'package:state_app/ui/home/state/top_artists_state.dart';
+import 'package:sunrisescrob/model/result.dart';
+import 'package:sunrisescrob/model/user/top_artist.dart';
+import 'package:sunrisescrob/repository/user_repository.dart';
+import 'package:sunrisescrob/ui/home/component/top_artists_component.dart';
+import 'package:sunrisescrob/ui/home/state/top_artists_state.dart';
 
 final topArtistsNotifier = ChangeNotifierProvider((ref) {
   final TopArtistsNotifier notifier =

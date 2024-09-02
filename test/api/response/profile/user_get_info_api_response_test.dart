@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:state_app/api/response/mapper/response_mapper.dart';
-import 'package:state_app/api/response/profile/user_get_info_api_response.dart';
+import 'package:sunrisescrob/api/response/mapper/response_mapper.dart';
+import 'package:sunrisescrob/api/response/profile/user_get_info_api_response.dart';
 
 import '../../../fixture.dart';
 

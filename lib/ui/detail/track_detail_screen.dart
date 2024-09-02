@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:state_app/model/result.dart';
-import 'package:state_app/model/track.dart';
-import 'package:state_app/repository/track_repository.dart';
-import 'package:state_app/ui/detail/component/track_content_component.dart';
+import 'package:sunrisescrob/model/result.dart';
+import 'package:sunrisescrob/model/track.dart';
+import 'package:sunrisescrob/repository/track_repository.dart';
+import 'package:sunrisescrob/ui/detail/component/track_content_component.dart';
 
 final trackNotifierProvider = ChangeNotifierProvider.autoDispose((ref) {
   final trackNotifier =
