@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sunrisescrob/ui/theme/app_colors.dart';
 
 class AppBottomNavigationBar extends StatelessWidget {
   final StatefulNavigationShell _navigationShell;
@@ -17,7 +18,7 @@ class AppBottomNavigationBar extends StatelessWidget {
       decoration: const BoxDecoration(
         border: Border(
           top: BorderSide(
-            color: Colors.black,
+            color: AppColors.grey800,
             width: 0.1,
           ),
         ),

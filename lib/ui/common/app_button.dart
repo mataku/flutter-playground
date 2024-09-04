@@ -29,7 +29,12 @@ class AppButton extends StatelessWidget {
         child: CupertinoButton(
           onPressed: _onTap,
           color: _backgroundColor ?? CupertinoColors.systemBlue,
-          child: Text(_text),
+          child: Text(
+            _text,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ),
       );
     } else {
