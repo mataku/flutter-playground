@@ -83,6 +83,7 @@ class LoginScreen extends ConsumerWidget {
                   }
                   return null;
                 },
+                cursorColor: theme.colorScheme.onSecondary,
               ),
             ),
             const Padding(padding: EdgeInsets.only(top: 16)),
@@ -122,6 +123,7 @@ class LoginScreen extends ConsumerWidget {
 
                   return null;
                 },
+                cursorColor: theme.colorScheme.onSecondary,
               ),
             ),
             const Padding(padding: EdgeInsets.only(top: 48)),
