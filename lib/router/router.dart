@@ -120,13 +120,22 @@ class AccountRoute extends GoRouteData {
 }
 
 class TrackDetailRoute extends GoRouteData {
-  const TrackDetailRoute();
+  final String artist;
+  final String track;
+
+  const TrackDetailRoute({
+    required this.artist,
+    required this.track,
+  });
 
   static const path = 'track_detail';
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const TrackDetailScreen();
+    return TrackDetailScreen(
+      artist: artist,
+      track: track,
+    );
   }
 }
 

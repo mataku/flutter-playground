@@ -10,8 +10,8 @@ import 'package:sunrisescrob/model/app_error.dart';
 import 'package:sunrisescrob/model/result.dart';
 import 'package:sunrisescrob/model/track.dart';
 
-final trackRepositoryProvider =
-    Provider((ref) => TrackRepositoryImpl(ref.read(lastFmApiServiceProvider)));
+final trackRepositoryProvider = Provider<TrackRepository>(
+    (ref) => TrackRepositoryImpl(ref.read(lastFmApiServiceProvider)));
 
 abstract class TrackRepository {
   Future<Result<Track>> getTrack(String track, String artist);
