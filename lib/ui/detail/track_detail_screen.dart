@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -9,25 +10,38 @@ import 'package:sunrisescrob/ui/detail/component/track_content_component.dart';
 final trackNotifierProvider = ChangeNotifierProvider.autoDispose((ref) {
   final trackNotifier =
       TrackNotifier(trackRepository: ref.read(trackRepositoryProvider));
-  trackNotifier.fetchTrack();
   return trackNotifier;
 });
 
-class TrackDetailScreen extends ConsumerWidget {
-  // TODO: fetch with artist and track instead of sample use
-  final String _artist;
-  final String _track;
+class TrackDetailScreen extends ConsumerStatefulWidget {
+  final String artist;
+  final String track;
   const TrackDetailScreen({
     super.key,
-    required String artist,
-    required String track,
-  })  : _artist = artist,
-        _track = track;
+    required this.artist,
+    required this.track,
+  });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<ConsumerStatefulWidget> createState() => _TrackDetailState();
+}
+
+class _TrackDetailState extends ConsumerState<TrackDetailScreen> {
+  _TrackDetailState();
+
+  @override
+  void initState() {
+    ref.read(trackNotifierProvider).fetchTrack(
+          artist: widget.artist,
+          track: widget.track,
+        );
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final notifier = ref.watch(trackNotifierProvider);
-    final track = notifier.track;
+    final track = notifier.trackDetail;
     final theme = Theme.of(context);
     EdgeInsets padding = MediaQuery.paddingOf(context);
 
@@ -92,12 +106,26 @@ class TrackNotifier extends ChangeNotifier {
 
   TrackNotifier({required this.trackRepository});
 
-  Track? track;
+  Track? trackDetail;
 
-  Future fetchTrack() async {
-    final result = await trackRepository.getTrackSample('Supernova', 'aespa');
+  Future fetchTrack({
+    required String artist,
+    required String track,
+  }) async {
+    Result<Track> result;
+    if (kDebugMode) {
+      result = await trackRepository.getTrackSample(
+        track: 'Supernova',
+        artist: 'aespa',
+      );
+    } else {
+      result = await trackRepository.getTrack(
+        track: track,
+        artist: artist,
+      );
+    }
     if (result is Success) {
-      track = result.getOrNull()!;
+      trackDetail = result.getOrNull()!;
       notifyListeners();
     }
   }

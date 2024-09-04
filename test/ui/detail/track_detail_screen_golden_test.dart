@@ -6,12 +6,14 @@ import 'package:mockito/mockito.dart';
 import 'package:sunrisescrob/api/response/mapper/response_mapper.dart';
 import 'package:sunrisescrob/model/result.dart';
 import 'package:sunrisescrob/repository/track_repository.dart';
+import 'package:sunrisescrob/ui/common/image/app_image_cache_manager.dart';
 import 'package:sunrisescrob/ui/detail/track_detail_screen.dart';
 import 'package:sunrisescrob/ui/theme/app_theme.dart';
 
 import '../../fixtures/test_data.dart';
 import '../../page/detail/track_notifier_test.mocks.dart';
 import '../../testable_app.dart';
+import '../../util/mock_cache_manager.dart';
 
 @GenerateMocks([TrackRepository])
 void main() {
@@ -20,7 +22,17 @@ void main() {
     setUp(() async {
       provideDummy(Result.success(testTrackApiResponse.response.toTrack()));
       final repo = MockTrackRepository();
-      when(repo.getTrackSample('Supernova', 'aespa')).thenAnswer((_) async {
+      when(repo.getTrackSample(
+        artist: 'aespa',
+        track: 'Supernova',
+      )).thenAnswer((_) async {
+        return Result.success(testTrackApiResponse.response.toTrack());
+      });
+
+      when(repo.getTrack(
+        track: 'Supernova',
+        artist: 'aespa',
+      )).thenAnswer((_) async {
         return Result.success(testTrackApiResponse.response.toTrack());
       });
       trackNotifier = TrackNotifier(trackRepository: repo);
@@ -34,7 +46,9 @@ void main() {
         ..addScenario(
           widget: ProviderScope(
             overrides: [
-              trackNotifierProvider.overrideWith((ref) => trackNotifier)
+              trackNotifierProvider.overrideWith((ref) => trackNotifier),
+              appImageCacheManagerProvider
+                  .overrideWithValue(MockCacheManager()),
             ],
             child: testableApp(
               child: const TrackDetailScreen(
@@ -58,7 +72,9 @@ void main() {
         ..addScenario(
           widget: ProviderScope(
             overrides: [
-              trackNotifierProvider.overrideWith((ref) => trackNotifier)
+              trackNotifierProvider.overrideWith((ref) => trackNotifier),
+              appImageCacheManagerProvider
+                  .overrideWithValue(MockCacheManager()),
             ],
             child: testableApp(
               child: const TrackDetailScreen(
@@ -82,7 +98,9 @@ void main() {
         ..addScenario(
           widget: ProviderScope(
             overrides: [
-              trackNotifierProvider.overrideWith((ref) => trackNotifier)
+              trackNotifierProvider.overrideWith((ref) => trackNotifier),
+              appImageCacheManagerProvider
+                  .overrideWithValue(MockCacheManager()),
             ],
             child: testableApp(
               child: const TrackDetailScreen(
