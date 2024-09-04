@@ -26,10 +26,14 @@ class ScrobbleScreen extends ConsumerWidget {
         child: ListView.builder(
           shrinkWrap: true,
           itemBuilder: (context, index) {
+            final track = tracks[index];
             return RecentTrackComponent(
-              recentTrack: tracks[index],
+              recentTrack: track,
               onTap: () {
-                const TrackDetailRoute().go(context);
+                TrackDetailRoute(
+                  artist: track.artist.name,
+                  track: track.name,
+                ).go(context);
               },
             );
           },

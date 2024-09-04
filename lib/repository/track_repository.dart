@@ -10,12 +10,18 @@ import 'package:sunrisescrob/model/app_error.dart';
 import 'package:sunrisescrob/model/result.dart';
 import 'package:sunrisescrob/model/track.dart';
 
-final trackRepositoryProvider =
-    Provider((ref) => TrackRepositoryImpl(ref.read(lastFmApiServiceProvider)));
+final trackRepositoryProvider = Provider<TrackRepository>(
+    (ref) => TrackRepositoryImpl(ref.read(lastFmApiServiceProvider)));
 
 abstract class TrackRepository {
-  Future<Result<Track>> getTrack(String track, String artist);
-  Future<Result<Track>> getTrackSample(String track, String artist);
+  Future<Result<Track>> getTrack({
+    required String track,
+    required String artist,
+  });
+  Future<Result<Track>> getTrackSample({
+    required String track,
+    required String artist,
+  });
 }
 
 class TrackRepositoryImpl implements TrackRepository {
@@ -24,7 +30,8 @@ class TrackRepositoryImpl implements TrackRepository {
   const TrackRepositoryImpl(this._lastFmApiService);
 
   @override
-  Future<Result<Track>> getTrack(String track, String artist) async {
+  Future<Result<Track>> getTrack(
+      {required String track, required String artist}) async {
     final endpoint = TrackInfoEndpoint(
       params: {
         'artist': artist,
@@ -40,7 +47,8 @@ class TrackRepositoryImpl implements TrackRepository {
   }
 
   @override
-  Future<Result<Track>> getTrackSample(String track, String artist) async {
+  Future<Result<Track>> getTrackSample(
+      {required String track, required String artist}) async {
     try {
       final data =
           await rootBundle.loadString("asset/json/track_get_info.json");

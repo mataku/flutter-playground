@@ -13,32 +13,31 @@ class RecentTrackComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final imageUrl = recentTrack.images.imageUrl();
-    return Material(
-      child: InkWell(
-        onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.only(
-            left: 16,
-            right: 16,
-            top: 8,
-            bottom: 8,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              ArtworkComponent(
-                imageUrl: imageUrl,
-                size: 56,
-              ),
-              const SizedBox(
-                width: 16,
-              ),
-              RecentTrackTitle(
-                trackName: recentTrack.name,
-                artistName: recentTrack.artist.name,
-              ),
-            ],
-          ),
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.only(
+          left: 16,
+          right: 16,
+          top: 8,
+          bottom: 8,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            ArtworkComponent(
+              imageUrl: imageUrl,
+              size: 56,
+            ),
+            const SizedBox(
+              width: 16,
+            ),
+            RecentTrackTitle(
+              trackName: recentTrack.name,
+              artistName: recentTrack.artist.name,
+            ),
+          ],
         ),
       ),
     );

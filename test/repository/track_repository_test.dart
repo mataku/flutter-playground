@@ -27,7 +27,10 @@ void main() {
           .thenAnswer((_) async => testTrackApiResponse);
 
       final repo = TrackRepositoryImpl(apiService);
-      final result = await repo.getTrack('Supernova', 'aespa');
+      final result = await repo.getTrack(
+        track: 'Supernova',
+        artist: 'aespa',
+      );
       expect(result is Success, true);
       expect(result.getOrNull() != null, true);
     });
@@ -37,7 +40,10 @@ void main() {
       when(apiService.request(any)).thenThrow(dioException);
 
       final repo = TrackRepositoryImpl(apiService);
-      final result = await repo.getTrack('Supernova', 'aespa');
+      final result = await repo.getTrack(
+        track: 'Supernova',
+        artist: 'aespa',
+      );
       expect(result is Failure, true);
       expect(result.exceptionOrNull(), const AppError.serverError());
     });

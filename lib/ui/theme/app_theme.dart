@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sunrisescrob/ui/theme/app_colors.dart';
 
 enum AppTheme {
   light(
@@ -37,7 +38,7 @@ const lightColorScheme = ColorScheme.light(
   primary: Color(0xFFEEEEEE),
   onPrimary: Colors.black,
   secondary: Colors.white,
-  onSecondary: Color(0xFF757575),
+  onSecondary: AppColors.grey600,
   surface: Color(0xFFF5F5F5),
   onSurface: Colors.black,
 );
@@ -47,7 +48,7 @@ const darkColorScheme = ColorScheme.dark(
   primaryContainer: Color(0xFF444444),
   onPrimaryContainer: Colors.white,
   secondary: Colors.white,
-  onSecondary: Color(0xFF90A4AE),
+  onSecondary: AppColors.blueGrey300,
   secondaryContainer: Colors.white,
   onSecondaryContainer: Color(0xFF90A4AE),
   surface: Color(0xFF37474F),
@@ -58,17 +59,17 @@ const lastfmDarkColorScheme = ColorScheme.dark(
   primary: Color(0xFF444444),
   onPrimary: Colors.white,
   secondary: Colors.white,
-  onSecondary: Color(0xFF90A4AE),
-  surface: Color(0xFF263238),
+  onSecondary: AppColors.blueGrey300,
+  surface: AppColors.blueGrey900,
   onSurface: Colors.white,
 );
 
 extension AppThemeExt on AppTheme {
   Color accentColor() {
     return switch (this) {
-      AppTheme.light => const Color(0xFFC0CA33),
-      AppTheme.dark => const Color(0xFFC0CA33),
-      AppTheme.lastfmDark => const Color(0xFFbb0414)
+      AppTheme.light => AppColors.lime,
+      AppTheme.dark => AppColors.lime,
+      AppTheme.lastfmDark => AppColors.lastFmRed,
     };
   }
 }

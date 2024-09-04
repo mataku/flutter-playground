@@ -21,20 +21,30 @@ void main() {
       provideDummy<Result<Track>>(Success(testTrack));
     });
     test('request succeeded', () async {
-      when(trackRepository.getTrackSample('Supernova', 'aespa'))
-          .thenAnswer((_) async => Result.success(testTrack));
+      when(trackRepository.getTrackSample(
+        artist: 'aespa',
+        track: 'Supernova',
+      )).thenAnswer((_) async => Result.success(testTrack));
       final notifier = TrackNotifier(trackRepository: trackRepository);
-      await notifier.fetchTrack();
-      expect(notifier.track, testTrack);
+      await notifier.fetchTrack(
+        artist: 'aespa',
+        track: 'Supernova',
+      );
+      expect(notifier.trackDetail, testTrack);
     });
 
     test('request failed', () async {
       final exception = TimeoutException('timeout');
-      when(trackRepository.getTrackSample('Supernova', 'aespa'))
-          .thenAnswer((_) async => Result.failure(exception));
+      when(trackRepository.getTrackSample(
+        track: 'Supernova',
+        artist: 'aespa',
+      )).thenAnswer((_) async => Result.failure(exception));
       final notifier = TrackNotifier(trackRepository: trackRepository);
-      await notifier.fetchTrack();
-      expect(notifier.track, null);
+      await notifier.fetchTrack(
+        artist: 'aespa',
+        track: 'Supernova',
+      );
+      expect(notifier.trackDetail, null);
     });
   });
 }
