@@ -6,9 +6,14 @@ import 'package:sunrisescrob/ui/common/artwork_component.dart';
 class RecentTrackComponent extends StatelessWidget {
   final RecentTrack recentTrack;
   final VoidCallback onTap;
+  final String imageKey;
 
-  const RecentTrackComponent(
-      {super.key, required this.recentTrack, required this.onTap});
+  const RecentTrackComponent({
+    super.key,
+    required this.recentTrack,
+    required this.onTap,
+    required this.imageKey,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +31,12 @@ class RecentTrackComponent extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            ArtworkComponent(
-              imageUrl: imageUrl,
-              size: 56,
+            Hero(
+              tag: imageKey,
+              child: ArtworkComponent(
+                imageUrl: imageUrl,
+                size: 56,
+              ),
             ),
             const SizedBox(
               width: 16,

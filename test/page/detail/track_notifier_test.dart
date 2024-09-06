@@ -21,7 +21,7 @@ void main() {
       provideDummy<Result<Track>>(Success(testTrack));
     });
     test('request succeeded', () async {
-      when(trackRepository.getTrackSample(
+      when(trackRepository.getTrack(
         artist: 'aespa',
         track: 'Supernova',
       )).thenAnswer((_) async => Result.success(testTrack));
@@ -35,7 +35,7 @@ void main() {
 
     test('request failed', () async {
       final exception = TimeoutException('timeout');
-      when(trackRepository.getTrackSample(
+      when(trackRepository.getTrack(
         track: 'Supernova',
         artist: 'aespa',
       )).thenAnswer((_) async => Result.failure(exception));

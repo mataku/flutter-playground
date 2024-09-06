@@ -91,7 +91,6 @@ final testChartTagList = testChartTagApiResponse.toTagList();
 
 const _testTrackResponse = TrackInfoResponse(
   name: 'Supernova',
-  mbid: 'trackmbid',
   url: 'https://example.com/supernova',
   duration: '300000',
   listeners: '100000',
@@ -99,13 +98,11 @@ const _testTrackResponse = TrackInfoResponse(
   album: TrackAlbumResponse(
     artist: 'aespa',
     title: 'Armageddon',
-    mbid: 'mbid',
     url: 'https://example.com/armageddon',
     images: [],
   ),
   artist: TrackInfoArtist(
     name: 'aespa',
-    mbid: 'mbid',
     url: 'https://example.com/aespa',
   ),
   wiki: WikiResponse(

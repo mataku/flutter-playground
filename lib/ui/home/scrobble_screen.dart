@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sunrisescrob/model/artwork.dart';
 import 'package:sunrisescrob/model/recent_track/recent_track.dart';
 import 'package:sunrisescrob/model/result.dart';
 import 'package:sunrisescrob/repository/recent_tracks_repository.dart';
@@ -29,10 +30,13 @@ class ScrobbleScreen extends ConsumerWidget {
             final track = tracks[index];
             return RecentTrackComponent(
               recentTrack: track,
+              imageKey: "scrobble_$index",
               onTap: () {
                 TrackDetailRoute(
                   artist: track.artist.name,
                   track: track.name,
+                  imageKey: "scrobble_$index",
+                  imageUrl: track.images.imageUrl() ?? '',
                 ).go(context);
               },
             );

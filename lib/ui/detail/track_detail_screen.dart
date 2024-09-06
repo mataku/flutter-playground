@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -16,10 +15,15 @@ final trackNotifierProvider = ChangeNotifierProvider.autoDispose((ref) {
 class TrackDetailScreen extends ConsumerStatefulWidget {
   final String artist;
   final String track;
+  final String imageKey;
+  final String imageUrl;
+
   const TrackDetailScreen({
     super.key,
     required this.artist,
     required this.track,
+    required this.imageKey,
+    required this.imageUrl,
   });
 
   @override
@@ -49,8 +53,11 @@ class _TrackDetailState extends ConsumerState<TrackDetailScreen> {
       top: false,
       child: Stack(
         children: [
-          if (track == null) const SizedBox(),
-          if (track != null) TrackContentComponent(track: track),
+          TrackContentComponent(
+            imageKey: widget.imageKey,
+            track: track,
+            imageUrl: widget.imageUrl,
+          ),
           Stack(
             children: [
               Container(
@@ -112,18 +119,10 @@ class TrackNotifier extends ChangeNotifier {
     required String artist,
     required String track,
   }) async {
-    Result<Track> result;
-    if (kDebugMode) {
-      result = await trackRepository.getTrackSample(
-        track: 'Supernova',
-        artist: 'aespa',
-      );
-    } else {
-      result = await trackRepository.getTrack(
-        track: track,
-        artist: artist,
-      );
-    }
+    Result<Track> result = await trackRepository.getTrack(
+      track: track,
+      artist: artist,
+    );
     if (result is Success) {
       trackDetail = result.getOrNull()!;
       notifyListeners();

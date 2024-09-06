@@ -8,11 +8,15 @@ import 'package:sunrisescrob/ui/detail/component/track_title.dart';
 import 'package:sunrisescrob/ui/discover/component/chart_tags_component.dart';
 
 class TrackContentComponent extends StatelessWidget {
-  final Track track;
+  final Track? track;
+  final String imageUrl;
+  final String imageKey;
 
   const TrackContentComponent({
     super.key,
     required this.track,
+    required this.imageKey,
+    required this.imageUrl,
   });
 
   @override
@@ -20,66 +24,89 @@ class TrackContentComponent extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
-          const ArtworkSquareComponent(
-            imageUrl: null,
-            size: double.infinity,
+          Hero(
+            tag: imageKey,
+            child: ArtworkSquareComponent(
+              imageUrl: imageUrl,
+              size: double.infinity,
+            ),
           ),
           const Padding(padding: EdgeInsets.only(top: 8)),
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 16,
-              right: 16,
-              top: 8,
-              bottom: 8,
+          if (track != null) _TrackDescriptionContent(track: track!)
+        ],
+      ),
+    );
+  }
+}
+
+class _TrackDescriptionContent extends StatelessWidget {
+  final Track _track;
+
+  const _TrackDescriptionContent({
+    required Track track,
+  }) : _track = track;
+
+  @override
+  Widget build(BuildContext context) {
+    TrackAlbum? album = _track.album;
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(
+            left: 16,
+            right: 16,
+            top: 8,
+            bottom: 8,
+          ),
+          child: SizedBox(
+            width: double.infinity,
+            child: TrackTitle(
+              track: _track.artist.name,
+              artist: _track.name,
             ),
-            child: SizedBox(
-              width: double.infinity,
-              child: TrackTitle(
-                track: track.artist.name,
-                artist: track.name,
-              ),
-            ),
           ),
-          TrackMetadata(
-            listeners: track.listeners,
-            playcount: track.playcount,
-            userPlaycount: "100",
-          ),
-          const Padding(
-            padding: EdgeInsets.only(left: 15, right: 15),
-            child: Divider(),
-          ),
+        ),
+        TrackMetadata(
+          listeners: _track.listeners,
+          playcount: _track.playcount,
+          userPlaycount: _track.userPlayCount,
+        ),
+        const Padding(
+          padding: EdgeInsets.only(left: 15, right: 15),
+          child: Divider(),
+        ),
+        if (album != null)
           Padding(
             padding:
                 const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
             child: TrackAlbumComponent(
-              album: track.album,
+              album: album,
             ),
           ),
-          SizedBox(
-            width: double.infinity,
-            height: 80,
-            child: ChartTagsCarousel(tags: track.tags),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(top: 16),
-          ),
+        SizedBox(
+          width: double.infinity,
+          height: 80,
+          child: ChartTagsCarousel(tags: _track.tags),
+        ),
+        const Padding(
+          padding: EdgeInsets.only(top: 16),
+        ),
+        if (_track.wiki != null)
           Padding(
             padding: const EdgeInsets.only(left: 16, right: 16),
             child: SizedBox(
               width: double.infinity,
               child: WikiComponent(
-                title: track.name,
-                wiki: track.wiki,
-                url: track.url,
+                title: _track.name,
+                wiki: _track.wiki!,
+                url: _track.url,
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(top: 24),
-          ),
-        ],
-      ),
+        const Padding(
+          padding: EdgeInsets.only(top: 24),
+        ),
+      ],
     );
   }
 }

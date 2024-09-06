@@ -13,7 +13,7 @@ void main() {
     final response = result.response;
     expect(response.artist.name, 'Coldplay');
     expect(response.name, 'Clocks');
-    expect(response.album.images.isNotEmpty, true);
+    expect(response.album?.images.isNotEmpty, true);
     expect(response.tags.tagsResponse.isNotEmpty, true);
   });
 }

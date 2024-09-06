@@ -153,7 +153,6 @@ extension TrackAlbumResponseExt on TrackAlbumResponse {
     return TrackAlbum(
       artist: artist,
       title: title,
-      mbid: mbid,
       url: url,
       images: images.toImageList(),
     );
@@ -164,15 +163,15 @@ extension TrackInfoResponseExt on TrackInfoResponse {
   Track toTrack() {
     return Track(
       name: name,
-      mbid: mbid,
       url: url,
       duration: duration,
       listeners: listeners,
       playcount: playcount,
       artist: artist.toTrackArtist(),
-      album: album.toTrackAlbum(),
+      album: album?.toTrackAlbum(),
       tags: tags.tagsResponse.map((tag) => tag.toTag()).toList(),
-      wiki: wiki.toWiki(),
+      wiki: wiki?.toWiki(),
+      userPlayCount: userplaycount ?? '0',
     );
   }
 }
