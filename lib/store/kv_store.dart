@@ -25,7 +25,8 @@ class KVStore {
 }
 
 enum KVStoreKey {
-  theme(key: 'theme');
+  theme(key: 'theme'),
+  username(key: 'username');
 
   const KVStoreKey({
     required this.key,
