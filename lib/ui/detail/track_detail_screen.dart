@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sunrisescrob/model/result.dart';
 import 'package:sunrisescrob/model/track.dart';
 import 'package:sunrisescrob/repository/track_repository.dart';
+import 'package:sunrisescrob/ui/common/artwork_component.dart';
 import 'package:sunrisescrob/ui/detail/component/track_content_component.dart';
 
 final trackNotifierProvider = ChangeNotifierProvider.autoDispose((ref) {
@@ -30,16 +31,31 @@ class TrackDetailScreen extends ConsumerStatefulWidget {
   ConsumerState<ConsumerStatefulWidget> createState() => _TrackDetailState();
 }
 
-class _TrackDetailState extends ConsumerState<TrackDetailScreen> {
-  _TrackDetailState();
+class _TrackDetailState extends ConsumerState<TrackDetailScreen>
+    with TickerProviderStateMixin {
+  late AnimationController _controller;
+
+  late Animation<double> _animation;
 
   @override
   void initState() {
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    );
+
+    _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
     ref.read(trackNotifierProvider).fetchTrack(
           artist: widget.artist,
           track: widget.track,
         );
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -49,14 +65,31 @@ class _TrackDetailState extends ConsumerState<TrackDetailScreen> {
     final theme = Theme.of(context);
     EdgeInsets padding = MediaQuery.paddingOf(context);
 
+    if (track != null) {
+      _controller.forward();
+    }
     return SafeArea(
       top: false,
       child: Stack(
         children: [
-          TrackContentComponent(
-            imageKey: widget.imageKey,
-            track: track,
-            imageUrl: widget.imageUrl,
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                Hero(
+                  tag: widget.imageKey,
+                  child: ArtworkSquareComponent(
+                    imageUrl: widget.imageUrl,
+                    size: double.infinity,
+                  ),
+                ),
+                const Padding(padding: EdgeInsets.only(top: 8)),
+                if (track != null)
+                  FadeTransition(
+                    opacity: _animation,
+                    child: TrackContentComponent(track: track),
+                  ),
+              ],
+            ),
           ),
           Stack(
             children: [
@@ -125,6 +158,7 @@ class TrackNotifier extends ChangeNotifier {
     );
     if (result is Success) {
       trackDetail = result.getOrNull()!;
+      debugPrint("MATAKUDEBUG detail $trackDetail");
       notifyListeners();
     }
   }

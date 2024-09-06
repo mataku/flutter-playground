@@ -143,9 +143,11 @@ class TrackDetailRoute extends GoRouteData {
         imageKey: imageKey,
         imageUrl: imageUrl,
       ),
+      transitionDuration: const Duration(milliseconds: 400),
+      reverseTransitionDuration: const Duration(milliseconds: 400),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         return FadeTransition(
-          opacity: animation,
+          opacity: CurveTween(curve: Curves.easeIn).animate(animation),
           child: child,
         );
       },
