@@ -10,6 +10,11 @@ concurrency:
   group: build-${{ github.head_ref || 'develop' }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  actions: read
+  checks: write
+
 jobs:
   ios:
     runs-on: macos-latest
@@ -59,4 +64,12 @@ jobs:
       - name: Linter
         run: flutter analyze
       - name: Run tests
-        run: flutter test
+        run: flutter test --machine > report.json
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: flutter test
+          path: report.json
+          reporter: flutter-json
+          fail-on-error: false
