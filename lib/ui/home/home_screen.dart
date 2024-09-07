@@ -40,6 +40,11 @@ class HomeScreen extends ConsumerWidget {
                         theme.colorScheme.onSecondary.withAlpha(128),
                     indicatorColor: theme.colorScheme.accentColor(),
                     dividerColor: theme.colorScheme.onSecondary.withAlpha(128),
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    indicatorPadding: const EdgeInsets.only(
+                      left: 16,
+                      right: 16,
+                    ),
                   ),
                   centerTitle: false,
                   shadowColor: Colors.transparent,
