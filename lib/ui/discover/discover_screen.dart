@@ -75,17 +75,17 @@ class DiscoverNotifier extends ChangeNotifier {
 
   Future fetchCharts() async {
     // TODO: request in parallel
-    final trackResult = await chartRepository.getChartTracksSample(1);
+    final trackResult = await chartRepository.getChartTracks(1);
     if (trackResult is Success) {
       tracks = trackResult.getOrNull()!;
     }
 
-    final artistResult = await chartRepository.getChartArtistsSample(1);
+    final artistResult = await chartRepository.getChartArtists(1);
     if (artistResult is Success) {
       artists = artistResult.getOrNull()!;
     }
 
-    final tagResult = await chartRepository.getChartTagsSample(1);
+    final tagResult = await chartRepository.getChartTags(1);
     if (tagResult is Success) {
       tags = tagResult.getOrNull()!;
     }
