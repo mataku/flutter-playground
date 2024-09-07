@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sunrisescrob/ui/home/scrobble_screen.dart';
 import 'package:sunrisescrob/ui/home/top_albums_screen.dart';
 import 'package:sunrisescrob/ui/home/top_artists_screen.dart';
+import 'package:sunrisescrob/ui/theme/app_theme.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -10,6 +11,7 @@ class HomeScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+
     return SafeArea(
       child: DefaultTabController(
         length: 3,
@@ -36,10 +38,12 @@ class HomeScreen extends ConsumerWidget {
                     labelColor: theme.colorScheme.onSurface,
                     unselectedLabelColor:
                         theme.colorScheme.onSecondary.withAlpha(128),
-                    indicatorColor: theme.colorScheme.primary,
+                    indicatorColor: theme.colorScheme.accentColor(),
                     dividerColor: theme.colorScheme.onSecondary.withAlpha(128),
                   ),
                   centerTitle: false,
+                  shadowColor: Colors.transparent,
+                  backgroundColor: theme.colorScheme.surface,
                 ),
               ];
             },
