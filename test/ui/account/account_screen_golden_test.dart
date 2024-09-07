@@ -32,7 +32,7 @@ void main() {
       final userInfo = UserGetInfoApiResponse.fromJson(json.decode(jsonMap));
       provideDummy<Result<UserInfo>>(Success(userInfo.response.toUserInfo()));
       final profileRepository = MockProfileRepository();
-      when(profileRepository.getUserInfoSample()).thenAnswer((_) async {
+      when(profileRepository.getUserInfo()).thenAnswer((_) async {
         return Result.success(userInfo.response.toUserInfo());
       });
       accountNotifier = AccountNotifier(profileRepository: profileRepository);

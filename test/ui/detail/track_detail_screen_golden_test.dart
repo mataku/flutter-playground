@@ -22,7 +22,7 @@ void main() {
     setUp(() async {
       provideDummy(Result.success(testTrackApiResponse.response.toTrack()));
       final repo = MockTrackRepository();
-      when(repo.getTrackSample(
+      when(repo.getTrack(
         artist: 'aespa',
         track: 'Supernova',
       )).thenAnswer((_) async {
