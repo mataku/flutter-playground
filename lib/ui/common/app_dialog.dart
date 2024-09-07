@@ -39,18 +39,29 @@ class AppDialog extends StatelessWidget {
         ],
       );
     } else {
+      final theme = Theme.of(context);
       return AlertDialog(
         title: Text(title),
         content: Text(description ?? ''),
         actions: [
           if (dismissOnTap != null)
-            GestureDetector(
-              onTap: dismissOnTap,
-              child: const Text('Cancel'),
+            TextButton(
+              onPressed: dismissOnTap,
+              child: Text(
+                'Cancel',
+                style: TextStyle(
+                  color: theme.colorScheme.onSurface,
+                ),
+              ),
             ),
-          GestureDetector(
-            onTap: confirmOnTap,
-            child: const Text('OK'),
+          TextButton(
+            onPressed: confirmOnTap,
+            child: Text(
+              'OK',
+              style: TextStyle(
+                color: theme.colorScheme.onSurface,
+              ),
+            ),
           ),
         ],
       );

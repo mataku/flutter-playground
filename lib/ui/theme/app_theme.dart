@@ -35,7 +35,7 @@ enum AppTheme {
 }
 
 const lightColorScheme = ColorScheme.light(
-  primary: AppColors.lime,
+  primary: Color(0xFFF5F5F5),
   onPrimary: Colors.black,
   secondary: Colors.white,
   onSecondary: AppColors.grey600,
@@ -43,7 +43,7 @@ const lightColorScheme = ColorScheme.light(
   onSurface: Colors.black,
 );
 const darkColorScheme = ColorScheme.dark(
-  primary: AppColors.lime,
+  primary: Color(0xFF444444),
   onPrimary: Colors.white,
   primaryContainer: Color(0xFF444444),
   onPrimaryContainer: Colors.white,
@@ -56,7 +56,7 @@ const darkColorScheme = ColorScheme.dark(
   surfaceContainer: Color(0xFF37474F),
 );
 const lastfmDarkColorScheme = ColorScheme.dark(
-  primary: AppColors.lastFmRed,
+  primary: Color(0xFF444444),
   onPrimary: Colors.white,
   secondary: Colors.white,
   onSecondary: AppColors.blueGrey300,
@@ -71,5 +71,18 @@ extension AppThemeExt on AppTheme {
       AppTheme.dark => AppColors.lime,
       AppTheme.lastfmDark => AppColors.lastFmRed,
     };
+  }
+}
+
+extension ColorSchemeExt on ColorScheme {
+  Color accentColor() {
+    if (brightness == Brightness.light) {
+      return AppColors.lime;
+    } else if (brightness == Brightness.dark &&
+        primary == const Color(0xFF444444)) {
+      return AppColors.lime;
+    } else {
+      return AppColors.lastFmRed;
+    }
   }
 }
