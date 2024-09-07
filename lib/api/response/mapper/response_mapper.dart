@@ -1,3 +1,4 @@
+import 'package:sunrisescrob/api/response/album/album_info_api_response.dart';
 import 'package:sunrisescrob/api/response/auth/auth_mobile_session_api_response.dart';
 import 'package:sunrisescrob/api/response/chart/chart_top_artists_api_response.dart';
 import 'package:sunrisescrob/api/response/chart/chart_top_tags_api_response.dart';
@@ -10,6 +11,7 @@ import 'package:sunrisescrob/api/response/top_tags_response.dart';
 import 'package:sunrisescrob/api/response/track/track_info_api_response.dart';
 import 'package:sunrisescrob/api/response/user/top_albums_api_response.dart';
 import 'package:sunrisescrob/api/response/user/top_artists_api_response.dart';
+import 'package:sunrisescrob/model/album/album.dart';
 import 'package:sunrisescrob/model/artwork.dart';
 import 'package:sunrisescrob/model/auth/mobile_session.dart';
 import 'package:sunrisescrob/model/chart/chart_artist.dart';
@@ -159,6 +161,12 @@ extension TrackAlbumResponseExt on TrackAlbumResponse {
   }
 }
 
+extension TopTagsResponseExt on TopTagsResponse {
+  List<Tag> toTagList() {
+    return tagsResponse.map((tag) => tag.toTag()).toList();
+  }
+}
+
 extension TrackInfoResponseExt on TrackInfoResponse {
   Track toTrack() {
     return Track(
@@ -169,7 +177,7 @@ extension TrackInfoResponseExt on TrackInfoResponse {
       playcount: playcount,
       artist: artist.toTrackArtist(),
       album: album?.toTrackAlbum(),
-      tags: tags.tagsResponse.map((tag) => tag.toTag()).toList(),
+      tags: tags.toTagList(),
       wiki: wiki?.toWiki(),
       userPlayCount: userplaycount ?? '0',
     );
@@ -237,6 +245,40 @@ extension AuthMobileSessionApiResponseExt on AuthMobileSessionApiResponse {
     return MobileSession(
       name: sessionBody.name,
       key: sessionBody.key,
+    );
+  }
+}
+
+extension AlbumTrackApiBodyExt on AlbumTrackApiBody {
+  AlbumTrack toAlbumTrack() {
+    return AlbumTrack(
+      duration: duration,
+      url: url,
+      name: name,
+      artist: artist.toTrackArtist(),
+    );
+  }
+}
+
+extension AlbumTrackListApiBodyExt on AlbumTrackListApiBody {
+  List<AlbumTrack> toAlbumTrackList() {
+    return tracks.map((track) => track.toAlbumTrack()).toList();
+  }
+}
+
+extension AlbumInfoApiResponseExt on AlbumInfoApiResponse {
+  Album toAlbum() {
+    final apiResponse = response;
+    return Album(
+      artist: apiResponse.artist,
+      tags: apiResponse.tags?.toTagList() ?? List.empty(),
+      name: apiResponse.name,
+      images: apiResponse.images.toImageList(),
+      tracks: apiResponse.tracks.toAlbumTrackList(),
+      listeners: apiResponse.listeners,
+      playcount: apiResponse.playcount,
+      userplaycount: apiResponse.userplaycount ?? '0',
+      url: apiResponse.url,
     );
   }
 }
