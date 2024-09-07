@@ -2,13 +2,20 @@
 
 Flutter Architecture Sample like Model-View-ViewModel using Last.fm API.
 
+## Features
+- Recent scrobbles
+- Top tracks
+- Top artists
+- Account info
+- Switch theme
+
 ## Architecture
 
 TODO
 
 - View (Flutter Widget)
 - Presentation layer: ChangeNotifier
-- Data layer: Repository (or use UseCase if there are complex business logic, various data type, or something) and class with freezed and json_serializabl
+- Data layer: Repository (or use UseCase if there are complex business logic, various data type, or something) and class with freezed and json_serializable
 - Domain layer: Dart Class with freezed:  [./lib/model/](./lib/model)
 
 ### HTTP request
@@ -85,4 +92,4 @@ final response = await lastFmApiService.request(recentEndpoint); // RecentTracks
 
 See [LICENSE](./LICENSE).
 
-This app uses [Noto Sans Japanese](https://fonts.google.com/noto/specimen/Noto+Sans+JP).
+This app uses [Noto Sans Japanese](https://fonts.google.com/noto/specimen/Noto+Sans+JP) in golden tests.
