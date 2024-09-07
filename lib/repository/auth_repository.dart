@@ -4,14 +4,12 @@ import 'package:sunrisescrob/api/last_fm_api_service.dart';
 import 'package:sunrisescrob/api/lastfm_api_signature.dart';
 import 'package:sunrisescrob/model/app_error.dart';
 import 'package:sunrisescrob/model/result.dart';
-import 'package:sunrisescrob/store/kv_store.dart';
 import 'package:sunrisescrob/store/session_store.dart';
 
 final authRepositoryProvider = Provider<AuthRepository>(
   (ref) => AuthRepositoryImpl(
     ref.read(lastFmApiServiceProvider),
     ref.read(sessionChangeNotifierProvider),
-    ref.read(kvStoreProvider),
   ),
 );
 
@@ -27,12 +25,9 @@ class AuthRepositoryImpl implements AuthRepository {
   // TODO: reconsider
   final SessionChangeNotifier _notifier;
 
-  final KVStore _kvStore;
-
   AuthRepositoryImpl(
     this._apiService,
     this._notifier,
-    this._kvStore,
   );
 
   @override
@@ -51,9 +46,9 @@ class AuthRepositoryImpl implements AuthRepository {
     );
     try {
       final result = await _apiService.request(endpoint);
-      await _kvStore.setStringValue(
-          KVStoreKey.username, result.sessionBody.name);
-      await _notifier.login(result.sessionBody.key);
+      await _notifier.login(
+          sessionKey: result.sessionBody.key,
+          username: result.sessionBody.name);
       return Result.success(result.sessionBody.name);
     } on Exception catch (error) {
       return Result.failure(AppError.getApiError(error));
