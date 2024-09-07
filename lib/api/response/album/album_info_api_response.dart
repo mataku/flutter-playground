@@ -70,8 +70,20 @@ class AlbumTrackApiBody with _$AlbumTrackApiBody {
     required String url,
     required String name,
     required TrackInfoArtist artist,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: '@attr') required RankApiBody rankBody,
   }) = _AlbumTrackApiBody;
 
   factory AlbumTrackApiBody.fromJson(Map<String, dynamic> json) =>
       _$AlbumTrackApiBodyFromJson(json);
+}
+
+@freezed
+class RankApiBody with _$RankApiBody {
+  const factory RankApiBody({
+    required int rank,
+  }) = _RankApiBody;
+
+  factory RankApiBody.fromJson(Map<String, dynamic> json) =>
+      _$RankApiBodyFromJson(json);
 }

@@ -26,6 +26,7 @@ class AlbumTrack with _$AlbumTrack {
     required int duration,
     required String url,
     required String name,
+    required int position,
     required CommonNameAndUrl artist,
   }) = _AlbumTrack;
 }

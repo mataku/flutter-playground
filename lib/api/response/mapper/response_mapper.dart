@@ -256,6 +256,7 @@ extension AlbumTrackApiBodyExt on AlbumTrackApiBody {
       url: url,
       name: name,
       artist: artist.toTrackArtist(),
+      position: rankBody.rank,
     );
   }
 }
