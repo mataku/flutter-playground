@@ -9,7 +9,6 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
   return GoldenToolkit.runWithConfiguration(
     () async {
       TestWidgetsFlutterBinding.ensureInitialized();
-      await loadAppFonts();
 
       final font = rootBundle.load('asset/font/NotoSansJP-Regular.ttf');
       final fontLoader = FontLoader('Noto Sans JP')..addFont(font);

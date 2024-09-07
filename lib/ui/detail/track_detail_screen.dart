@@ -158,7 +158,6 @@ class TrackNotifier extends ChangeNotifier {
     );
     if (result is Success) {
       trackDetail = result.getOrNull()!;
-      debugPrint("MATAKUDEBUG detail $trackDetail");
       notifyListeners();
     }
   }
