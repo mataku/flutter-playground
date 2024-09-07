@@ -35,7 +35,7 @@ enum AppTheme {
 }
 
 const lightColorScheme = ColorScheme.light(
-  primary: Color(0xFFEEEEEE),
+  primary: AppColors.lime,
   onPrimary: Colors.black,
   secondary: Colors.white,
   onSecondary: AppColors.grey600,
@@ -43,7 +43,7 @@ const lightColorScheme = ColorScheme.light(
   onSurface: Colors.black,
 );
 const darkColorScheme = ColorScheme.dark(
-  primary: Color(0xFF444444),
+  primary: AppColors.lime,
   onPrimary: Colors.white,
   primaryContainer: Color(0xFF444444),
   onPrimaryContainer: Colors.white,
@@ -56,7 +56,7 @@ const darkColorScheme = ColorScheme.dark(
   surfaceContainer: Color(0xFF37474F),
 );
 const lastfmDarkColorScheme = ColorScheme.dark(
-  primary: Color(0xFF444444),
+  primary: AppColors.lastFmRed,
   onPrimary: Colors.white,
   secondary: Colors.white,
   onSecondary: AppColors.blueGrey300,
