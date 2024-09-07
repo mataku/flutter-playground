@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:sunrisescrob/store/kv_store.dart';
 
 final sessionStoreProvider = Provider((ref) => SessionStore());
 
@@ -28,26 +29,38 @@ class SessionStore {
 
 class SessionChangeNotifier extends ChangeNotifier {
   final SessionStore _sessionStore;
+  final KVStore _kvStore;
 
   // ignore: unused_field
   bool _isLoggedIn = false;
 
   SessionChangeNotifier({
     required SessionStore sessionStore,
-  }) : _sessionStore = sessionStore;
+    required KVStore kvStore,
+  })  : _sessionStore = sessionStore,
+        _kvStore = kvStore;
 
-  Future<void> login(String sessionKey) async {
+  Future<void> login({
+    required String sessionKey,
+    required String username,
+  }) async {
     _isLoggedIn = true;
     await _sessionStore.setSessionKey(sessionKey);
+    await _kvStore.setStringValue(KVStoreKey.username, username);
     notifyListeners();
   }
 
   Future<void> logout() async {
     _isLoggedIn = false;
     await _sessionStore.clearSessionKey();
+    await _kvStore.clearStringValue(KVStoreKey.username);
     notifyListeners();
   }
 }
 
-final sessionChangeNotifierProvider = ChangeNotifierProvider((ref) =>
-    SessionChangeNotifier(sessionStore: ref.read(sessionStoreProvider)));
+final sessionChangeNotifierProvider = ChangeNotifierProvider(
+  (ref) => SessionChangeNotifier(
+    sessionStore: ref.read(sessionStoreProvider),
+    kvStore: ref.read(kvStoreProvider),
+  ),
+);

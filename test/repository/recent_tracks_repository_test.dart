@@ -7,25 +7,35 @@ import 'package:sunrisescrob/api/response/mapper/response_mapper.dart';
 import 'package:sunrisescrob/model/app_error.dart';
 import 'package:sunrisescrob/model/result.dart';
 import 'package:sunrisescrob/repository/recent_tracks_repository.dart';
+import 'package:sunrisescrob/store/kv_store.dart';
 
 import '../fixtures/test_data.dart';
 // avoid conflict with original MockDioException implementation in dio package
 import 'recent_tracks_repository_test.mocks.dart' as app_mock;
 
-@GenerateMocks([LastFmApiService, DioException])
+@GenerateMocks([LastFmApiService, DioException, KVStore])
 void main() {
   group('getRecentTracks', () {
     late app_mock.MockLastFmApiService apiService;
     late app_mock.MockDioException dioException;
+    late app_mock.MockKVStore kvStore;
+    const username = 'sunsetscrob';
 
-    setUp(() {
+    setUp(() async {
       apiService = app_mock.MockLastFmApiService();
       dioException = app_mock.MockDioException();
+      kvStore = app_mock.MockKVStore();
+      when(kvStore.getStringValue(KVStoreKey.username)).thenAnswer((_) async {
+        return username;
+      });
     });
     test('request succeeded', () async {
       when(apiService.request(any))
           .thenAnswer((_) async => testRecentTrackApiResponse);
-      final repo = RecentTracksRepositoryImpl(apiService);
+      final repo = RecentTracksRepositoryImpl(
+        apiService: apiService,
+        kvStore: kvStore,
+      );
       final result = await repo.getRecentTracks(1);
       expect(result is Success, true);
       expect(
@@ -35,7 +45,10 @@ void main() {
     test('request failed', () async {
       when(dioException.type).thenReturn(DioExceptionType.connectionError);
       when(apiService.request(any)).thenThrow(dioException);
-      final repo = RecentTracksRepositoryImpl(apiService);
+      final repo = RecentTracksRepositoryImpl(
+        apiService: apiService,
+        kvStore: kvStore,
+      );
       final result = await repo.getRecentTracks(1);
       expect(result is Failure, true);
       expect(result.exceptionOrNull(), const AppError.serverError());

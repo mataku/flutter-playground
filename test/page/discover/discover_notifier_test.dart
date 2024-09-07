@@ -26,11 +26,11 @@ void main() {
     });
 
     test('request succeeded', () async {
-      when(chartRepository.getChartTracksSample(1))
+      when(chartRepository.getChartTracks(1))
           .thenAnswer((_) async => Result.success(testChartTrackList));
-      when(chartRepository.getChartArtistsSample(1))
+      when(chartRepository.getChartArtists(1))
           .thenAnswer((_) async => Result.success(testChartArtistList));
-      when(chartRepository.getChartTagsSample(1))
+      when(chartRepository.getChartTags(1))
           .thenAnswer((_) async => Result.success(testChartTagList));
 
       final notifier = DiscoverNotifier(chartRepository: chartRepository);
@@ -42,11 +42,11 @@ void main() {
 
     test('request failed', () async {
       final exception = TimeoutException('timeout');
-      when(chartRepository.getChartTracksSample(1))
+      when(chartRepository.getChartTracks(1))
           .thenAnswer((_) async => Result.failure(exception));
-      when(chartRepository.getChartArtistsSample(1))
+      when(chartRepository.getChartArtists(1))
           .thenAnswer((_) async => Result.failure(exception));
-      when(chartRepository.getChartTagsSample(1))
+      when(chartRepository.getChartTags(1))
           .thenAnswer((_) async => Result.failure(exception));
 
       final notifier = DiscoverNotifier(chartRepository: chartRepository);

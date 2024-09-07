@@ -36,7 +36,7 @@ class HomeScreen extends ConsumerWidget {
                     labelColor: theme.colorScheme.onSurface,
                     unselectedLabelColor:
                         theme.colorScheme.onSecondary.withAlpha(128),
-                    indicatorColor: theme.colorScheme.onSurface,
+                    indicatorColor: theme.colorScheme.primary,
                     dividerColor: theme.colorScheme.onSecondary.withAlpha(128),
                   ),
                   centerTitle: false,

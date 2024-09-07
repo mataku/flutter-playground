@@ -27,11 +27,11 @@ void main() {
       provideDummy<Result<List<Tag>>>(Success(testChartTagList));
 
       final chartRepository = MockChartRepository();
-      when(chartRepository.getChartTracksSample(1))
+      when(chartRepository.getChartTracks(1))
           .thenAnswer((_) async => Result.success(testChartTrackList));
-      when(chartRepository.getChartArtistsSample(1))
+      when(chartRepository.getChartArtists(1))
           .thenAnswer((_) async => Result.success(testChartArtistList));
-      when(chartRepository.getChartTagsSample(1))
+      when(chartRepository.getChartTags(1))
           .thenAnswer((_) async => Result.success(testChartTagList));
 
       discoverNotifier = DiscoverNotifier(chartRepository: chartRepository);

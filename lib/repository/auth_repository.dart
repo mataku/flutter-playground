@@ -46,7 +46,9 @@ class AuthRepositoryImpl implements AuthRepository {
     );
     try {
       final result = await _apiService.request(endpoint);
-      await _notifier.login(result.sessionBody.key);
+      await _notifier.login(
+          sessionKey: result.sessionBody.key,
+          username: result.sessionBody.name);
       return Result.success(result.sessionBody.name);
     } on Exception catch (error) {
       return Result.failure(AppError.getApiError(error));

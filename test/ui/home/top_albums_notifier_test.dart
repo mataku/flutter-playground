@@ -28,7 +28,7 @@ void main() {
     });
 
     test('request succeeded', () async {
-      when(userRepository.getTopAlbumsSample(1))
+      when(userRepository.getTopAlbums(1))
           .thenAnswer((_) async => Result.success(topAlbums));
       final notifier = TopAlbumsNotifier(userRepository: userRepository);
       await notifier.fetchData();
@@ -39,7 +39,7 @@ void main() {
 
     test('request failed', () async {
       final mockException = TimeoutException('timeout');
-      when(userRepository.getTopAlbumsSample(1))
+      when(userRepository.getTopAlbums(1))
           .thenAnswer((_) async => Result.failure(mockException));
       final notifier = TopAlbumsNotifier(userRepository: userRepository);
       await notifier.fetchData();

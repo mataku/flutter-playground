@@ -10,25 +10,34 @@ import 'package:sunrisescrob/api/response/user/top_artists_api_response.dart';
 import 'package:sunrisescrob/model/app_error.dart';
 import 'package:sunrisescrob/model/result.dart';
 import 'package:sunrisescrob/repository/user_repository.dart';
+import 'package:sunrisescrob/store/kv_store.dart';
 
 import '../fixture.dart';
-import 'chart_repository_test.mocks.dart' as app_mock;
+import 'user_repository_test.mocks.dart' as app_mock;
 
-@GenerateMocks([LastFmApiService, DioException])
+@GenerateMocks([LastFmApiService, DioException, KVStore])
 void main() {
   late app_mock.MockLastFmApiService apiService;
   late app_mock.MockDioException dioException;
+  late app_mock.MockKVStore kvStore;
   group('getTopAlbums', () {
-    setUp(() {
+    setUp(() async {
       apiService = app_mock.MockLastFmApiService();
       dioException = app_mock.MockDioException();
+      kvStore = app_mock.MockKVStore();
+      when(kvStore.getStringValue(KVStoreKey.username)).thenAnswer((_) async {
+        return 'sunsetscrob';
+      });
     });
 
     test('request succeeded', () async {
       final response = fixture("user_top_albums.json");
       final albums = TopAlbumsApiResponse.fromJson(json.decode(response));
       when(apiService.request(any)).thenAnswer((_) async => albums);
-      final repo = UserRepositoryImpl(apiService);
+      final repo = UserRepositoryImpl(
+        apiService: apiService,
+        kvStore: kvStore,
+      );
       final result = await repo.getTopAlbums(1);
       expect(result is Success, true);
       expect(result.getOrNull()!.isNotEmpty, true);
@@ -37,7 +46,10 @@ void main() {
     test('request failed', () async {
       when(dioException.type).thenReturn(DioExceptionType.connectionError);
       when(apiService.request(any)).thenThrow(dioException);
-      final repo = UserRepositoryImpl(apiService);
+      final repo = UserRepositoryImpl(
+        apiService: apiService,
+        kvStore: kvStore,
+      );
       final result = await repo.getTopAlbums(1);
       expect(result is Failure, true);
       expect(result.exceptionOrNull(), const AppError.serverError());
@@ -45,16 +57,23 @@ void main() {
   });
 
   group('getTopArtists', () {
-    setUp(() {
+    setUp(() async {
       apiService = app_mock.MockLastFmApiService();
       dioException = app_mock.MockDioException();
+      kvStore = app_mock.MockKVStore();
+      when(kvStore.getStringValue(KVStoreKey.username)).thenAnswer((_) async {
+        return 'sunsetscrob';
+      });
     });
 
     test('request succeeded', () async {
       final response = fixture("user_top_artists.json");
       final albums = TopArtistsApiResponse.fromJson(json.decode(response));
       when(apiService.request(any)).thenAnswer((_) async => albums);
-      final repo = UserRepositoryImpl(apiService);
+      final repo = UserRepositoryImpl(
+        apiService: apiService,
+        kvStore: kvStore,
+      );
       final result = await repo.getTopArtists(1);
       expect(result is Success, true);
       expect(result.getOrNull()!.isNotEmpty, true);
@@ -63,7 +82,10 @@ void main() {
     test('request failed', () async {
       when(dioException.type).thenReturn(DioExceptionType.connectionError);
       when(apiService.request(any)).thenThrow(dioException);
-      final repo = UserRepositoryImpl(apiService);
+      final repo = UserRepositoryImpl(
+        apiService: apiService,
+        kvStore: kvStore,
+      );
       final result = await repo.getTopArtists(1);
       expect(result is Failure, true);
       expect(result.exceptionOrNull(), const AppError.serverError());

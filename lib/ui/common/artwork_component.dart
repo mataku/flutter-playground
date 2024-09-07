@@ -82,6 +82,7 @@ class ArtworkSquareComponent extends ConsumerWidget {
       );
     } else {
       imageComponent = CachedNetworkImage(
+        fit: BoxFit.cover,
         imageUrl: imageUrl!,
         placeholder: (context, url) {
           return AspectRatio(
@@ -101,7 +102,7 @@ class ArtworkSquareComponent extends ConsumerWidget {
               width: size,
               child: Image.asset(
                 "asset/image/no_image.png",
-                fit: BoxFit.cover,
+                fit: BoxFit.fitWidth,
               ),
             ),
           );

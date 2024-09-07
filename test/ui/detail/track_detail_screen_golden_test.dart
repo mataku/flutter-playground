@@ -22,7 +22,7 @@ void main() {
     setUp(() async {
       provideDummy(Result.success(testTrackApiResponse.response.toTrack()));
       final repo = MockTrackRepository();
-      when(repo.getTrackSample(
+      when(repo.getTrack(
         artist: 'aespa',
         track: 'Supernova',
       )).thenAnswer((_) async {
@@ -54,6 +54,8 @@ void main() {
               child: const TrackDetailScreen(
                 artist: 'aespa',
                 track: 'Supernova',
+                imageKey: 'imageKey',
+                imageUrl: '',
               ),
               appTheme: AppTheme.light,
             ),
@@ -61,6 +63,12 @@ void main() {
         );
 
       await tester.pumpDeviceBuilder(builder);
+
+      await trackNotifier.fetchTrack(
+        track: 'Supernova',
+        artist: 'aespa',
+      );
+
       await screenMatchesGolden(tester, 'track_detail_screen_light');
     });
 
@@ -80,6 +88,8 @@ void main() {
               child: const TrackDetailScreen(
                 artist: 'aespa',
                 track: 'Supernova',
+                imageUrl: '',
+                imageKey: 'imageKey',
               ),
               appTheme: AppTheme.dark,
             ),
@@ -87,6 +97,11 @@ void main() {
         );
 
       await tester.pumpDeviceBuilder(builder);
+
+      await trackNotifier.fetchTrack(
+        track: 'Supernova',
+        artist: 'aespa',
+      );
       await screenMatchesGolden(tester, 'track_detail_screen_dark');
     });
 
@@ -106,6 +121,8 @@ void main() {
               child: const TrackDetailScreen(
                 artist: 'aespa',
                 track: 'Supernova',
+                imageKey: 'imageKey',
+                imageUrl: '',
               ),
               appTheme: AppTheme.lastfmDark,
             ),
@@ -113,6 +130,10 @@ void main() {
         );
 
       await tester.pumpDeviceBuilder(builder);
+      await trackNotifier.fetchTrack(
+        track: 'Supernova',
+        artist: 'aespa',
+      );
       await screenMatchesGolden(tester, 'track_detail_screen_lastfmdark');
     });
   });

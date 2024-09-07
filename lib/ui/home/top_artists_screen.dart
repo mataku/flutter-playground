@@ -45,7 +45,7 @@ class TopArtistsNotifier extends ChangeNotifier {
       isLoading: true,
     );
 
-    final result = await userRepository.getTopArtistsSample(_page);
+    final result = await userRepository.getTopArtists(_page);
 
     if (result is Success) {
       List<TopArtist> artists = (result as Success<List<TopArtist>>).data;

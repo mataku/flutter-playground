@@ -65,7 +65,7 @@ class AccountNotifier extends ChangeNotifier {
   UserInfo? userInfo;
 
   Future fetchUserInfo() async {
-    final userInfoResult = await _profileRepository.getUserInfoSample();
+    final userInfoResult = await _profileRepository.getUserInfo();
     userInfo = userInfoResult.getOrNull();
     notifyListeners();
   }

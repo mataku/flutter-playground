@@ -122,19 +122,35 @@ class AccountRoute extends GoRouteData {
 class TrackDetailRoute extends GoRouteData {
   final String artist;
   final String track;
+  final String imageKey;
+  final String imageUrl;
 
   const TrackDetailRoute({
     required this.artist,
     required this.track,
+    required this.imageKey,
+    required this.imageUrl,
   });
 
   static const path = 'track_detail';
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return TrackDetailScreen(
-      artist: artist,
-      track: track,
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return CustomTransitionPage(
+      child: TrackDetailScreen(
+        artist: artist,
+        track: track,
+        imageKey: imageKey,
+        imageUrl: imageUrl,
+      ),
+      transitionDuration: const Duration(milliseconds: 400),
+      reverseTransitionDuration: const Duration(milliseconds: 400),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return FadeTransition(
+          opacity: CurveTween(curve: Curves.easeIn).animate(animation),
+          child: child,
+        );
+      },
     );
   }
 }

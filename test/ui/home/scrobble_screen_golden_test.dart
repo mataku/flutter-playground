@@ -31,8 +31,7 @@ void main() {
       final response = RecentTracksApiResponse.fromJson(jsonMap);
       provideDummy<Result<List<RecentTrack>>>(
           Success(response.toRecentTrackList()));
-      when(mockRecentTracksRepository.getRecentTracksSample(1))
-          .thenAnswer((_) async {
+      when(mockRecentTracksRepository.getRecentTracks(1)).thenAnswer((_) async {
         return Result.success(response.toRecentTrackList());
       });
     });

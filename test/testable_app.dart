@@ -27,8 +27,12 @@ Widget testableApp({
       colorScheme: appTheme.colorScheme,
       useMaterial3: true,
       fontFamily: 'Noto Sans JP',
+      brightness: appTheme.brightness,
     ),
     debugShowCheckedModeBanner: false,
-    home: child,
+    home: ColoredBox(
+      color: appTheme.colorScheme.surface,
+      child: child,
+    ),
   );
 }

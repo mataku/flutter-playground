@@ -22,10 +22,15 @@ class KVStore {
   ) async {
     return _pref?.getString(key.key) ?? '';
   }
+
+  Future<void> clearStringValue(KVStoreKey key) async {
+    await _pref?.remove(key.key);
+  }
 }
 
 enum KVStoreKey {
-  theme(key: 'theme');
+  theme(key: 'theme'),
+  username(key: 'username');
 
   const KVStoreKey({
     required this.key,
