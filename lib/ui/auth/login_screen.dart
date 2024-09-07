@@ -18,6 +18,7 @@ class LoginScreen extends ConsumerWidget {
   final usernameTextEditController = TextEditingController();
   final passwordTextEditController = TextEditingController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   LoginScreen({
     super.key,
@@ -38,110 +39,115 @@ class LoginScreen extends ConsumerWidget {
 
     return Scaffold(
       key: _scaffoldKey,
-      body: Padding(
-        padding: const EdgeInsets.only(left: 16, right: 16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text(
-              'Login to Last.fm',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-              ),
-            ),
-            const Padding(padding: EdgeInsets.only(top: 24)),
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              child: TextFormField(
-                controller: usernameTextEditController,
-                decoration: InputDecoration(
-                  labelText: 'Username',
-                  labelStyle: TextStyle(color: theme.colorScheme.onSurface),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: theme.colorScheme.onSurface,
-                    ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: theme.colorScheme.onSurface,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: theme.colorScheme.onSurface,
-                    ),
-                  ),
-                  focusColor: theme.colorScheme.onSurface,
-                ),
-                keyboardType: TextInputType.visiblePassword,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Username is empty';
-                  }
-                  return null;
-                },
-                cursorColor: theme.colorScheme.onSecondary,
-              ),
-            ),
-            const Padding(padding: EdgeInsets.only(top: 16)),
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              child: TextFormField(
+      body: Form(
+        key: _formKey,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 16, right: 16),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text(
+                'Login to Last.fm',
                 style: TextStyle(
-                  color: theme.colorScheme.onSurface,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
                 ),
-                controller: passwordTextEditController,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  labelStyle: TextStyle(color: theme.colorScheme.onSurface),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: theme.colorScheme.onSurface,
+              ),
+              const Padding(padding: EdgeInsets.only(top: 24)),
+              Padding(
+                padding: const EdgeInsets.only(left: 16, right: 16),
+                child: TextFormField(
+                  controller: usernameTextEditController,
+                  decoration: InputDecoration(
+                    labelText: 'Username',
+                    labelStyle: TextStyle(color: theme.colorScheme.onSurface),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: theme.colorScheme.onSurface,
+                      ),
                     ),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: theme.colorScheme.onSurface,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: theme.colorScheme.onSurface,
+                      ),
                     ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: theme.colorScheme.onSurface,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: theme.colorScheme.onSurface,
+                      ),
                     ),
+                    focusColor: theme.colorScheme.onSurface,
                   ),
-                  focusColor: theme.colorScheme.onSurface,
+                  keyboardType: TextInputType.visiblePassword,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Username is empty';
+                    }
+                    return null;
+                  },
+                  cursorColor: theme.colorScheme.onSecondary,
                 ),
-                keyboardType: TextInputType.visiblePassword,
-                obscureText: true,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Password is empty';
-                  }
+              ),
+              const Padding(padding: EdgeInsets.only(top: 16)),
+              Padding(
+                padding: const EdgeInsets.only(left: 16, right: 16),
+                child: TextFormField(
+                  style: TextStyle(
+                    color: theme.colorScheme.onSurface,
+                  ),
+                  controller: passwordTextEditController,
+                  decoration: InputDecoration(
+                    labelText: 'Password',
+                    labelStyle: TextStyle(color: theme.colorScheme.onSurface),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: theme.colorScheme.onSurface,
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: theme.colorScheme.onSurface,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: theme.colorScheme.onSurface,
+                      ),
+                    ),
+                    focusColor: theme.colorScheme.onSurface,
+                  ),
+                  keyboardType: TextInputType.visiblePassword,
+                  obscureText: true,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Password is empty';
+                    }
 
-                  return null;
-                },
-                cursorColor: theme.colorScheme.onSecondary,
+                    return null;
+                  },
+                  cursorColor: theme.colorScheme.onSecondary,
+                ),
               ),
-            ),
-            const Padding(padding: EdgeInsets.only(top: 48)),
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              child: AppButton(
-                text: 'Let me in!',
-                onTap: () {
-                  notifier.login(
-                    username: usernameTextEditController.text,
-                    password: passwordTextEditController.text,
-                  );
-                },
-                backgroundColor: const Color(0xFFC0CA33),
-                textColor: theme.colorScheme.surface,
+              const Padding(padding: EdgeInsets.only(top: 48)),
+              Padding(
+                padding: const EdgeInsets.only(left: 16, right: 16),
+                child: AppButton(
+                  text: 'Let me in!',
+                  onTap: () {
+                    if (_formKey.currentState!.validate()) {
+                      notifier.login(
+                        username: usernameTextEditController.text,
+                        password: passwordTextEditController.text,
+                      );
+                    }
+                  },
+                  backgroundColor: const Color(0xFFC0CA33),
+                  textColor: theme.colorScheme.surface,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
