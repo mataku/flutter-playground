@@ -34,15 +34,14 @@ void main() {
       mockRecentTracksRepository = MockRecentTracksRepository();
       provideDummy<Result<List<RecentTrack>>>(Success(List.empty()));
 
-      when(mockRecentTracksRepository.getRecentTracksSample(1))
-          .thenAnswer((_) async {
+      when(mockRecentTracksRepository.getRecentTracks(1)).thenAnswer((_) async {
         return Result.success(List.empty());
       });
       mockUserRepository = MockUserRepository();
       final response = fixture("user_top_artists.json");
       final artists = TopArtistsApiResponse.fromJson(json.decode(response));
       provideDummy<Result<List<TopArtist>>>(Success(artists.toTopArtistList()));
-      when(mockUserRepository.getTopArtistsSample(1)).thenAnswer((_) async {
+      when(mockUserRepository.getTopArtists(1)).thenAnswer((_) async {
         return Result.success(artists.toTopArtistList());
       });
     });

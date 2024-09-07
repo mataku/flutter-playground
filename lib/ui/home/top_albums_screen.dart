@@ -46,7 +46,7 @@ class TopAlbumsNotifier extends ChangeNotifier {
       hasMore: topAlbumsState.hasMore,
       isLoading: true,
     );
-    final result = await userRepository.getTopAlbumsSample(_page);
+    final result = await userRepository.getTopAlbums(_page);
     if (result is Success) {
       List<TopAlbum> albums = (result as Success<List<TopAlbum>>).data;
       List<TopAlbum> currentTopAlbums = List.of(topAlbumsState.topAlbums);
