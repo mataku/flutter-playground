@@ -1,41 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sunrisescrob/model/album/album.dart';
 import 'package:sunrisescrob/model/result.dart';
-import 'package:sunrisescrob/model/track.dart';
-import 'package:sunrisescrob/repository/track_repository.dart';
-import 'package:sunrisescrob/ui/common/artwork_component.dart';
-import 'package:sunrisescrob/ui/detail/component/track_content_component.dart';
+import 'package:sunrisescrob/repository/album_repository.dart';
+import 'package:sunrisescrob/ui/detail/component/album_content.dart';
 
-final trackNotifierProvider = ChangeNotifierProvider.autoDispose((ref) {
-  final trackNotifier =
-      TrackNotifier(trackRepository: ref.read(trackRepositoryProvider));
-  return trackNotifier;
-});
-
-class TrackDetailScreen extends ConsumerStatefulWidget {
+class AlbumDetailScreen extends ConsumerStatefulWidget {
   final String artist;
-  final String track;
+  final String album;
   final String imageKey;
   final String imageUrl;
 
-  const TrackDetailScreen({
+  const AlbumDetailScreen({
     super.key,
     required this.artist,
-    required this.track,
+    required this.album,
     required this.imageKey,
     required this.imageUrl,
   });
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _TrackDetailState();
+  ConsumerState<ConsumerStatefulWidget> createState() {
+    return _AlbumDetailState();
+  }
 }
 
-class _TrackDetailState extends ConsumerState<TrackDetailScreen>
+class _AlbumDetailState extends ConsumerState<AlbumDetailScreen>
     with TickerProviderStateMixin {
   late AnimationController _controller;
-
-  late Animation<double> _animation;
 
   @override
   void initState() {
@@ -44,10 +37,9 @@ class _TrackDetailState extends ConsumerState<TrackDetailScreen>
       vsync: this,
     );
 
-    _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
-    ref.read(trackNotifierProvider).fetchTrack(
+    ref.read(albumNotifierProvider).fetchAlbum(
           artist: widget.artist,
-          track: widget.track,
+          album: widget.album,
         );
     super.initState();
   }
@@ -60,41 +52,28 @@ class _TrackDetailState extends ConsumerState<TrackDetailScreen>
 
   @override
   Widget build(BuildContext context) {
-    final notifier = ref.watch(trackNotifierProvider);
-    final track = notifier.trackDetail;
+    final notifier = ref.watch(albumNotifierProvider);
+    final album = notifier.albumDetail;
     final theme = Theme.of(context);
     EdgeInsets padding = MediaQuery.paddingOf(context);
-
-    if (track != null) {
+    if (album != null) {
       _controller.forward();
     }
+
     return SafeArea(
       top: false,
       child: Stack(
         children: [
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                Hero(
-                  tag: widget.imageKey,
-                  child: ArtworkSquareComponent(
-                    imageUrl: widget.imageUrl,
-                    size: double.infinity,
-                  ),
-                ),
-                if (track != null)
-                  FadeTransition(
-                    opacity: _animation,
-                    child: TrackContentComponent(track: track),
-                  ),
-              ],
-            ),
+          AlbumContent(
+            album: album,
+            imageUrl: widget.imageUrl,
+            imageKey: widget.imageKey,
           ),
           Stack(
             children: [
               Container(
                 width: double.infinity,
-                height: 100,
+                height: 60,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -133,30 +112,38 @@ class _TrackDetailState extends ConsumerState<TrackDetailScreen>
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
   }
 }
 
-class TrackNotifier extends ChangeNotifier {
-  final TrackRepository trackRepository;
+final albumNotifierProvider = ChangeNotifierProvider(
+  (ref) => AlbumNotifier(
+    albumRepository: ref.read(albumRepositoryProvider),
+  ),
+);
 
-  TrackNotifier({required this.trackRepository});
+class AlbumNotifier extends ChangeNotifier {
+  final AlbumRepository _albumRepository;
 
-  Track? trackDetail;
+  AlbumNotifier({
+    required AlbumRepository albumRepository,
+  }) : _albumRepository = albumRepository;
 
-  Future fetchTrack({
+  Album? albumDetail;
+
+  Future fetchAlbum({
     required String artist,
-    required String track,
+    required String album,
   }) async {
-    Result<Track> result = await trackRepository.getTrack(
-      track: track,
+    Result<Album> result = await _albumRepository.getAlbumInfo(
       artist: artist,
+      album: album,
     );
     if (result is Success) {
-      trackDetail = result.getOrNull()!;
+      albumDetail = result.getOrNull()!;
       notifyListeners();
     }
   }

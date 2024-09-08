@@ -30,10 +30,12 @@ class TrackAlbumComponent extends StatelessWidget {
               size: 96,
             ),
             const Padding(padding: EdgeInsets.only(left: 16)),
-            AlbumTitleComponent(
-              title: album.title,
-              artist: album.artist,
-            )
+            Expanded(
+              child: _AlbumTitleComponent(
+                title: album.title,
+                artist: album.artist,
+              ),
+            ),
           ],
         ),
       ],
@@ -41,11 +43,12 @@ class TrackAlbumComponent extends StatelessWidget {
   }
 }
 
-class AlbumTitleComponent extends StatelessWidget {
+class _AlbumTitleComponent extends StatelessWidget {
   final String title;
   final String artist;
 
-  const AlbumTitleComponent({
+  const _AlbumTitleComponent({
+    // ignore: unused_element
     super.key,
     required this.title,
     required this.artist,
@@ -62,10 +65,14 @@ class AlbumTitleComponent extends StatelessWidget {
             fontWeight: FontWeight.w500,
             fontSize: 16,
           ),
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
         ),
         Text(
           artist,
           style: const TextStyle(fontSize: 12),
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
         )
       ],
     );

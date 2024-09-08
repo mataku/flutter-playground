@@ -34,11 +34,13 @@ class TrackMetadata extends StatelessWidget {
             value: playcount,
             label: 'Playcount',
           ),
-          const Padding(padding: EdgeInsets.only(left: 6, right: 6)),
-          ValueDescription(
-            value: userPlaycount,
-            label: 'Yours',
-          ),
+          if (userPlaycount != '0')
+            const Padding(padding: EdgeInsets.only(left: 6, right: 6)),
+          if (userPlaycount != '0')
+            ValueDescription(
+              value: userPlaycount,
+              label: 'Yours',
+            ),
         ],
       ),
     );
