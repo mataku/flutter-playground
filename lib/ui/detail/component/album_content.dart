@@ -19,6 +19,8 @@ class AlbumContent extends StatelessWidget {
     final wiki = _album.wiki;
     final theme = Theme.of(context);
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AlbumTitleComponent(
           albumName: _album.name,
@@ -29,16 +31,17 @@ class AlbumContent extends StatelessWidget {
           playcount: _album.playcount,
           userPlaycount: _album.userplaycount.toString(),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 8),
-          child: SizedBox(
-            width: double.infinity,
-            height: 60,
-            child: TagListComponent(
-              tags: _album.tags,
+        if (_album.tags.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: SizedBox(
+              width: double.infinity,
+              height: 60,
+              child: TagListComponent(
+                tags: _album.tags,
+              ),
             ),
           ),
-        ),
         Padding(
           padding: const EdgeInsets.only(
             top: 8,

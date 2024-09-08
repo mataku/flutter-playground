@@ -19,6 +19,8 @@ class ArtistContent extends StatelessWidget {
     // final similarArtists = _artist.similarArtists;
 
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _TitleComponent(title: _artist.name),
         TrackMetadata(
@@ -26,16 +28,17 @@ class ArtistContent extends StatelessWidget {
           playcount: _artist.playcount,
           userPlaycount: _artist.userplaycount,
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 8),
-          child: SizedBox(
-            width: double.infinity,
-            height: 60,
-            child: TagListComponent(
-              tags: _artist.tags,
+        if (_artist.tags.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: SizedBox(
+              width: double.infinity,
+              height: 60,
+              child: TagListComponent(
+                tags: _artist.tags,
+              ),
             ),
           ),
-        ),
         Padding(
           padding: const EdgeInsets.only(
             top: 8,

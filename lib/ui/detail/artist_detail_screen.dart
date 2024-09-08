@@ -33,7 +33,7 @@ class _ArtistDetailState extends ConsumerState<ArtistDetailScreen>
   @override
   void initState() {
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 900),
+      duration: const Duration(milliseconds: 500),
       vsync: this,
     );
     _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
