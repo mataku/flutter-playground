@@ -8,17 +8,11 @@ import 'package:sunrisescrob/ui/detail/component/track_metadata.dart';
 
 class AlbumContent extends StatelessWidget {
   final Album _album;
-  final String _imageUrl;
-  final String _imageKey;
 
   const AlbumContent({
     super.key,
     required Album album,
-    required String imageUrl,
-    required String imageKey,
-  })  : _album = album,
-        _imageUrl = imageUrl,
-        _imageKey = imageKey;
+  }) : _album = album;
 
   @override
   Widget build(BuildContext context) {

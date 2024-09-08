@@ -82,8 +82,6 @@ class _AlbumDetailState extends ConsumerState<AlbumDetailScreen>
                     opacity: _animation,
                     child: AlbumContent(
                       album: album,
-                      imageUrl: widget.imageUrl,
-                      imageKey: widget.imageKey,
                     ),
                   ),
               ],
