@@ -1,4 +1,5 @@
 import 'package:sunrisescrob/api/response/album/album_info_api_response.dart';
+import 'package:sunrisescrob/api/response/artist/artist_info_api_response.dart';
 import 'package:sunrisescrob/api/response/auth/auth_mobile_session_api_response.dart';
 import 'package:sunrisescrob/api/response/chart/chart_top_artists_api_response.dart';
 import 'package:sunrisescrob/api/response/chart/chart_top_tags_api_response.dart';
@@ -11,7 +12,9 @@ import 'package:sunrisescrob/api/response/top_tags_response.dart';
 import 'package:sunrisescrob/api/response/track/track_info_api_response.dart';
 import 'package:sunrisescrob/api/response/user/top_albums_api_response.dart';
 import 'package:sunrisescrob/api/response/user/top_artists_api_response.dart';
+import 'package:sunrisescrob/api/response/wiki_response.dart';
 import 'package:sunrisescrob/model/album/album.dart';
+import 'package:sunrisescrob/model/artist/artist.dart';
 import 'package:sunrisescrob/model/artwork.dart';
 import 'package:sunrisescrob/model/auth/mobile_session.dart';
 import 'package:sunrisescrob/model/chart/chart_artist.dart';
@@ -20,6 +23,7 @@ import 'package:sunrisescrob/model/common_name.dart';
 import 'package:sunrisescrob/model/common_name_and_url.dart';
 import 'package:sunrisescrob/model/profile/user_info.dart';
 import 'package:sunrisescrob/model/recent_track/recent_track.dart';
+import 'package:sunrisescrob/model/similar_content.dart';
 import 'package:sunrisescrob/model/tag.dart';
 import 'package:sunrisescrob/model/track.dart';
 import 'package:sunrisescrob/model/user/top_album.dart';
@@ -281,6 +285,33 @@ extension AlbumInfoApiResponseExt on AlbumInfoApiResponse {
       userplaycount: apiResponse.userplaycount ?? 0,
       url: apiResponse.url,
       wiki: apiResponse.wikiResponse?.toWiki(),
+    );
+  }
+}
+
+extension SimilarArtistsBodyExt on SimilarArtistsBody {
+  List<SimilarContent> toSimilarArtists() {
+    return artists
+        .map((artist) => SimilarContent(
+              name: artist.name,
+              url: artist.url,
+              images: artist.images.toImageList(),
+            ))
+        .toList();
+  }
+}
+
+extension ArtistInfoApiResponseExt on ArtistInfoApiResponse {
+  Artist toArtist() {
+    final response = body;
+    return Artist(
+      name: response.name,
+      url: response.url,
+      images: response.images.toImageList(),
+      wiki: response.wiki?.toWiki(),
+      similarArtists:
+          response.similarArtists?.toSimilarArtists() ?? List.empty(),
+      tags: response.tags.toTagList(),
     );
   }
 }
