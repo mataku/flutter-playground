@@ -35,7 +35,7 @@ class _AlbumDetailState extends ConsumerState<AlbumDetailScreen>
   @override
   void initState() {
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 900),
       vsync: this,
     );
     _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
