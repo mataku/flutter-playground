@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:sunrisescrob/model/album/album.dart';
+import 'package:sunrisescrob/ui/common/tag_list_component.dart';
 import 'package:sunrisescrob/ui/common/wiki_component.dart';
 import 'package:sunrisescrob/ui/detail/component/album_title_component.dart';
 import 'package:sunrisescrob/ui/detail/component/album_tracks_component.dart';
 import 'package:sunrisescrob/ui/detail/component/track_metadata.dart';
-import 'package:sunrisescrob/ui/discover/component/chart_tags_component.dart';
 
 class AlbumContent extends StatelessWidget {
   final Album _album;
@@ -40,7 +40,7 @@ class AlbumContent extends StatelessWidget {
           child: SizedBox(
             width: double.infinity,
             height: 60,
-            child: ChartTagsCarousel(
+            child: TagListComponent(
               tags: _album.tags,
             ),
           ),
