@@ -6,6 +6,7 @@ import 'package:sunrisescrob/ui/account/account_screen.dart';
 import 'package:sunrisescrob/ui/account/theme_selection_screen.dart';
 import 'package:sunrisescrob/ui/auth/login_screen.dart';
 import 'package:sunrisescrob/ui/detail/album_detail_screen.dart';
+import 'package:sunrisescrob/ui/detail/artist_detail_screen.dart';
 import 'package:sunrisescrob/ui/detail/track_detail_screen.dart';
 import 'package:sunrisescrob/ui/discover/discover_screen.dart';
 import 'package:sunrisescrob/ui/home/home_screen.dart';
@@ -54,7 +55,10 @@ final routerProvider = Provider((ref) {
             ),
             TypedGoRoute<AlbumDetailRoute>(
               path: AlbumDetailRoute.path,
-            )
+            ),
+            TypedGoRoute<ArtistDetailRoute>(
+              path: ArtistDetailRoute.path,
+            ),
           ],
         ),
       ],
@@ -180,6 +184,39 @@ class AlbumDetailRoute extends GoRouteData {
       child: AlbumDetailScreen(
         artist: artist,
         album: album,
+        imageKey: imageKey,
+        imageUrl: imageUrl,
+      ),
+      transitionDuration: const Duration(milliseconds: 400),
+      reverseTransitionDuration: const Duration(milliseconds: 400),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return FadeTransition(
+          opacity: CurveTween(curve: Curves.easeIn).animate(animation),
+          child: child,
+        );
+      },
+    );
+  }
+}
+
+class ArtistDetailRoute extends GoRouteData {
+  final String artist;
+  final String imageKey;
+  final String imageUrl;
+
+  const ArtistDetailRoute({
+    required this.artist,
+    required this.imageKey,
+    required this.imageUrl,
+  });
+
+  static const path = 'artist_detail';
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) {
+    return CustomTransitionPage(
+      child: ArtistDetailScreen(
+        artist: artist,
         imageKey: imageKey,
         imageUrl: imageUrl,
       ),

@@ -54,7 +54,8 @@ class AlbumContent extends StatelessWidget {
           albumTracks: _album.tracks,
         ),
         if (wiki != null)
-          SliverToBoxAdapter(
+          Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
             child: WikiComponent(
               title: _album.name,
               wiki: wiki,

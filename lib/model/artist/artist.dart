@@ -15,5 +15,8 @@ class Artist with _$Artist {
     Wiki? wiki,
     required List<SimilarContent> similarArtists,
     required List<Tag> tags,
+    required String listeners,
+    required String playcount,
+    required String userplaycount,
   }) = _Artist;
 }

@@ -312,6 +312,9 @@ extension ArtistInfoApiResponseExt on ArtistInfoApiResponse {
       similarArtists:
           response.similarArtists?.toSimilarArtists() ?? List.empty(),
       tags: response.tags.toTagList(),
+      listeners: response.stats.listeners,
+      playcount: response.stats.playcount,
+      userplaycount: response.stats.userplaycount ?? '0',
     );
   }
 }
