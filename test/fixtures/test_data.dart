@@ -9,6 +9,7 @@ import 'package:sunrisescrob/api/response/paging_attr_body_response.dart';
 import 'package:sunrisescrob/api/response/recent_track/recent_tracks_api_response.dart';
 import 'package:sunrisescrob/api/response/top_tags_response.dart';
 import 'package:sunrisescrob/api/response/track/track_info_api_response.dart';
+import 'package:sunrisescrob/api/response/wiki_response.dart';
 import 'package:sunrisescrob/model/artwork.dart';
 
 const pagingAttrResponse = PagingAttrBodyResponse(

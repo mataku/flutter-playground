@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sunrisescrob/api/response/image_response.dart';
 import 'package:sunrisescrob/api/response/top_tags_response.dart';
+import 'package:sunrisescrob/api/response/wiki_response.dart';
 
 part 'track_info_api_response.freezed.dart';
 part 'track_info_api_response.g.dart';
@@ -55,18 +56,6 @@ class TrackAlbumResponse {
       _$TrackAlbumResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$TrackAlbumResponseToJson(this);
-}
-
-@freezed
-class WikiResponse with _$WikiResponse {
-  const factory WikiResponse({
-    required String published,
-    required String summary,
-    required String content,
-  }) = _WikiResponse;
-
-  factory WikiResponse.fromJson(Map<String, dynamic> json) =>
-      _$WikiResponseFromJson(json);
 }
 
 @freezed

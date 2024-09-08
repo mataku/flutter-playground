@@ -41,6 +41,7 @@ class TopArtistsComponent extends StatelessWidget {
                   imageUrl: artist.images.imageUrl() ?? '',
                   artist: artist.name,
                   playcount: artist.playcount,
+                  imageKey: "top_artist_$index",
                 );
               },
               childCount: artists.length,

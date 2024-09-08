@@ -1,40 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:sunrisescrob/model/artist/artist.dart';
 import 'package:sunrisescrob/model/result.dart';
-import 'package:sunrisescrob/model/track.dart';
-import 'package:sunrisescrob/repository/track_repository.dart';
+import 'package:sunrisescrob/repository/artist_repository.dart';
 import 'package:sunrisescrob/ui/common/artwork_component.dart';
-import 'package:sunrisescrob/ui/detail/component/track_content_component.dart';
+import 'package:sunrisescrob/ui/detail/component/artist_content.dart';
 
-final trackNotifierProvider = ChangeNotifierProvider.autoDispose((ref) {
-  final trackNotifier =
-      TrackNotifier(trackRepository: ref.read(trackRepositoryProvider));
-  return trackNotifier;
-});
-
-class TrackDetailScreen extends ConsumerStatefulWidget {
+class ArtistDetailScreen extends ConsumerStatefulWidget {
   final String artist;
-  final String track;
   final String imageKey;
   final String imageUrl;
 
-  const TrackDetailScreen({
+  const ArtistDetailScreen({
     super.key,
     required this.artist,
-    required this.track,
     required this.imageKey,
     required this.imageUrl,
   });
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _TrackDetailState();
+  ConsumerState<ConsumerStatefulWidget> createState() {
+    return _ArtistDetailState();
+  }
 }
 
-class _TrackDetailState extends ConsumerState<TrackDetailScreen>
+class _ArtistDetailState extends ConsumerState<ArtistDetailScreen>
     with TickerProviderStateMixin {
   late AnimationController _controller;
-
   late Animation<double> _animation;
 
   @override
@@ -43,11 +36,9 @@ class _TrackDetailState extends ConsumerState<TrackDetailScreen>
       duration: const Duration(milliseconds: 500),
       vsync: this,
     );
-
     _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
-    ref.read(trackNotifierProvider).fetchTrack(
-          artist: widget.artist,
-          track: widget.track,
+    ref.read(artistNotifierProvider).fetchArtist(
+          widget.artist,
         );
     super.initState();
   }
@@ -60,14 +51,14 @@ class _TrackDetailState extends ConsumerState<TrackDetailScreen>
 
   @override
   Widget build(BuildContext context) {
-    final notifier = ref.watch(trackNotifierProvider);
-    final track = notifier.trackDetail;
+    final notifier = ref.watch(artistNotifierProvider);
+    final artist = notifier.artistDetail;
     final theme = Theme.of(context);
     EdgeInsets padding = MediaQuery.paddingOf(context);
-
-    if (track != null) {
+    if (artist != null) {
       _controller.forward();
     }
+
     return SafeArea(
       top: false,
       child: Stack(
@@ -82,10 +73,12 @@ class _TrackDetailState extends ConsumerState<TrackDetailScreen>
                     size: double.infinity,
                   ),
                 ),
-                if (track != null)
+                if (artist != null)
                   FadeTransition(
                     opacity: _animation,
-                    child: TrackContentComponent(track: track),
+                    child: ArtistContent(
+                      artist: artist,
+                    ),
                   ),
                 const Padding(padding: EdgeInsets.only(top: 24)),
               ],
@@ -95,7 +88,7 @@ class _TrackDetailState extends ConsumerState<TrackDetailScreen>
             children: [
               Container(
                 width: double.infinity,
-                height: 100,
+                height: 60,
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -134,30 +127,33 @@ class _TrackDetailState extends ConsumerState<TrackDetailScreen>
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );
   }
 }
 
-class TrackNotifier extends ChangeNotifier {
-  final TrackRepository trackRepository;
+final artistNotifierProvider = ChangeNotifierProvider.autoDispose((ref) {
+  return ArtistNotifier(artistRepository: ref.read(artistRepositoryProvider));
+});
 
-  TrackNotifier({required this.trackRepository});
+class ArtistNotifier extends ChangeNotifier {
+  final ArtistRepository _artistRepository;
 
-  Track? trackDetail;
+  ArtistNotifier({
+    required ArtistRepository artistRepository,
+  }) : _artistRepository = artistRepository;
 
-  Future fetchTrack({
-    required String artist,
-    required String track,
-  }) async {
-    Result<Track> result = await trackRepository.getTrack(
-      track: track,
-      artist: artist,
-    );
+  Artist? artistDetail;
+
+  Future fetchArtist(
+    String artist,
+  ) async {
+    Result<Artist> result =
+        await _artistRepository.getArtistInfo(artist: artist);
     if (result is Success) {
-      trackDetail = result.getOrNull()!;
+      artistDetail = result.getOrNull()!;
       notifyListeners();
     }
   }

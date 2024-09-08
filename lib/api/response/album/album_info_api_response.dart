@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sunrisescrob/api/response/image_response.dart';
 import 'package:sunrisescrob/api/response/top_tags_response.dart';
 import 'package:sunrisescrob/api/response/track/track_info_api_response.dart';
+import 'package:sunrisescrob/api/response/wiki_response.dart';
 
 part 'album_info_api_response.freezed.dart';
 part 'album_info_api_response.g.dart';

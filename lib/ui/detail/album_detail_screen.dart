@@ -84,6 +84,7 @@ class _AlbumDetailState extends ConsumerState<AlbumDetailScreen>
                       album: album,
                     ),
                   ),
+                const Padding(padding: EdgeInsets.only(top: 24)),
               ],
             ),
           ),

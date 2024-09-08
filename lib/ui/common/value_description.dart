@@ -26,7 +26,7 @@ class ValueDescription extends StatelessWidget {
         ),
         const Padding(padding: EdgeInsets.only(top: 4)),
         Text(
-          IntRepresentation.toReadableValue(label),
+          label,
           style: TextStyle(
             fontSize: 14,
             color: theme.colorScheme.onSecondary,
