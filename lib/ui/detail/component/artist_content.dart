@@ -16,7 +16,7 @@ class ArtistContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final wiki = _artist.wiki;
-    final similarArtists = _artist.similarArtists;
+    // final similarArtists = _artist.similarArtists;
 
     return Column(
       children: [
