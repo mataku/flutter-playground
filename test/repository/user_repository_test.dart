@@ -43,6 +43,7 @@ void main() {
       final result = await repo.getTopAlbums(1);
       expect(result is Success, true);
       expect(result.getOrNull()!.isNotEmpty, true);
+      verify(kvStore.getStringValue(KVStoreKey.username)).called(1);
       verify(apiService.request(UserTopAlbumsEndpoint(
         params: {
           'page': '1',
@@ -85,6 +86,7 @@ void main() {
       final result = await repo.getTopArtists(1);
       expect(result is Success, true);
       expect(result.getOrNull()!.isNotEmpty, true);
+      verify(kvStore.getStringValue(KVStoreKey.username)).called(1);
       verify(apiService.request(UserTopArtistsEndpoint(
         params: {
           'page': '1',
