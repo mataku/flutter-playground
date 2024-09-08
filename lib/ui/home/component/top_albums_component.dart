@@ -42,6 +42,7 @@ class TopAlbumsComponent extends StatelessWidget {
                   album: album.name,
                   artist: album.artist.name,
                   playcount: album.playcount,
+                  imageKey: "top_album_$index",
                 );
               },
               childCount: albums.length,

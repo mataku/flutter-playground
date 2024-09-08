@@ -46,7 +46,7 @@ const darkColorScheme = ColorScheme.dark(
   primary: Color(0xFF444444),
   onPrimary: Colors.white,
   primaryContainer: Color(0xFF444444),
-  onPrimaryContainer: Colors.white,
+  onPrimaryContainer: Color(0xFFeaddff),
   secondary: Colors.white,
   onSecondary: AppColors.blueGrey300,
   secondaryContainer: Colors.white,

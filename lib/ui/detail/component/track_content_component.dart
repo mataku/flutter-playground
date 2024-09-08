@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sunrisescrob/model/track.dart';
+import 'package:sunrisescrob/ui/common/tag_list_component.dart';
 import 'package:sunrisescrob/ui/common/wiki_component.dart';
 import 'package:sunrisescrob/ui/detail/component/track_album_component.dart';
 import 'package:sunrisescrob/ui/detail/component/track_metadata.dart';
@@ -16,6 +17,7 @@ class TrackContentComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     TrackAlbum? album = _track.album;
     return Column(
       children: [
@@ -23,7 +25,7 @@ class TrackContentComponent extends StatelessWidget {
           padding: const EdgeInsets.only(
             left: 16,
             right: 16,
-            top: 8,
+            top: 16,
             bottom: 8,
           ),
           child: SizedBox(
@@ -39,9 +41,25 @@ class TrackContentComponent extends StatelessWidget {
           playcount: _track.playcount,
           userPlaycount: _track.userPlayCount,
         ),
-        const Padding(
-          padding: EdgeInsets.only(left: 15, right: 15),
-          child: Divider(),
+        if (_track.tags.isNotEmpty)
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: SizedBox(
+              width: double.infinity,
+              height: 60,
+              child: TagListComponent(tags: _track.tags),
+            ),
+          ),
+        Padding(
+          padding: const EdgeInsets.only(
+            top: 8,
+            left: 15,
+            right: 15,
+            bottom: 8,
+          ),
+          child: Divider(
+            color: theme.colorScheme.onSecondary.withAlpha(128),
+          ),
         ),
         if (album != null)
           Padding(
