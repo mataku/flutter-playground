@@ -2,6 +2,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:sunrisescrob/api/endpoint/chart_top_artists_endpoint.dart';
+import 'package:sunrisescrob/api/endpoint/chart_top_tags_endpoint.dart';
+import 'package:sunrisescrob/api/endpoint/chart_top_tracks_endpoint.dart';
 import 'package:sunrisescrob/api/last_fm_api_service.dart';
 import 'package:sunrisescrob/model/app_error.dart';
 import 'package:sunrisescrob/model/result.dart';
@@ -28,6 +31,13 @@ void main() {
       final result = await repo.getChartTracks(1);
       expect(result is Success, true);
       expect(result.getOrNull()!.isNotEmpty, true);
+
+      verify(apiService.request(ChartTopTracksEndpoint(
+        params: {
+          'page': '1',
+          'limit': '10',
+        },
+      ))).called(1);
     });
 
     test('request failed', () async {
@@ -53,6 +63,13 @@ void main() {
       final result = await repo.getChartArtists(1);
       expect(result is Success, true);
       expect(result.getOrNull()!.isNotEmpty, true);
+
+      verify(apiService.request(ChartTopArtistsEndpoint(
+        params: {
+          'page': '1',
+          'limit': '10',
+        },
+      ))).called(1);
     });
 
     test('request failed', () async {
@@ -78,6 +95,13 @@ void main() {
       final result = await repo.getChartTags(1);
       expect(result is Success, true);
       expect(result.getOrNull()!.isNotEmpty, true);
+
+      verify(apiService.request(ChartTopTagsEndpoint(
+        params: {
+          'page': '1',
+          'limit': '10',
+        },
+      ))).called(1);
     });
 
     test('request failed', () async {
