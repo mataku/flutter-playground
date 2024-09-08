@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sunrisescrob/model/album/album.dart';
 import 'package:sunrisescrob/model/result.dart';
 import 'package:sunrisescrob/repository/album_repository.dart';
+import 'package:sunrisescrob/ui/common/artwork_component.dart';
 import 'package:sunrisescrob/ui/detail/component/album_content.dart';
 
 class AlbumDetailScreen extends ConsumerStatefulWidget {
@@ -29,13 +30,15 @@ class AlbumDetailScreen extends ConsumerStatefulWidget {
 class _AlbumDetailState extends ConsumerState<AlbumDetailScreen>
     with TickerProviderStateMixin {
   late AnimationController _controller;
+  late Animation<double> _animation;
 
   @override
   void initState() {
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 1000),
       vsync: this,
     );
+    _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
 
     ref.read(albumNotifierProvider).fetchAlbum(
           artist: widget.artist,
@@ -64,10 +67,27 @@ class _AlbumDetailState extends ConsumerState<AlbumDetailScreen>
       top: false,
       child: Stack(
         children: [
-          AlbumContent(
-            album: album,
-            imageUrl: widget.imageUrl,
-            imageKey: widget.imageKey,
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                Hero(
+                  tag: widget.imageKey,
+                  child: ArtworkSquareComponent(
+                    imageUrl: widget.imageUrl,
+                    size: double.infinity,
+                  ),
+                ),
+                if (album != null)
+                  FadeTransition(
+                    opacity: _animation,
+                    child: AlbumContent(
+                      album: album,
+                      imageUrl: widget.imageUrl,
+                      imageKey: widget.imageKey,
+                    ),
+                  ),
+              ],
+            ),
           ),
           Stack(
             children: [

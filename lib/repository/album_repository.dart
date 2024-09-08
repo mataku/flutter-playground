@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sunrisescrob/api/endpoint/album_get_info_endpoint.dart';
 import 'package:sunrisescrob/api/last_fm_api_service.dart';
@@ -45,13 +44,10 @@ class AlbumRepositoryImpl implements AlbumRepository {
         'user': username,
       },
     );
-    debugPrint("MATAKUDEBUG $endpoint");
     try {
       final result = await _apiService.request(endpoint);
-      debugPrint("MATAKUDEBUG result $result");
       return Result.success(result.toAlbum());
     } on Exception catch (error) {
-      debugPrint("MATAKUDEBUG result $error");
       return Result.failure(AppError.getApiError(error));
     }
   }
