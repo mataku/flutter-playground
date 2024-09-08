@@ -27,8 +27,9 @@ class AlbumInfoApiBody {
   final AlbumTrackListApiBody tracks;
   final String listeners;
   final String playcount;
-  String? userplaycount;
+  int? userplaycount;
   final String url;
+  WikiResponse? wikiResponse;
 
   AlbumInfoApiBody({
     required this.artist,
@@ -40,6 +41,7 @@ class AlbumInfoApiBody {
     required this.playcount,
     this.userplaycount,
     required this.url,
+    this.wikiResponse,
   });
 
   factory AlbumInfoApiBody.fromJson(Map<String, dynamic> json) =>
@@ -66,7 +68,7 @@ class AlbumTrackListApiBody {
 @freezed
 class AlbumTrackApiBody with _$AlbumTrackApiBody {
   const factory AlbumTrackApiBody({
-    required int duration,
+    int? duration,
     required String url,
     required String name,
     required TrackInfoArtist artist,

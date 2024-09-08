@@ -12,7 +12,7 @@ abstract class Endpoint<T> {
   T parseFromJson(Response<dynamic> response);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return other is Endpoint &&
         other.path == path &&
         mapEquals(other.params, params) &&

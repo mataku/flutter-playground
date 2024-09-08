@@ -278,8 +278,9 @@ extension AlbumInfoApiResponseExt on AlbumInfoApiResponse {
       tracks: apiResponse.tracks.toAlbumTrackList(),
       listeners: apiResponse.listeners,
       playcount: apiResponse.playcount,
-      userplaycount: apiResponse.userplaycount ?? '0',
+      userplaycount: apiResponse.userplaycount ?? 0,
       url: apiResponse.url,
+      wiki: apiResponse.wikiResponse?.toWiki(),
     );
   }
 }
