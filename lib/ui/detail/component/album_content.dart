@@ -46,7 +46,12 @@ class AlbumContent extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 8, bottom: 8),
+          padding: const EdgeInsets.only(
+            top: 8,
+            bottom: 8,
+            left: 15,
+            right: 15,
+          ),
           child: Divider(
             color: theme.colorScheme.onSecondary.withAlpha(128),
           ),
