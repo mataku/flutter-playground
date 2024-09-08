@@ -4,6 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:sunrisescrob/api/endpoint/user_top_albums_endpoint.dart';
+import 'package:sunrisescrob/api/endpoint/user_top_artists_endpoint.dart';
 import 'package:sunrisescrob/api/last_fm_api_service.dart';
 import 'package:sunrisescrob/api/response/user/top_albums_api_response.dart';
 import 'package:sunrisescrob/api/response/user/top_artists_api_response.dart';
@@ -41,6 +43,13 @@ void main() {
       final result = await repo.getTopAlbums(1);
       expect(result is Success, true);
       expect(result.getOrNull()!.isNotEmpty, true);
+      verify(kvStore.getStringValue(KVStoreKey.username)).called(1);
+      verify(apiService.request(UserTopAlbumsEndpoint(
+        params: {
+          'page': '1',
+          'user': 'sunsetscrob',
+        },
+      ))).called(1);
     });
 
     test('request failed', () async {
@@ -77,6 +86,13 @@ void main() {
       final result = await repo.getTopArtists(1);
       expect(result is Success, true);
       expect(result.getOrNull()!.isNotEmpty, true);
+      verify(kvStore.getStringValue(KVStoreKey.username)).called(1);
+      verify(apiService.request(UserTopArtistsEndpoint(
+        params: {
+          'page': '1',
+          'user': 'sunsetscrob',
+        },
+      ))).called(1);
     });
 
     test('request failed', () async {

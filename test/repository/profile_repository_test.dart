@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:sunrisescrob/api/endpoint/user_get_info_endpoint.dart';
 import 'package:sunrisescrob/api/last_fm_api_service.dart';
 import 'package:sunrisescrob/api/response/profile/user_get_info_api_response.dart';
 import 'package:sunrisescrob/model/app_error.dart';
@@ -43,6 +44,16 @@ void main() {
       final result = await repo.getUserInfo();
       expect(result is Success, true);
       expect(result.getOrNull()!.name, 'matakucom');
+
+      verify(kvStore.getStringValue(KVStoreKey.username)).called(1);
+
+      verify(
+        apiService.request(
+          UserGetInfoEndpoint(
+            params: {'user': username},
+          ),
+        ),
+      ).called(1);
     });
 
     test('request failed', () async {

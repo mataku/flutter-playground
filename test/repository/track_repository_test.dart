@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:sunrisescrob/api/endpoint/track_info_endpoint.dart';
 import 'package:sunrisescrob/api/last_fm_api_service.dart';
 import 'package:sunrisescrob/model/app_error.dart';
 import 'package:sunrisescrob/model/result.dart';
@@ -43,6 +44,16 @@ void main() {
       );
       expect(result is Success, true);
       expect(result.getOrNull() != null, true);
+
+      verify(kvStore.getStringValue(KVStoreKey.username)).called(1);
+
+      verify(apiService.request(TrackInfoEndpoint(
+        params: {
+          'artist': 'aespa',
+          'track': 'Supernova',
+          'username': username,
+        },
+      ))).called(1);
     });
 
     test('request failed', () async {

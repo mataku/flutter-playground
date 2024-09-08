@@ -91,8 +91,6 @@ flutter:
   assets:
     - .env
     - asset/image/no_image.png
-    - asset/json/
-    - asset/font/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -119,7 +117,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-  
+
   # for golden test
   fonts:
     - family: Noto Sans JP
@@ -127,4 +125,4 @@ flutter:
         - asset: asset/font/NotoSansJP-Regular.ttf
         - asset: asset/font/NotoSansJP-Bold.ttf
           weight: 500
-       
+

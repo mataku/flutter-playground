@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:sunrisescrob/api/endpoint/recent_tracks_endpoint.dart';
 import 'package:sunrisescrob/api/last_fm_api_service.dart';
 import 'package:sunrisescrob/api/response/mapper/response_mapper.dart';
 import 'package:sunrisescrob/model/app_error.dart';
@@ -40,6 +41,15 @@ void main() {
       expect(result is Success, true);
       expect(
           result.getOrNull()!, testRecentTrackApiResponse.toRecentTrackList());
+
+      verify(kvStore.getStringValue(KVStoreKey.username)).called(1);
+
+      verify(apiService.request(RecentTracksEndpoint(
+        params: {
+          'page': '1',
+          'user': username,
+        },
+      ))).called(1);
     });
 
     test('request failed', () async {
