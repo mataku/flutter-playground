@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sunrisescrob/model/key.dart';
+
+part 'http_provider.g.dart';
 
 final _options = BaseOptions(
   baseUrl: "https://ws.audioscrobbler.com",
@@ -11,14 +13,15 @@ final _options = BaseOptions(
   headers: {'charset': 'utf-8'},
 );
 
-final dioProvider = Provider<Dio>((ref) {
+@Riverpod(keepAlive: true)
+Dio dio(DioRef ref) {
   final dio = Dio(_options);
   dio.interceptors.add(const AuthInterceptor());
   if (kDebugMode) {
     dio.interceptors.add(const DebugLogInterceptor());
   }
   return dio;
-});
+}
 
 class AuthInterceptor extends Interceptor {
   const AuthInterceptor();

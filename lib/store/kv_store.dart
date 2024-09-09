@@ -1,7 +1,12 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-final kvStoreProvider = Provider((ref) => KVStore());
+part 'kv_store.g.dart';
+
+@Riverpod(keepAlive: true)
+KVStore kvStore(KvStoreRef ref) {
+  return KVStore();
+}
 
 class KVStore {
   static SharedPreferences? _pref;

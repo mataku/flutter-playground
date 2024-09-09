@@ -1,10 +1,14 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sunrisescrob/api/endpoint/endpoint.dart';
 import 'package:sunrisescrob/api/http_provider.dart';
 
-final lastFmApiServiceProvider =
-    Provider((ref) => LastFmApiService(dio: ref.read(dioProvider)));
+part 'last_fm_api_service.g.dart';
+
+@Riverpod(keepAlive: true, dependencies: [dio])
+LastFmApiService lastFmApiService(LastFmApiServiceRef ref) {
+  return LastFmApiService(dio: ref.read(dioProvider));
+}
 
 class LastFmApiService {
   final Dio _dio;
