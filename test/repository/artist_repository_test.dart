@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -20,6 +21,7 @@ void main() {
   late app_mock.MockLastFmApiService apiService;
   late app_mock.MockDioException dioException;
   late app_mock.MockKVStore kvStore;
+  late ProviderContainer providerContainer;
 
   group('getArtistInfo', () {
     setUp(() async {
@@ -29,14 +31,19 @@ void main() {
       when(kvStore.getStringValue(KVStoreKey.username)).thenAnswer((_) async {
         return 'sunsetscrob';
       });
+      providerContainer = ProviderContainer(
+        overrides: [
+          lastFmApiServiceProvider.overrideWithValue(apiService),
+          kvStoreProvider.overrideWithValue(kvStore),
+        ],
+      );
     });
 
     test('request succeeded', () async {
       final response = fixture('artist_get_info.json');
       final album = ArtistInfoApiResponse.fromJson(json.decode(response));
       when(apiService.request(any)).thenAnswer((_) async => album);
-      final repo =
-          ArtistRepositoryImpl(apiService: apiService, kvStore: kvStore);
+      final repo = providerContainer.read(artistRepositoryProvider);
       final result = await repo.getArtistInfo(artist: 'aespa');
       expect(result is Success, true);
       verify(apiService.request(
@@ -65,8 +72,7 @@ void main() {
           ),
         ),
       ).thenThrow(dioException);
-      final repo =
-          ArtistRepositoryImpl(apiService: apiService, kvStore: kvStore);
+      final repo = providerContainer.read(artistRepositoryProvider);
       final result = await repo.getArtistInfo(artist: 'aespa');
       expect(result is Failure, true);
       expect(result.exceptionOrNull(), const AppError.serverError());

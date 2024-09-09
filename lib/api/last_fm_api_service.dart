@@ -7,14 +7,19 @@ part 'last_fm_api_service.g.dart';
 
 @Riverpod(keepAlive: true, dependencies: [dio])
 LastFmApiService lastFmApiService(LastFmApiServiceRef ref) {
-  return LastFmApiService(dio: ref.read(dioProvider));
+  return _LastFmApiServiceImpl(dio: ref.read(dioProvider));
 }
 
-class LastFmApiService {
+abstract class LastFmApiService {
+  Future<T> request<T>(Endpoint<T> endpoint);
+}
+
+class _LastFmApiServiceImpl extends LastFmApiService {
   final Dio _dio;
 
-  LastFmApiService({required Dio dio}) : _dio = dio;
+  _LastFmApiServiceImpl({required Dio dio}) : _dio = dio;
 
+  @override
   Future<T> request<T>(Endpoint<T> endpoint) async {
     final result = switch (endpoint.requestType) {
       RequestType.get => _get(endpoint),

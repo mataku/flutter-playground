@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -18,16 +19,22 @@ import 'chart_repository_test.mocks.dart' as app_mock;
 void main() {
   late app_mock.MockLastFmApiService apiService;
   late app_mock.MockDioException dioException;
+  late ProviderContainer providerContainer;
   group('getChartTracks', () {
     setUp(() {
       apiService = app_mock.MockLastFmApiService();
       dioException = app_mock.MockDioException();
+      providerContainer = ProviderContainer(
+        overrides: [
+          lastFmApiServiceProvider.overrideWithValue(apiService),
+        ],
+      );
     });
 
     test('request succeeded', () async {
       when(apiService.request(any))
           .thenAnswer((_) async => testChartTrackApiResponse);
-      final repo = ChartRepositoryImpl(apiService);
+      final repo = providerContainer.read(chartRepositoryProvider);
       final result = await repo.getChartTracks(1);
       expect(result is Success, true);
       expect(result.getOrNull()!.isNotEmpty, true);
@@ -43,7 +50,7 @@ void main() {
     test('request failed', () async {
       when(dioException.type).thenReturn(DioExceptionType.connectionError);
       when(apiService.request(any)).thenThrow(dioException);
-      final repo = ChartRepositoryImpl(apiService);
+      final repo = providerContainer.read(chartRepositoryProvider);
       final result = await repo.getChartTracks(1);
       expect(result is Failure, true);
       expect(result.exceptionOrNull(), const AppError.serverError());
@@ -54,12 +61,17 @@ void main() {
     setUp(() {
       apiService = app_mock.MockLastFmApiService();
       dioException = app_mock.MockDioException();
+      providerContainer = ProviderContainer(
+        overrides: [
+          lastFmApiServiceProvider.overrideWithValue(apiService),
+        ],
+      );
     });
 
     test('request succeeded', () async {
       when(apiService.request(any))
           .thenAnswer((_) async => testChartArtistApiResponse);
-      final repo = ChartRepositoryImpl(apiService);
+      final repo = providerContainer.read(chartRepositoryProvider);
       final result = await repo.getChartArtists(1);
       expect(result is Success, true);
       expect(result.getOrNull()!.isNotEmpty, true);
@@ -75,7 +87,7 @@ void main() {
     test('request failed', () async {
       when(dioException.type).thenReturn(DioExceptionType.connectionError);
       when(apiService.request(any)).thenThrow(dioException);
-      final repo = ChartRepositoryImpl(apiService);
+      final repo = providerContainer.read(chartRepositoryProvider);
       final result = await repo.getChartArtists(1);
       expect(result is Failure, true);
       expect(result.exceptionOrNull(), const AppError.serverError());
@@ -86,12 +98,17 @@ void main() {
     setUp(() {
       apiService = app_mock.MockLastFmApiService();
       dioException = app_mock.MockDioException();
+      providerContainer = ProviderContainer(
+        overrides: [
+          lastFmApiServiceProvider.overrideWithValue(apiService),
+        ],
+      );
     });
 
     test('request succeeded', () async {
       when(apiService.request(any))
           .thenAnswer((_) async => testChartTagApiResponse);
-      final repo = ChartRepositoryImpl(apiService);
+      final repo = providerContainer.read(chartRepositoryProvider);
       final result = await repo.getChartTags(1);
       expect(result is Success, true);
       expect(result.getOrNull()!.isNotEmpty, true);
@@ -107,7 +124,7 @@ void main() {
     test('request failed', () async {
       when(dioException.type).thenReturn(DioExceptionType.connectionError);
       when(apiService.request(any)).thenThrow(dioException);
-      final repo = ChartRepositoryImpl(apiService);
+      final repo = providerContainer.read(chartRepositoryProvider);
       final result = await repo.getChartTags(1);
       expect(result is Failure, true);
       expect(result.exceptionOrNull(), const AppError.serverError());
