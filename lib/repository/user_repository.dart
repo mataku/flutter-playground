@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sunrisescrob/api/endpoint/user_top_albums_endpoint.dart';
 import 'package:sunrisescrob/api/endpoint/user_top_artists_endpoint.dart';
 import 'package:sunrisescrob/api/last_fm_api_service.dart';
@@ -9,23 +9,27 @@ import 'package:sunrisescrob/model/user/top_album.dart';
 import 'package:sunrisescrob/model/user/top_artist.dart';
 import 'package:sunrisescrob/store/kv_store.dart';
 
-final userRepositoryProvider = Provider<UserRepository>(
-  (ref) => UserRepositoryImpl(
+part 'user_repository.g.dart';
+
+// [userRepositoryProvider]
+@Riverpod(dependencies: [lastFmApiService, kvStore])
+UserRepository userRepository(UserRepositoryRef ref) {
+  return _UserRepositoryImpl(
     apiService: ref.read(lastFmApiServiceProvider),
     kvStore: ref.read(kvStoreProvider),
-  ),
-);
+  );
+}
 
 abstract class UserRepository {
   Future<Result<List<TopAlbum>>> getTopAlbums(int page);
   Future<Result<List<TopArtist>>> getTopArtists(int page);
 }
 
-class UserRepositoryImpl implements UserRepository {
+class _UserRepositoryImpl implements UserRepository {
   final LastFmApiService _lastFmApiService;
   final KVStore _kvStore;
 
-  UserRepositoryImpl({
+  _UserRepositoryImpl({
     required LastFmApiService apiService,
     required KVStore kvStore,
   })  : _lastFmApiService = apiService,

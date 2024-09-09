@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -20,6 +21,7 @@ void main() {
     late app_mock.MockLastFmApiService apiService;
     late app_mock.MockDioException dioException;
     late app_mock.MockKVStore kvStore;
+    late ProviderContainer providerContainer;
     const username = 'sunsetscrob';
 
     setUp(() async {
@@ -29,14 +31,17 @@ void main() {
       when(kvStore.getStringValue(KVStoreKey.username)).thenAnswer((_) async {
         return username;
       });
+      providerContainer = ProviderContainer(
+        overrides: [
+          lastFmApiServiceProvider.overrideWithValue(apiService),
+          kvStoreProvider.overrideWithValue(kvStore),
+        ],
+      );
     });
     test('request succeeded', () async {
       when(apiService.request(any))
           .thenAnswer((_) async => testRecentTrackApiResponse);
-      final repo = RecentTracksRepositoryImpl(
-        apiService: apiService,
-        kvStore: kvStore,
-      );
+      final repo = providerContainer.read(recentTracksRepositoryProvider);
       final result = await repo.getRecentTracks(1);
       expect(result is Success, true);
       expect(
@@ -55,10 +60,7 @@ void main() {
     test('request failed', () async {
       when(dioException.type).thenReturn(DioExceptionType.connectionError);
       when(apiService.request(any)).thenThrow(dioException);
-      final repo = RecentTracksRepositoryImpl(
-        apiService: apiService,
-        kvStore: kvStore,
-      );
+      final repo = providerContainer.read(recentTracksRepositoryProvider);
       final result = await repo.getRecentTracks(1);
       expect(result is Failure, true);
       expect(result.exceptionOrNull(), const AppError.serverError());

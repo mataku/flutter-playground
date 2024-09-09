@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -22,6 +23,7 @@ void main() {
   late app_mock.MockLastFmApiService apiService;
   late app_mock.MockDioException dioException;
   late app_mock.MockKVStore kvStore;
+  late ProviderContainer providerContainer;
   group('getTopAlbums', () {
     setUp(() async {
       apiService = app_mock.MockLastFmApiService();
@@ -30,16 +32,19 @@ void main() {
       when(kvStore.getStringValue(KVStoreKey.username)).thenAnswer((_) async {
         return 'sunsetscrob';
       });
+      providerContainer = ProviderContainer(
+        overrides: [
+          lastFmApiServiceProvider.overrideWithValue(apiService),
+          kvStoreProvider.overrideWithValue(kvStore),
+        ],
+      );
     });
 
     test('request succeeded', () async {
       final response = fixture("user_top_albums.json");
       final albums = TopAlbumsApiResponse.fromJson(json.decode(response));
       when(apiService.request(any)).thenAnswer((_) async => albums);
-      final repo = UserRepositoryImpl(
-        apiService: apiService,
-        kvStore: kvStore,
-      );
+      final repo = providerContainer.read(userRepositoryProvider);
       final result = await repo.getTopAlbums(1);
       expect(result is Success, true);
       expect(result.getOrNull()!.isNotEmpty, true);
@@ -55,10 +60,7 @@ void main() {
     test('request failed', () async {
       when(dioException.type).thenReturn(DioExceptionType.connectionError);
       when(apiService.request(any)).thenThrow(dioException);
-      final repo = UserRepositoryImpl(
-        apiService: apiService,
-        kvStore: kvStore,
-      );
+      final repo = providerContainer.read(userRepositoryProvider);
       final result = await repo.getTopAlbums(1);
       expect(result is Failure, true);
       expect(result.exceptionOrNull(), const AppError.serverError());
@@ -73,16 +75,19 @@ void main() {
       when(kvStore.getStringValue(KVStoreKey.username)).thenAnswer((_) async {
         return 'sunsetscrob';
       });
+      providerContainer = ProviderContainer(
+        overrides: [
+          lastFmApiServiceProvider.overrideWithValue(apiService),
+          kvStoreProvider.overrideWithValue(kvStore),
+        ],
+      );
     });
 
     test('request succeeded', () async {
       final response = fixture("user_top_artists.json");
       final albums = TopArtistsApiResponse.fromJson(json.decode(response));
       when(apiService.request(any)).thenAnswer((_) async => albums);
-      final repo = UserRepositoryImpl(
-        apiService: apiService,
-        kvStore: kvStore,
-      );
+      final repo = providerContainer.read(userRepositoryProvider);
       final result = await repo.getTopArtists(1);
       expect(result is Success, true);
       expect(result.getOrNull()!.isNotEmpty, true);
@@ -98,10 +103,8 @@ void main() {
     test('request failed', () async {
       when(dioException.type).thenReturn(DioExceptionType.connectionError);
       when(apiService.request(any)).thenThrow(dioException);
-      final repo = UserRepositoryImpl(
-        apiService: apiService,
-        kvStore: kvStore,
-      );
+      final repo = providerContainer.read(userRepositoryProvider);
+
       final result = await repo.getTopArtists(1);
       expect(result is Failure, true);
       expect(result.exceptionOrNull(), const AppError.serverError());

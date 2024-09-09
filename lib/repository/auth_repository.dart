@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sunrisescrob/api/endpoint/auth_get_mobile_session_endpoint.dart';
 import 'package:sunrisescrob/api/last_fm_api_service.dart';
 import 'package:sunrisescrob/api/lastfm_api_signature.dart';
@@ -6,12 +6,15 @@ import 'package:sunrisescrob/model/app_error.dart';
 import 'package:sunrisescrob/model/result.dart';
 import 'package:sunrisescrob/store/session_store.dart';
 
-final authRepositoryProvider = Provider<AuthRepository>(
-  (ref) => AuthRepositoryImpl(
+part 'auth_repository.g.dart';
+
+@Riverpod(dependencies: [lastFmApiService])
+AuthRepository authRepository(AuthRepositoryRef ref) {
+  return _AuthRepositoryImpl(
     ref.read(lastFmApiServiceProvider),
     ref.read(sessionChangeNotifierProvider),
-  ),
-);
+  );
+}
 
 abstract class AuthRepository {
   Future<Result<String>> authorize({
@@ -20,12 +23,12 @@ abstract class AuthRepository {
   });
 }
 
-class AuthRepositoryImpl implements AuthRepository {
+class _AuthRepositoryImpl implements AuthRepository {
   final LastFmApiService _apiService;
   // TODO: reconsider
   final SessionChangeNotifier _notifier;
 
-  AuthRepositoryImpl(
+  _AuthRepositoryImpl(
     this._apiService,
     this._notifier,
   );

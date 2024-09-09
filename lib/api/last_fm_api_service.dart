@@ -1,16 +1,25 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sunrisescrob/api/endpoint/endpoint.dart';
 import 'package:sunrisescrob/api/http_provider.dart';
 
-final lastFmApiServiceProvider =
-    Provider((ref) => LastFmApiService(dio: ref.read(dioProvider)));
+part 'last_fm_api_service.g.dart';
 
-class LastFmApiService {
+@Riverpod(keepAlive: true, dependencies: [dio])
+LastFmApiService lastFmApiService(LastFmApiServiceRef ref) {
+  return _LastFmApiServiceImpl(dio: ref.read(dioProvider));
+}
+
+abstract class LastFmApiService {
+  Future<T> request<T>(Endpoint<T> endpoint);
+}
+
+class _LastFmApiServiceImpl extends LastFmApiService {
   final Dio _dio;
 
-  LastFmApiService({required Dio dio}) : _dio = dio;
+  _LastFmApiServiceImpl({required Dio dio}) : _dio = dio;
 
+  @override
   Future<T> request<T>(Endpoint<T> endpoint) async {
     final result = switch (endpoint.requestType) {
       RequestType.get => _get(endpoint),

@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sunrisescrob/store/kv_store.dart';
 
-final sessionStoreProvider = Provider((ref) => SessionStore());
+part 'session_store.g.dart';
 
-class SessionStore {
+@Riverpod(keepAlive: true)
+SessionStore sessionStore(SessionStoreRef ref) {
+  return SessionStoreImpl();
+}
+
+abstract class SessionStore {
+  Future<String?> getSessionKey();
+  Future<void> setSessionKey(String sessionKey);
+  Future<void> clearSessionKey();
+}
+
+class SessionStoreImpl extends SessionStore {
   final storage = const FlutterSecureStorage(
     aOptions: AndroidOptions(
       encryptedSharedPreferences: false,
@@ -14,14 +26,17 @@ class SessionStore {
 
   static const _sessionKey = 'session_key';
 
+  @override
   Future<String?> getSessionKey() async {
     return await storage.read(key: _sessionKey);
   }
 
+  @override
   Future<void> setSessionKey(String sessionKey) async {
     await storage.write(key: _sessionKey, value: sessionKey);
   }
 
+  @override
   Future<void> clearSessionKey() async {
     await storage.delete(key: _sessionKey);
   }

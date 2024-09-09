@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -20,6 +21,7 @@ void main() {
     late app_mock.MockLastFmApiService apiService;
     late app_mock.MockDioException dioException;
     late app_mock.MockKVStore kvStore;
+    late ProviderContainer providerContainer;
 
     setUp(() {
       apiService = app_mock.MockLastFmApiService();
@@ -28,16 +30,19 @@ void main() {
       when(kvStore.getStringValue(KVStoreKey.username)).thenAnswer((_) async {
         return username;
       });
+      providerContainer = ProviderContainer(
+        overrides: [
+          lastFmApiServiceProvider.overrideWithValue(apiService),
+          kvStoreProvider.overrideWithValue(kvStore),
+        ],
+      );
     });
 
     test('request succeeded', () async {
       when(apiService.request(any))
           .thenAnswer((_) async => testTrackApiResponse);
 
-      final repo = TrackRepositoryImpl(
-        lastFmApiService: apiService,
-        kvStore: kvStore,
-      );
+      final repo = providerContainer.read(trackRepositoryProvider);
       final result = await repo.getTrack(
         track: 'Supernova',
         artist: 'aespa',
@@ -60,11 +65,7 @@ void main() {
       when(dioException.type).thenReturn(DioExceptionType.connectionError);
       when(apiService.request(any)).thenThrow(dioException);
 
-      final repo = TrackRepositoryImpl(
-        lastFmApiService: apiService,
-        kvStore: kvStore,
-      );
-
+      final repo = providerContainer.read(trackRepositoryProvider);
       final result = await repo.getTrack(
         track: 'Supernova',
         artist: 'aespa',

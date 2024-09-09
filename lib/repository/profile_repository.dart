@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sunrisescrob/api/endpoint/user_get_info_endpoint.dart';
 import 'package:sunrisescrob/api/last_fm_api_service.dart';
 import 'package:sunrisescrob/api/response/mapper/response_mapper.dart';
@@ -7,22 +7,25 @@ import 'package:sunrisescrob/model/profile/user_info.dart';
 import 'package:sunrisescrob/model/result.dart';
 import 'package:sunrisescrob/store/kv_store.dart';
 
-final profileRepositoryProvider = Provider<ProfileRepository>(
-  (ref) => ProfileRepositoryImpl(
+part 'profile_repository.g.dart';
+
+@Riverpod(dependencies: [lastFmApiService, kvStore])
+ProfileRepository profileRepository(ProfileRepositoryRef ref) {
+  return _ProfileRepositoryImpl(
     apiService: ref.read(lastFmApiServiceProvider),
     kvStore: ref.read(kvStoreProvider),
-  ),
-);
+  );
+}
 
 abstract class ProfileRepository {
   Future<Result<UserInfo>> getUserInfo();
 }
 
-class ProfileRepositoryImpl implements ProfileRepository {
+class _ProfileRepositoryImpl implements ProfileRepository {
   final KVStore _kvStore;
   final LastFmApiService _apiService;
 
-  ProfileRepositoryImpl({
+  _ProfileRepositoryImpl({
     required LastFmApiService apiService,
     required KVStore kvStore,
   })  : _apiService = apiService,

@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sunrisescrob/api/endpoint/chart_top_artists_endpoint.dart';
 import 'package:sunrisescrob/api/endpoint/chart_top_tags_endpoint.dart';
 import 'package:sunrisescrob/api/endpoint/chart_top_tracks_endpoint.dart';
@@ -10,19 +10,23 @@ import 'package:sunrisescrob/model/chart/chart_track.dart';
 import 'package:sunrisescrob/model/result.dart';
 import 'package:sunrisescrob/model/tag.dart';
 
+part 'chart_repository.g.dart';
+
 abstract class ChartRepository {
   Future<Result<List<ChartArtist>>> getChartArtists(int page);
   Future<Result<List<ChartTrack>>> getChartTracks(int page);
   Future<Result<List<Tag>>> getChartTags(int page);
 }
 
-final chartRepositoryProvider = Provider<ChartRepository>(
-    (ref) => ChartRepositoryImpl(ref.read(lastFmApiServiceProvider)));
+@Riverpod(dependencies: [lastFmApiService])
+ChartRepository chartRepository(ChartRepositoryRef ref) {
+  return _ChartRepositoryImpl(ref.read(lastFmApiServiceProvider));
+}
 
-class ChartRepositoryImpl implements ChartRepository {
+class _ChartRepositoryImpl implements ChartRepository {
   final LastFmApiService _lastFmApiService;
 
-  const ChartRepositoryImpl(this._lastFmApiService);
+  const _ChartRepositoryImpl(this._lastFmApiService);
 
   @override
   Future<Result<List<ChartArtist>>> getChartArtists(int page) async {

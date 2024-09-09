@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -21,6 +22,7 @@ void main() {
   late app_mock.MockLastFmApiService apiService;
   late app_mock.MockDioException dioException;
   late app_mock.MockSessionChangeNotifier sessionChangeNotifier;
+  late ProviderContainer providerContainer;
 
   group('authorize', () {
     const username = 'mataku';
@@ -30,6 +32,13 @@ void main() {
       apiService = app_mock.MockLastFmApiService();
       dioException = app_mock.MockDioException();
       sessionChangeNotifier = app_mock.MockSessionChangeNotifier();
+      providerContainer = ProviderContainer(
+        overrides: [
+          lastFmApiServiceProvider.overrideWithValue(apiService),
+          sessionChangeNotifierProvider
+              .overrideWith((ref) => sessionChangeNotifier),
+        ],
+      );
     });
 
     test('request succeeded', () async {
@@ -37,7 +46,7 @@ void main() {
       final mobileSession =
           AuthMobileSessionApiResponse.fromJson(json.decode(rawResponse));
       when(apiService.request(any)).thenAnswer((_) async => mobileSession);
-      final repo = AuthRepositoryImpl(apiService, sessionChangeNotifier);
+      final repo = providerContainer.read(authRepositoryProvider);
       final result = await repo.authorize(
         username: username,
         password: password,
@@ -67,7 +76,7 @@ void main() {
         apiService.request(any),
       ).thenThrow(dioException);
 
-      final repo = AuthRepositoryImpl(apiService, sessionChangeNotifier);
+      final repo = providerContainer.read(authRepositoryProvider);
       final result = await repo.authorize(
         username: username,
         password: password,

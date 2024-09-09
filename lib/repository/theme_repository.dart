@@ -1,20 +1,26 @@
 import 'package:collection/collection.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sunrisescrob/store/kv_store.dart';
 import 'package:sunrisescrob/ui/theme/app_theme.dart';
 
-final themeRepositoryProvider = Provider<ThemeRepository>(
-    (ref) => ThemeRepositoryImpl(kvStore: ref.read(kvStoreProvider)));
+part 'theme_repository.g.dart';
+
+@Riverpod(dependencies: [kvStore])
+ThemeRepository themeRepository(ThemeRepositoryRef ref) {
+  return _ThemeRepositoryImpl(
+    kvStore: ref.read(kvStoreProvider),
+  );
+}
 
 abstract class ThemeRepository {
   Future<AppTheme> getCurrentTheme();
   Future<void> setTheme(AppTheme theme);
 }
 
-class ThemeRepositoryImpl implements ThemeRepository {
+class _ThemeRepositoryImpl implements ThemeRepository {
   final KVStore kvStore;
 
-  const ThemeRepositoryImpl({
+  const _ThemeRepositoryImpl({
     required this.kvStore,
   });
 

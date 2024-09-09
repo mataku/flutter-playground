@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sunrisescrob/api/endpoint/recent_tracks_endpoint.dart';
 import 'package:sunrisescrob/api/last_fm_api_service.dart';
 import 'package:sunrisescrob/api/response/mapper/response_mapper.dart';
@@ -7,22 +7,25 @@ import 'package:sunrisescrob/model/recent_track/recent_track.dart';
 import 'package:sunrisescrob/model/result.dart';
 import 'package:sunrisescrob/store/kv_store.dart';
 
+part 'recent_tracks_repository.g.dart';
+
+@Riverpod(dependencies: [lastFmApiService, kvStore])
+RecentTracksRepository recentTracksRepository(RecentTracksRepositoryRef ref) {
+  return _RecentTracksRepositoryImpl(
+    apiService: ref.read(lastFmApiServiceProvider),
+    kvStore: ref.read(kvStoreProvider),
+  );
+}
+
 abstract class RecentTracksRepository {
   Future<Result<List<RecentTrack>>> getRecentTracks(int page);
 }
 
-final recentTracksRepositoryProvider = Provider<RecentTracksRepository>(
-  (ref) => RecentTracksRepositoryImpl(
-    apiService: ref.read(lastFmApiServiceProvider),
-    kvStore: ref.read(kvStoreProvider),
-  ),
-);
-
-class RecentTracksRepositoryImpl implements RecentTracksRepository {
+class _RecentTracksRepositoryImpl implements RecentTracksRepository {
   final LastFmApiService _lastFmApiService;
   final KVStore _kvStore;
 
-  RecentTracksRepositoryImpl({
+  _RecentTracksRepositoryImpl({
     required LastFmApiService apiService,
     required KVStore kvStore,
   })  : _lastFmApiService = apiService,

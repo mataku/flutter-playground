@@ -40,20 +40,20 @@ abstract class Endpoint<T> {
 
 ```dart
 // api client
-import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sunrisescrob/api/endpoint/endpoint.dart';
-import 'package:sunrisescrob/api/http_provider.dart';
+abstract class LastFmApiService {
+  Future<T> request<T>(Endpoint<T> endpoint);
+}
 
-class LastFmApiService {
-  final Dio dio;
+class _LastFmApiServiceImpl extends LastFmApiService {
+  final Dio _dio;
 
-  LastFmApiService({required this.dio});
+  _LastFmApiServiceImpl({required Dio dio}) : _dio = dio;
 
+  @override
   Future<T> request<T>(Endpoint<T> endpoint) async {
     final result = switch (endpoint.requestType) {
       RequestType.get => _get(endpoint),
-      RequestType.post => _post(endpoint)
+      RequestType.post => _post(endpoint),
     };
 
     return result;
@@ -61,10 +61,17 @@ class LastFmApiService {
 
   Future<T> _get<T>(Endpoint<T> endpoint) async {
     final response =
-        await dio.get(endpoint.path, queryParameters: endpoint.params);
+        await _dio.get(endpoint.path, queryParameters: endpoint.params);
+    return endpoint.parseFromJson(response);
+  }
+
+  Future<T> _post<T>(Endpoint<T> endpoint) async {
+    final response =
+        await _dio.post(endpoint.path, queryParameters: endpoint.params);
     return endpoint.parseFromJson(response);
   }
 }
+
 ```
 
 Define the type returned for each endpoint. In the API Client, use the `request` method with defined type in endpoint: `Future<T> request<T>(Endpoint<T> endpoint)`
@@ -85,6 +92,7 @@ class RecentTracksEndpoint extends Endpoint<RecentTracksApiResponse> {
 
 // usage
 final recentEndpoint = RecentTrackEndpoint(params: {'username': 'mataku'});
+// ref.read(lastFmApiServiceProvider)
 final response = await lastFmApiService.request(recentEndpoint); // RecentTracksApiResponse type
 ```
 

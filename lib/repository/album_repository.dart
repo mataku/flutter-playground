@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sunrisescrob/api/endpoint/album_get_info_endpoint.dart';
 import 'package:sunrisescrob/api/last_fm_api_service.dart';
 import 'package:sunrisescrob/api/response/mapper/response_mapper.dart';
@@ -7,12 +7,16 @@ import 'package:sunrisescrob/model/app_error.dart';
 import 'package:sunrisescrob/model/result.dart';
 import 'package:sunrisescrob/store/kv_store.dart';
 
-final albumRepositoryProvider = Provider<AlbumRepository>((ref) {
-  return AlbumRepositoryImpl(
+part 'album_repository.g.dart';
+
+// [albumRepositoryProvider]
+@Riverpod(dependencies: [lastFmApiService, kvStore])
+AlbumRepository albumRepository(AlbumRepositoryRef ref) {
+  return _AlbumRepositoryImpl(
     apiService: ref.read(lastFmApiServiceProvider),
     kvStore: ref.read(kvStoreProvider),
   );
-});
+}
 
 abstract class AlbumRepository {
   Future<Result<Album>> getAlbumInfo({
@@ -21,11 +25,11 @@ abstract class AlbumRepository {
   });
 }
 
-class AlbumRepositoryImpl implements AlbumRepository {
+class _AlbumRepositoryImpl implements AlbumRepository {
   final LastFmApiService _apiService;
   final KVStore _kvStore;
 
-  AlbumRepositoryImpl({
+  _AlbumRepositoryImpl({
     required LastFmApiService apiService,
     required KVStore kvStore,
   })  : _apiService = apiService,

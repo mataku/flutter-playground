@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -20,6 +21,7 @@ void main() {
   late app_mock.MockLastFmApiService apiService;
   late app_mock.MockDioException dioException;
   late app_mock.MockKVStore kvStore;
+  late ProviderContainer providerContainer;
 
   const username = 'sunsetscrob';
 
@@ -31,16 +33,19 @@ void main() {
       when(kvStore.getStringValue(KVStoreKey.username)).thenAnswer((_) async {
         return username;
       });
+      providerContainer = ProviderContainer(
+        overrides: [
+          lastFmApiServiceProvider.overrideWithValue(apiService),
+          kvStoreProvider.overrideWithValue(kvStore),
+        ],
+      );
     });
 
     test('request succeeded', () async {
       final jsonMap = fixture('user_get_info.json');
       final userInfo = UserGetInfoApiResponse.fromJson(json.decode(jsonMap));
       when(apiService.request(any)).thenAnswer((_) async => userInfo);
-      final repo = ProfileRepositoryImpl(
-        apiService: apiService,
-        kvStore: kvStore,
-      );
+      final repo = providerContainer.read(profileRepositoryProvider);
       final result = await repo.getUserInfo();
       expect(result is Success, true);
       expect(result.getOrNull()!.name, 'matakucom');
@@ -59,10 +64,7 @@ void main() {
     test('request failed', () async {
       when(dioException.type).thenReturn(DioExceptionType.connectionError);
       when(apiService.request(any)).thenThrow(dioException);
-      final repo = ProfileRepositoryImpl(
-        apiService: apiService,
-        kvStore: kvStore,
-      );
+      final repo = providerContainer.read(profileRepositoryProvider);
       final result = await repo.getUserInfo();
       expect(result is Failure, true);
       expect(result.exceptionOrNull(), const AppError.serverError());
