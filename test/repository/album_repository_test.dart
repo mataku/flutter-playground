@@ -64,7 +64,7 @@ void main() {
             ),
           ),
         ),
-      )).called(1);
+      ),).called(1);
     });
 
     test('request failed', () async {

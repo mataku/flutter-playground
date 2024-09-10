@@ -45,7 +45,7 @@ void main() {
       final result = await repo.getRecentTracks(1);
       expect(result is Success, true);
       expect(
-          result.getOrNull()!, testRecentTrackApiResponse.toRecentTrackList());
+          result.getOrNull()!, testRecentTrackApiResponse.toRecentTrackList(),);
 
       verify(kvStore.getStringValue(KVStoreKey.username)).called(1);
 
@@ -54,7 +54,7 @@ void main() {
           'page': '1',
           'user': username,
         },
-      ))).called(1);
+      ),),).called(1);
     });
 
     test('request failed', () async {

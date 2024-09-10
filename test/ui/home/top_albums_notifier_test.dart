@@ -19,7 +19,7 @@ void main() {
   group('fetchData', () {
     late UserRepository userRepository;
     final List<TopAlbum> topAlbums = TopAlbumsApiResponse.fromJson(
-            json.decode(fixture('user_top_albums.json')))
+            json.decode(fixture('user_top_albums.json')),)
         .toTopAlbumList();
 
     setUp(() {

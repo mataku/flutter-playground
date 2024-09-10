@@ -30,7 +30,7 @@ class AlbumTracksComponent extends StatelessWidget {
           children: _albumTracks
               .map((track) => _AlbumTrackComponent(albumTrack: track))
               .toList(),
-        )
+        ),
       ],
     );
   }
@@ -68,7 +68,7 @@ class _AlbumTrackComponent extends StatelessWidget {
               ),
             ),
             if (_albumTrack.duration != 0)
-              Text(IntRepresentation.toReadableTime(_albumTrack.duration))
+              Text(IntRepresentation.toReadableTime(_albumTrack.duration)),
           ],
         ),
       ),

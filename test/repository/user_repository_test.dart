@@ -54,7 +54,7 @@ void main() {
           'page': '1',
           'user': 'sunsetscrob',
         },
-      ))).called(1);
+      ),),).called(1);
     });
 
     test('request failed', () async {
@@ -97,7 +97,7 @@ void main() {
           'page': '1',
           'user': 'sunsetscrob',
         },
-      ))).called(1);
+      ),),).called(1);
     });
 
     test('request failed', () async {

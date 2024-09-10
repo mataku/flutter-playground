@@ -44,7 +44,7 @@ void main() {
           'page': '1',
           'limit': '10',
         },
-      ))).called(1);
+      ),),).called(1);
     });
 
     test('request failed', () async {
@@ -81,7 +81,7 @@ void main() {
           'page': '1',
           'limit': '10',
         },
-      ))).called(1);
+      ),),).called(1);
     });
 
     test('request failed', () async {
@@ -118,7 +118,7 @@ void main() {
           'page': '1',
           'limit': '10',
         },
-      ))).called(1);
+      ),),).called(1);
     });
 
     test('request failed', () async {

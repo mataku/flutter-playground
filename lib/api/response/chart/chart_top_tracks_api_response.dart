@@ -24,7 +24,7 @@ class ChartTopTracksApiBody {
   final PagingAttrBodyResponse pagingAttrBodyResponse;
 
   const ChartTopTracksApiBody(
-      {required this.tracks, required this.pagingAttrBodyResponse});
+      {required this.tracks, required this.pagingAttrBodyResponse,});
 
   factory ChartTopTracksApiBody.fromJson(Map<String, dynamic> json) =>
       _$ChartTopTracksApiBodyFromJson(json);

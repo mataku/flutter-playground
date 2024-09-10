@@ -11,7 +11,7 @@ class SimilarContentResponse {
   final List<ImageResponse> images;
 
   SimilarContentResponse(
-      {required this.name, required this.url, required this.images});
+      {required this.name, required this.url, required this.images,});
 
   factory SimilarContentResponse.fromJson(Map<String, dynamic> json) =>
       _$SimilarContentResponseFromJson(json);

@@ -24,7 +24,7 @@ void main() async {
             return snapshot.hasData ? const MyApp() : const SizedBox();
           },
         );
-      }),
+      },),
     ),
   );
 }

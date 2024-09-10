@@ -10,7 +10,7 @@ class ChartCell extends StatelessWidget {
       {super.key,
       required this.title,
       required this.subtitle,
-      required this.artworkUrl});
+      required this.artworkUrl,});
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class ChartCell extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                 ),
-              )
+              ),
           ],
         ),
       ),

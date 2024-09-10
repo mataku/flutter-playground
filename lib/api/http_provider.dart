@@ -51,7 +51,7 @@ class DebugLogInterceptor extends Interceptor {
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     debugPrint('######## State App Response Log ########');
     debugPrint(
-        'onResponse <--- ${response.statusCode} ${response.requestOptions.path}');
+        'onResponse <--- ${response.statusCode} ${response.requestOptions.path}',);
     debugPrint('onResponse <--- Headers: ${response.headers}');
     debugPrint('onResponse <--- Response Data: ${response.data}');
     super.onResponse(response, handler);

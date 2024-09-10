@@ -12,7 +12,7 @@ class TagComponent extends StatelessWidget {
       label: Text(tag.name),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(20))),
+          borderRadius: BorderRadius.all(Radius.circular(20)),),
       labelPadding: const EdgeInsets.symmetric(horizontal: 12),
       visualDensity: const VisualDensity(horizontal: 0.0, vertical: 0),
     );

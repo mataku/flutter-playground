@@ -65,13 +65,13 @@ const testChartArtistApiResponse = ChartTopArtistsApiResponse(
     body: ChartTopArtistsApiBody(
   artists: [_testChartArtistResponse],
   pagingAttrBodyResponse: pagingAttrResponse,
-));
+),);
 
 final testChartTrackApiResponse = ChartTopTracksApiResponse(
     body: ChartTopTracksApiBody(
   tracks: [_testChartTrackResponse],
   pagingAttrBodyResponse: pagingAttrResponse,
-));
+),);
 
 final testChartArtistList = testChartArtistApiResponse.toChartArtistList();
 final testChartTrackList = testChartTrackApiResponse.toChartTrackList();

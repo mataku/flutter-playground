@@ -95,10 +95,10 @@ class _ArtistDetailState extends ConsumerState<ArtistDetailScreen>
                   end: Alignment.bottomCenter,
                   colors: [
                     Colors.black.withAlpha(128),
-                    Colors.white.withAlpha(2)
+                    Colors.white.withAlpha(2),
                   ],
                   stops: const [0.0, 1.0],
-                )),
+                ),),
               ),
               Padding(
                 padding: EdgeInsets.only(

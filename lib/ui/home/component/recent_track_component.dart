@@ -57,7 +57,7 @@ class RecentTrackTitle extends StatelessWidget {
   final String artistName;
 
   const RecentTrackTitle(
-      {super.key, required this.trackName, required this.artistName});
+      {super.key, required this.trackName, required this.artistName,});
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,7 @@ class RecentTrackTitle extends StatelessWidget {
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(fontSize: 12),
-          )
+          ),
         ],
       ),
     );

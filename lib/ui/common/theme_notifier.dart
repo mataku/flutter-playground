@@ -4,7 +4,7 @@ import 'package:sunrisescrob/repository/theme_repository.dart';
 import 'package:sunrisescrob/ui/theme/app_theme.dart';
 
 final themeNotifierProvider = ChangeNotifierProvider(
-    (ref) => ThemeNotifier(ref.read(themeRepositoryProvider)));
+    (ref) => ThemeNotifier(ref.read(themeRepositoryProvider)),);
 
 class ThemeNotifier extends ChangeNotifier {
   final ThemeRepository _themeRepository;

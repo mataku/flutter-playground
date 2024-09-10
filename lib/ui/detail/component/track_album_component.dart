@@ -73,7 +73,7 @@ class _AlbumTitleComponent extends StatelessWidget {
           style: const TextStyle(fontSize: 12),
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
-        )
+        ),
       ],
     );
   }

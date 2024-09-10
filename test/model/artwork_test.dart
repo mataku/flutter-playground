@@ -7,7 +7,7 @@ void main() {
   group('imageUrl', () {
     test('extralarge exists', () {
       expect([extraLargeArtwork, largeArtwork].imageUrl(),
-          "https://example.com/extralarge.png");
+          "https://example.com/extralarge.png",);
     });
 
     test('large exists', () {

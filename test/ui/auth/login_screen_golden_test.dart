@@ -28,7 +28,7 @@ void main() {
             overrides: [
               loginNotifierProvider.overrideWith((ref) {
                 return loginNotifier;
-              })
+              }),
             ],
             child: testableApp(
               child: LoginScreen(),
@@ -52,7 +52,7 @@ void main() {
             overrides: [
               loginNotifierProvider.overrideWith((ref) {
                 return loginNotifier;
-              })
+              }),
             ],
             child: testableApp(
               child: LoginScreen(),
@@ -76,7 +76,7 @@ void main() {
             overrides: [
               loginNotifierProvider.overrideWith((ref) {
                 return loginNotifier;
-              })
+              }),
             ],
             child: testableApp(
               child: LoginScreen(),

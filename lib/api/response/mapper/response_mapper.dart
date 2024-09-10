@@ -202,7 +202,7 @@ extension AlbumResponseExt on AlbumResponse {
         mbid: mbid,
         url: url,
         artist: artist.toTrackArtist(),
-        images: images.toImageList());
+        images: images.toImageList(),);
   }
 }
 
@@ -296,7 +296,7 @@ extension SimilarArtistsBodyExt on SimilarArtistsBody {
               name: artist.name,
               url: artist.url,
               images: artist.images.toImageList(),
-            ))
+            ),)
         .toList();
   }
 }

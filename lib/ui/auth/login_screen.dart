@@ -155,11 +155,11 @@ class LoginScreen extends ConsumerWidget {
 }
 
 void _showErrorMessage(
-    BuildContext context, String message, VoidCallback onConfirm) {
+    BuildContext context, String message, VoidCallback onConfirm,) {
   if (Platform.isAndroid) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(message),
-    ));
+    ),);
   } else {
     showDialog(
       context: context,

@@ -93,7 +93,7 @@ class _ThemeSelection extends StatelessWidget {
                 Icons.check,
                 size: 20,
                 color: theme.colorScheme.onSurface,
-              )
+              ),
           ],
         ),
       ),

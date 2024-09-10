@@ -57,7 +57,7 @@ void main() {
             overrides: [
               scrobbleNotifierProvider.overrideWith((ref) {
                 return ScrobbleNotifier(
-                    recentTracksRepository: mockRecentTracksRepository);
+                    recentTracksRepository: mockRecentTracksRepository,);
               }),
               topAlbumsNotifier.overrideWith((ref) {
                 return notifier;
@@ -94,7 +94,7 @@ void main() {
             overrides: [
               scrobbleNotifierProvider.overrideWith((ref) {
                 return ScrobbleNotifier(
-                    recentTracksRepository: mockRecentTracksRepository);
+                    recentTracksRepository: mockRecentTracksRepository,);
               }),
               topAlbumsNotifier.overrideWith((ref) {
                 return notifier;
@@ -131,7 +131,7 @@ void main() {
             overrides: [
               scrobbleNotifierProvider.overrideWith((ref) {
                 return ScrobbleNotifier(
-                    recentTracksRepository: mockRecentTracksRepository);
+                    recentTracksRepository: mockRecentTracksRepository,);
               }),
               topAlbumsNotifier.overrideWith((ref) {
                 return notifier;

@@ -25,14 +25,14 @@ void main() {
       when(repo.getTrack(
         artist: 'aespa',
         track: 'Supernova',
-      )).thenAnswer((_) async {
+      ),).thenAnswer((_) async {
         return Result.success(testTrackApiResponse.response.toTrack());
       });
 
       when(repo.getTrack(
         track: 'Supernova',
         artist: 'aespa',
-      )).thenAnswer((_) async {
+      ),).thenAnswer((_) async {
         return Result.success(testTrackApiResponse.response.toTrack());
       });
       trackNotifier = TrackNotifier(trackRepository: repo);

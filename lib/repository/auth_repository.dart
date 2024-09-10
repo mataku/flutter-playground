@@ -35,7 +35,7 @@ class _AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<Result<String>> authorize(
-      {required String username, required String password}) async {
+      {required String username, required String password,}) async {
     Map<String, String> params = {
       'username': username,
       'password': password,
@@ -51,7 +51,7 @@ class _AuthRepositoryImpl implements AuthRepository {
       final result = await _apiService.request(endpoint);
       await _notifier.login(
           sessionKey: result.sessionBody.key,
-          username: result.sessionBody.name);
+          username: result.sessionBody.name,);
       return Result.success(result.sessionBody.name);
     } on Exception catch (error) {
       return Result.failure(AppError.getApiError(error));

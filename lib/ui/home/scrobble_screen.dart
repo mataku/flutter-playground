@@ -10,7 +10,7 @@ import 'package:sunrisescrob/ui/home/state/scrobble_state.dart';
 
 final scrobbleNotifierProvider = ChangeNotifierProvider((ref) {
   final ScrobbleNotifier notifier = ScrobbleNotifier(
-      recentTracksRepository: ref.read(recentTracksRepositoryProvider));
+      recentTracksRepository: ref.read(recentTracksRepositoryProvider),);
   notifier.fetchData();
   return notifier;
 });

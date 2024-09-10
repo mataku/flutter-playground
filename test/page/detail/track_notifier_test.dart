@@ -24,7 +24,7 @@ void main() {
       when(trackRepository.getTrack(
         artist: 'aespa',
         track: 'Supernova',
-      )).thenAnswer((_) async => Result.success(testTrack));
+      ),).thenAnswer((_) async => Result.success(testTrack));
       final notifier = TrackNotifier(trackRepository: trackRepository);
       await notifier.fetchTrack(
         artist: 'aespa',
@@ -38,7 +38,7 @@ void main() {
       when(trackRepository.getTrack(
         track: 'Supernova',
         artist: 'aespa',
-      )).thenAnswer((_) async => Result.failure(exception));
+      ),).thenAnswer((_) async => Result.failure(exception));
       final notifier = TrackNotifier(trackRepository: trackRepository);
       await notifier.fetchTrack(
         artist: 'aespa',

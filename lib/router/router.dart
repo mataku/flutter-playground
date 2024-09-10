@@ -73,10 +73,10 @@ final routerProvider = Provider((ref) {
         TypedGoRoute<AccountRoute>(path: AccountRoute.path, routes: [
           TypedGoRoute<ThemeSelectionRoute>(
             path: ThemeSelectionRoute.path,
-          )
-        ]),
+          ),
+        ],),
       ],
-    )
+    ),
   ],
 )
 class TopShellRoute extends StatefulShellRouteData {
@@ -86,7 +86,7 @@ class TopShellRoute extends StatefulShellRouteData {
 
   @override
   Widget builder(BuildContext context, GoRouterState state,
-      StatefulNavigationShell navigationShell) {
+      StatefulNavigationShell navigationShell,) {
     return TopScreen(navigationShell: navigationShell);
   }
 }

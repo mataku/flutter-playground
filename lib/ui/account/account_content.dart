@@ -15,7 +15,7 @@ class AccountContent extends StatelessWidget {
   final VoidCallback onLogout;
 
   const AccountContent(this._userInfo, this._appTheme, this.onLogout,
-      {super.key});
+      {super.key,});
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +128,7 @@ class _UserListeningInfoComponent extends StatelessWidget {
           playcount: playcount,
           albumCount: albumCount,
           artistCount: artistCount,
-        )
+        ),
       ],
     );
   }

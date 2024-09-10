@@ -9,7 +9,7 @@ class MockCacheManager extends Mock implements CacheManager {
   Stream<FileResponse> getFileStream(String url,
       {String? key,
       Map<String, String>? headers,
-      bool withProgress = false}) async* {
+      bool withProgress = false,}) async* {
     yield FileInfo(
       system.file('test/fixtures/kota.png'),
       FileSource.Cache,
@@ -22,7 +22,7 @@ class MockCacheManager extends Mock implements CacheManager {
   Future<FileInfo> downloadFile(String url,
       {String? key,
       Map<String, String>? authHeaders,
-      bool force = false}) async {
+      bool force = false,}) async {
     return FileInfo(
       system.file('test/fixtures/kota.png'),
       FileSource.Cache,
@@ -33,7 +33,7 @@ class MockCacheManager extends Mock implements CacheManager {
 
   @override
   Future<FileInfo?> getFileFromCache(String key,
-      {bool ignoreMemCache = false}) async {
+      {bool ignoreMemCache = false,}) async {
     return FileInfo(
       system.file('test/fixtures/kota.png'),
       FileSource.Cache,

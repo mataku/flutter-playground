@@ -36,7 +36,7 @@ class _TrackRepositoryImpl implements TrackRepository {
 
   @override
   Future<Result<Track>> getTrack(
-      {required String track, required String artist}) async {
+      {required String track, required String artist,}) async {
     final username = await _kvStore.getStringValue(KVStoreKey.username);
     final endpoint = TrackInfoEndpoint(
       params: {

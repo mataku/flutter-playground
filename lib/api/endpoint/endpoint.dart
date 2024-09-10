@@ -7,7 +7,7 @@ abstract class Endpoint<T> {
   final RequestType requestType;
 
   Endpoint(
-      {required this.path, required this.params, required this.requestType});
+      {required this.path, required this.params, required this.requestType,});
 
   T parseFromJson(Response<dynamic> response);
 

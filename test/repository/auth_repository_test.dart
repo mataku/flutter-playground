@@ -62,12 +62,12 @@ void main() {
 
       verify(apiService.request(AuthGetMobileSessionEndpoint(
         params: params,
-      ))).called(1);
+      ),),).called(1);
 
       verify(sessionChangeNotifier.login(
         sessionKey: mobileSession.sessionBody.key,
         username: mobileSession.sessionBody.name,
-      )).called(1);
+      ),).called(1);
     });
 
     test('request failed', () async {
