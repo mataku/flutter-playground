@@ -1,11 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
+    "config:base"
   ],
   "schedule": "after 3pm on Friday",
   "timezone": "Asia/Tokyo",
-  "rangeStrategy": "bump",
+  "rangeStrategy": "replaced",
   "rebaseWhen": "conflicted",
   "packageRules": [
     {
@@ -23,5 +23,8 @@
       "platformAutomerge": true
     }
   ],
-  "enabledManagers": ["github-actions", "pub"]
+  "enabledManagers": ["github-actions", "pub"],
+  "lockFileMaintenance": {
+    "enabled": true
+  },
 }
