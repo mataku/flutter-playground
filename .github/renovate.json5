@@ -25,6 +25,8 @@
   ],
   "enabledManagers": ["github-actions", "pub"],
   "lockFileMaintenance": {
-    "enabled": true
+    "enabled": true,
+    "automerge": true,
+    "platformAutomerge": true
   },
 }
