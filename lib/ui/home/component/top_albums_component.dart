@@ -28,11 +28,10 @@ class TopAlbumsComponent extends StatelessWidget {
             padding: EdgeInsets.only(top: 12),
           ),
           SliverGrid(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
               crossAxisSpacing: 8,
               childAspectRatio: 0.72,
-              mainAxisSpacing: 4,
             ),
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {

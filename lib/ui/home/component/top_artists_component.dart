@@ -28,11 +28,10 @@ class TopArtistsComponent extends StatelessWidget {
             padding: EdgeInsets.only(top: 12),
           ),
           SliverGrid(
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
               crossAxisSpacing: 8,
-              childAspectRatio: 0.75,
-              mainAxisSpacing: 4,
+              childAspectRatio: 0.76,
             ),
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
