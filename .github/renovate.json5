@@ -1,0 +1,26 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended"
+  ],
+  "schedule": "after 3pm on Friday",
+  "timezone": "Asia/Tokyo",
+  "rangeStrategy": "bump",
+  "rebaseWhen": "conflicted",
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "dart_pub",
+      "automerge": true,
+      "platformAutomerge": true,
+      "matchManegers": ["pub"]
+    },
+    {
+      "groupName": "GitHub Actions",
+      "matchManegers": ["github-actions"],
+      "automerge": true,
+      "platformAutomerge": true
+    }
+  ],
+  "enabledManagers": ["github-actions", "pub"]
+}
