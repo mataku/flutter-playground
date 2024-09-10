@@ -9,6 +9,13 @@ Flutter Architecture Sample like Model-View-ViewModel using Last.fm API.
 - Account info
 - Switch theme
 
+## Setup
+
+```shell
+# fvm flutter
+flutter pub get --no-example && dart run build_runner build --delete-conflicting-outputs
+```
+
 ## Architecture
 
 TODO
