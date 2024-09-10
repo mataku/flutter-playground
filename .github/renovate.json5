@@ -13,11 +13,12 @@
       "groupName": "dart_pub",
       "automerge": true,
       "platformAutomerge": true,
-      "matchManegers": ["pub"]
+      "matchManagers": ["pub"]
     },
     {
+      "matchUpdateTypes": ["major", "patch", "minor"],
       "groupName": "GitHub Actions",
-      "matchManegers": ["github-actions"],
+      "matchManagers": ["github-actions"],
       "automerge": true,
       "platformAutomerge": true
     }
