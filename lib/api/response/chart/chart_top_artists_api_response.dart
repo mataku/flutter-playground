@@ -16,45 +16,31 @@ class ChartTopArtistsApiResponse with _$ChartTopArtistsApiResponse {
       _$ChartTopArtistsApiResponseFromJson(json);
 }
 
-@JsonSerializable(explicitToJson: true)
-class ChartTopArtistsApiBody {
-  @JsonKey(name: 'artist')
-  final List<ChartArtistResponse> artists;
-  @JsonKey(name: '@attr')
-  final PagingAttrBodyResponse pagingAttrBodyResponse;
-
-  const ChartTopArtistsApiBody({
-    required this.artists,
-    required this.pagingAttrBodyResponse,
-  });
+@freezed
+class ChartTopArtistsApiBody with _$ChartTopArtistsApiBody {
+  const factory ChartTopArtistsApiBody({
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'artist') required List<ChartArtistResponse> artists,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: '@attr')
+    required PagingAttrBodyResponse pagingAttrBodyResponse,
+  }) = _ChartTopArtistsApiBody;
 
   factory ChartTopArtistsApiBody.fromJson(Map<String, dynamic> json) =>
       _$ChartTopArtistsApiBodyFromJson(json);
-
-  Map<String, dynamic> toJson() => _$ChartTopArtistsApiBodyToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true)
-class ChartArtistResponse {
-  final String name;
-  @JsonKey(name: 'playcount')
-  final String playCount;
-  final String listeners;
-  final String url;
-
-  @JsonKey(name: 'image')
-  final List<ImageResponse> images;
-
-  const ChartArtistResponse({
-    required this.name,
-    required this.url,
-    required this.playCount,
-    required this.listeners,
-    required this.images,
-  });
+@freezed
+class ChartArtistResponse with _$ChartArtistResponse {
+  const factory ChartArtistResponse({
+    required String name,
+    required String url,
+    required String playcount,
+    required String listeners,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'image') required List<ImageResponse> images,
+  }) = _ChartArtistResponse;
 
   factory ChartArtistResponse.fromJson(Map<String, dynamic> json) =>
       _$ChartArtistResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$ChartArtistResponseToJson(this);
 }

@@ -37,25 +37,18 @@ class TrackInfoResponse with _$TrackInfoResponse {
       _$TrackInfoResponseFromJson(json);
 }
 
-@JsonSerializable(explicitToJson: true)
-class TrackAlbumResponse {
-  final String artist;
-  final String title;
-  final String url;
-  @JsonKey(name: 'image')
-  final List<ImageResponse> images;
-  const TrackAlbumResponse({
-    required this.artist,
-    required this.title,
-    required this.url,
+@freezed
+class TrackAlbumResponse with _$TrackAlbumResponse {
+  const factory TrackAlbumResponse({
+    required String artist,
+    required String title,
+    required String url,
     // ignore: invalid_annotation_target
-    required this.images,
-  });
+    @JsonKey(name: 'image') required List<ImageResponse> images,
+  }) = _TrackAlbumResponse;
 
   factory TrackAlbumResponse.fromJson(Map<String, dynamic> json) =>
       _$TrackAlbumResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$TrackAlbumResponseToJson(this);
 }
 
 @freezed

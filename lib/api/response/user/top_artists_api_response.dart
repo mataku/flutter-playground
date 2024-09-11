@@ -15,38 +15,26 @@ class TopArtistsApiResponse with _$TopArtistsApiResponse {
       _$TopArtistsApiResponseFromJson(json);
 }
 
-@JsonSerializable(explicitToJson: true)
-class TopArtistsResponse {
-  @JsonKey(name: 'artist')
-  final List<ArtistResponse> artists;
-
-  const TopArtistsResponse({
-    required this.artists,
-  });
+@freezed
+class TopArtistsResponse with _$TopArtistsResponse {
+  const factory TopArtistsResponse({
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'artist') required List<ArtistResponse> artists,
+  }) = _TopArtistsResponse;
 
   factory TopArtistsResponse.fromJson(Map<String, dynamic> json) =>
       _$TopArtistsResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$TopArtistsResponseToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true)
-class ArtistResponse {
-  final String name;
-  final String url;
-  final String playcount;
-  @JsonKey(name: 'image')
-  final List<ImageResponse> images;
-
-  const ArtistResponse({
-    required this.name,
-    required this.url,
-    required this.playcount,
-    required this.images,
-  });
+@freezed
+class ArtistResponse with _$ArtistResponse {
+  const factory ArtistResponse({
+    required String name,
+    required String url,
+    required String playcount,
+    @JsonKey(name: 'image') required List<ImageResponse> images,
+  }) = _ArtistResponse;
 
   factory ArtistResponse.fromJson(Map<String, dynamic> json) =>
       _$ArtistResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$ArtistResponseToJson(this);
 }

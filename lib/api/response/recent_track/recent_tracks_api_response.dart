@@ -25,18 +25,15 @@ class RecentTracksApiResponse with _$RecentTracksApiResponse {
   }
 }
 
-@JsonSerializable(explicitToJson: true)
-class RecentTracksResponse {
-  @JsonKey(name: 'track')
-  final List<RecentTrackResponse> tracks;
-  const RecentTracksResponse({
-    required this.tracks,
-  });
+@freezed
+class RecentTracksResponse with _$RecentTracksResponse {
+  const factory RecentTracksResponse({
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'track') required List<RecentTrackResponse> tracks,
+  }) = _RecentTracksResponse;
 
   factory RecentTracksResponse.fromJson(Map<String, dynamic> json) =>
       _$RecentTracksResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$RecentTracksResponseToJson(this);
 }
 
 @freezed

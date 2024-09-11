@@ -16,47 +16,35 @@ class ChartTopTracksApiResponse with _$ChartTopTracksApiResponse {
       _$ChartTopTracksApiResponseFromJson(json);
 }
 
-@JsonSerializable(explicitToJson: true)
-class ChartTopTracksApiBody {
-  @JsonKey(name: 'track')
-  final List<ChartTrackResponse> tracks;
-  @JsonKey(name: '@attr')
-  final PagingAttrBodyResponse pagingAttrBodyResponse;
-
-  const ChartTopTracksApiBody(
-      {required this.tracks, required this.pagingAttrBodyResponse,});
+@freezed
+class ChartTopTracksApiBody with _$ChartTopTracksApiBody {
+  const factory ChartTopTracksApiBody({
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'track') required List<ChartTrackResponse> tracks,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: '@attr')
+    required PagingAttrBodyResponse pagingAttrBodyResponse,
+  }) = _ChartTopTracksApiBody;
 
   factory ChartTopTracksApiBody.fromJson(Map<String, dynamic> json) =>
       _$ChartTopTracksApiBodyFromJson(json);
-
-  Map<String, dynamic> toJson() => _$ChartTopTracksApiBodyToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true)
-class ChartTrackResponse {
-  final String name;
-  @JsonKey(name: 'playcount')
-  final String playCount;
-  final String listeners;
-  final String url;
-  final ChartTrackArtistResponse artist;
-
-  @JsonKey(name: 'image')
-  final List<ImageResponse> images;
-
-  const ChartTrackResponse({
-    required this.name,
-    required this.url,
-    required this.playCount,
-    required this.listeners,
-    required this.artist,
-    required this.images,
-  });
+@freezed
+class ChartTrackResponse with _$ChartTrackResponse {
+  const factory ChartTrackResponse({
+    required String name,
+    required String url,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'playcount') required String playCount,
+    required String listeners,
+    required ChartTrackArtistResponse artist,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'image') required List<ImageResponse> images,
+  }) = _ChartTrackResponse;
 
   factory ChartTrackResponse.fromJson(Map<String, dynamic> json) =>
       _$ChartTrackResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$ChartTrackResponseToJson(this);
 }
 
 @freezed

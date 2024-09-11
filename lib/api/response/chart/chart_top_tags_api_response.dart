@@ -15,22 +15,18 @@ class ChartTopTagsApiResponse with _$ChartTopTagsApiResponse {
       _$ChartTopTagsApiResponseFromJson(json);
 }
 
-@JsonSerializable(explicitToJson: true)
-class ChartTopTagsApiBody {
-  @JsonKey(name: 'tag')
-  final List<ChartTopTagResponse> tags;
-  @JsonKey(name: '@attr')
-  final PagingAttrBodyResponse pagingAttrBodyResponse;
-
-  const ChartTopTagsApiBody({
-    required this.tags,
-    required this.pagingAttrBodyResponse,
-  });
+@freezed
+class ChartTopTagsApiBody with _$ChartTopTagsApiBody {
+  const factory ChartTopTagsApiBody({
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'tag') required List<ChartTopTagResponse> tags,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: '@attr')
+    required PagingAttrBodyResponse pagingAttrBodyResponse,
+  }) = _ChartTopTagsApiBody;
 
   factory ChartTopTagsApiBody.fromJson(Map<String, dynamic> json) =>
       _$ChartTopTagsApiBodyFromJson(json);
-
-  Map<String, dynamic> toJson() => _$ChartTopTagsApiBodyToJson(this);
 }
 
 @freezed

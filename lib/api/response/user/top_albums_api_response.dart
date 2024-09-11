@@ -16,42 +16,29 @@ class TopAlbumsApiResponse with _$TopAlbumsApiResponse {
       _$TopAlbumsApiResponseFromJson(json);
 }
 
-@JsonSerializable(explicitToJson: true)
-class AlbumRootResponse {
-  @JsonKey(name: 'album')
-  final List<AlbumResponse> albums;
-
-  const AlbumRootResponse({
-    required this.albums,
-  });
+@freezed
+class AlbumRootResponse with _$AlbumRootResponse {
+  const factory AlbumRootResponse({
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'album') required List<AlbumResponse> albums,
+  }) = _AlbumRootResponse;
 
   factory AlbumRootResponse.fromJson(Map<String, dynamic> json) =>
       _$AlbumRootResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$AlbumRootResponseToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true)
-class AlbumResponse {
-  final String name;
-  final String playcount;
-  final String mbid;
-  final String url;
-  final TrackInfoArtist artist;
-  @JsonKey(name: 'image')
-  final List<ImageResponse> images;
-
-  const AlbumResponse({
-    required this.name,
-    required this.playcount,
-    required this.mbid,
-    required this.url,
-    required this.artist,
-    required this.images,
-  });
+@freezed
+class AlbumResponse with _$AlbumResponse {
+  const factory AlbumResponse({
+    required String name,
+    required String playcount,
+    required String mbid,
+    required String url,
+    required TrackInfoArtist artist,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'image') required List<ImageResponse> images,
+  }) = _AlbumResponse;
 
   factory AlbumResponse.fromJson(Map<String, dynamic> json) =>
       _$AlbumResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$AlbumResponseToJson(this);
 }

@@ -30,14 +30,6 @@ import 'package:sunrisescrob/model/user/top_album.dart';
 import 'package:sunrisescrob/model/user/top_artist.dart';
 import 'package:sunrisescrob/model/wiki.dart';
 
-extension RecentTracksApiResponseExt on RecentTracksApiResponse {
-  List<RecentTrack> toRecentTrackList() {
-    return response.tracks
-        .map((trackResponse) => trackResponse.toRecentTrack())
-        .toList();
-  }
-}
-
 extension RecentTrackResponseExt on RecentTrackResponse {
   RecentTrack toRecentTrack() {
     return RecentTrack(
@@ -47,6 +39,14 @@ extension RecentTrackResponseExt on RecentTrackResponse {
       name: name,
       url: url,
     );
+  }
+}
+
+extension RecentTracksApiResponseExt on RecentTracksApiResponse {
+  List<RecentTrack> toRecentTrackList() {
+    return response.tracks
+        .map((trackResponse) => trackResponse.toRecentTrack())
+        .toList();
   }
 }
 
@@ -73,7 +73,7 @@ extension ChartArtistResponseExt on ChartArtistResponse {
     return ChartArtist(
       name: name,
       url: url,
-      playCount: playCount,
+      playCount: playcount,
       listeners: listeners,
       images: images.toImageList(),
     );
@@ -197,12 +197,13 @@ extension TrackInfoApiResponseExt on TrackInfoApiResponse {
 extension AlbumResponseExt on AlbumResponse {
   TopAlbum toTopAlbum() {
     return TopAlbum(
-        name: name,
-        playcount: playcount,
-        mbid: mbid,
-        url: url,
-        artist: artist.toTrackArtist(),
-        images: images.toImageList(),);
+      name: name,
+      playcount: playcount,
+      mbid: mbid,
+      url: url,
+      artist: artist.toTrackArtist(),
+      images: images.toImageList(),
+    );
   }
 }
 
@@ -292,11 +293,13 @@ extension AlbumInfoApiResponseExt on AlbumInfoApiResponse {
 extension SimilarArtistsBodyExt on SimilarArtistsBody {
   List<SimilarContent> toSimilarArtists() {
     return artists
-        .map((artist) => SimilarContent(
-              name: artist.name,
-              url: artist.url,
-              images: artist.images.toImageList(),
-            ),)
+        .map(
+          (artist) => SimilarContent(
+            name: artist.name,
+            url: artist.url,
+            images: artist.images.toImageList(),
+          ),
+        )
         .toList();
   }
 }

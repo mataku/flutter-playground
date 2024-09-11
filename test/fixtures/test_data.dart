@@ -56,22 +56,24 @@ final _testChartTrackResponse = ChartTrackResponse(
 const _testChartArtistResponse = ChartArtistResponse(
   name: 'aespa',
   url: 'https://example.com/aespa',
-  playCount: '100000',
+  playcount: '100000',
   listeners: '1000000',
   images: [],
 );
 
 const testChartArtistApiResponse = ChartTopArtistsApiResponse(
-    body: ChartTopArtistsApiBody(
-  artists: [_testChartArtistResponse],
-  pagingAttrBodyResponse: pagingAttrResponse,
-),);
+  body: ChartTopArtistsApiBody(
+    artists: [_testChartArtistResponse],
+    pagingAttrBodyResponse: pagingAttrResponse,
+  ),
+);
 
 final testChartTrackApiResponse = ChartTopTracksApiResponse(
-    body: ChartTopTracksApiBody(
-  tracks: [_testChartTrackResponse],
-  pagingAttrBodyResponse: pagingAttrResponse,
-),);
+  body: ChartTopTracksApiBody(
+    tracks: [_testChartTrackResponse],
+    pagingAttrBodyResponse: pagingAttrResponse,
+  ),
+);
 
 final testChartArtistList = testChartArtistApiResponse.toChartArtistList();
 final testChartTrackList = testChartTrackApiResponse.toChartTrackList();

@@ -18,52 +18,35 @@ class AlbumInfoApiResponse with _$AlbumInfoApiResponse {
       _$AlbumInfoApiResponseFromJson(json);
 }
 
-@JsonSerializable(explicitToJson: true)
-class AlbumInfoApiBody {
-  final String artist;
-  TopTagsResponse? tags;
-  final String name;
-  @JsonKey(name: 'image')
-  final List<ImageResponse> images;
-  final AlbumTrackListApiBody tracks;
-  final String listeners;
-  final String playcount;
-  int? userplaycount;
-  final String url;
-  WikiResponse? wikiResponse;
-
-  AlbumInfoApiBody({
-    required this.artist,
-    this.tags,
-    required this.name,
-    required this.images,
-    required this.tracks,
-    required this.listeners,
-    required this.playcount,
-    this.userplaycount,
-    required this.url,
-    this.wikiResponse,
-  });
+@freezed
+class AlbumInfoApiBody with _$AlbumInfoApiBody {
+  const factory AlbumInfoApiBody({
+    required String artist,
+    TopTagsResponse? tags,
+    required String name,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'image') required List<ImageResponse> images,
+    required AlbumTrackListApiBody tracks,
+    required String listeners,
+    required String playcount,
+    int? userplaycount,
+    required String url,
+    WikiResponse? wikiResponse,
+  }) = _AlbumInfoApiBody;
 
   factory AlbumInfoApiBody.fromJson(Map<String, dynamic> json) =>
       _$AlbumInfoApiBodyFromJson(json);
-
-  Map<String, dynamic> toJson() => _$AlbumInfoApiBodyToJson(this);
 }
 
-@JsonSerializable(explicitToJson: true)
-class AlbumTrackListApiBody {
-  @JsonKey(name: 'track')
-  final List<AlbumTrackApiBody> tracks;
-
-  const AlbumTrackListApiBody({
-    required this.tracks,
-  });
+@freezed
+class AlbumTrackListApiBody with _$AlbumTrackListApiBody {
+  const factory AlbumTrackListApiBody({
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'track') required List<AlbumTrackApiBody> tracks,
+  }) = _AlbumTrackListApiBody;
 
   factory AlbumTrackListApiBody.fromJson(Map<String, dynamic> json) =>
       _$AlbumTrackListApiBodyFromJson(json);
-
-  Map<String, dynamic> toJson() => _$AlbumTrackListApiBodyToJson(this);
 }
 
 @freezed

@@ -18,46 +18,34 @@ class ArtistInfoApiResponse with _$ArtistInfoApiResponse {
       _$ArtistInfoApiResponseFromJson(json);
 }
 
-@JsonSerializable(explicitToJson: true)
-class ArtistInfoBody {
-  final String name;
-  final String url;
-  @JsonKey(name: 'image')
-  final List<ImageResponse> images;
-  final StatsBody stats;
-  @JsonKey(name: 'similar')
-  SimilarArtistsBody? similarArtists;
-  final TopTagsResponse tags;
-  @JsonKey(name: 'bio')
-  WikiResponse? wiki;
-
-  ArtistInfoBody({
-    required this.name,
-    required this.url,
-    required this.images,
-    required this.stats,
-    this.similarArtists,
-    required this.tags,
-    this.wiki,
-  });
+@freezed
+class ArtistInfoBody with _$ArtistInfoBody {
+  const factory ArtistInfoBody({
+    required String name,
+    required String url,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'image') required List<ImageResponse> images,
+    required StatsBody stats,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'similar') SimilarArtistsBody? similarArtists,
+    required TopTagsResponse tags,
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'bio') WikiResponse? wiki,
+  }) = _ArtistInfoBody;
 
   factory ArtistInfoBody.fromJson(Map<String, dynamic> json) =>
       _$ArtistInfoBodyFromJson(json);
 }
 
-@JsonSerializable(explicitToJson: true)
-class SimilarArtistsBody {
-  @JsonKey(name: 'artist')
-  final List<SimilarContentResponse> artists;
-
-  SimilarArtistsBody({
-    required this.artists,
-  });
+@freezed
+class SimilarArtistsBody with _$SimilarArtistsBody {
+  const factory SimilarArtistsBody({
+    // ignore: invalid_annotation_target
+    @JsonKey(name: 'artist') required List<SimilarContentResponse> artists,
+  }) = _SimilarArtistsBody;
 
   factory SimilarArtistsBody.fromJson(Map<String, dynamic> json) =>
       _$SimilarArtistsBodyFromJson(json);
-
-  Map<String, dynamic> toJson() => _$SimilarArtistsBodyToJson(this);
 }
 
 @freezed
