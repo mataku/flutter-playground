@@ -32,6 +32,7 @@ class ArtistResponse with _$ArtistResponse {
     required String name,
     required String url,
     required String playcount,
+    // ignore: invalid_annotation_target
     @JsonKey(name: 'image') required List<ImageResponse> images,
   }) = _ArtistResponse;
 
