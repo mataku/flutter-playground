@@ -3,8 +3,11 @@
   "extends": [
     "config:base"
   ],
-  "schedule": "after 3pm on Friday",
   "timezone": "Asia/Tokyo",
+  "schedule": [
+    "after 3pm on Friday",
+    "before 5pm on Friday"
+  ],
   "rangeStrategy": "replaced",
   "rebaseWhen": "conflicted",
   "packageRules": [
