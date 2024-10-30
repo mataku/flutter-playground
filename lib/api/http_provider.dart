@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sunrisescrob/model/key.dart';
 
@@ -14,7 +15,7 @@ final _options = BaseOptions(
 );
 
 @Riverpod(keepAlive: true)
-Dio dio(DioRef ref) {
+Dio dio(Ref ref) {
   final dio = Dio(_options);
   dio.interceptors.add(const AuthInterceptor());
   if (kDebugMode) {
@@ -51,7 +52,8 @@ class DebugLogInterceptor extends Interceptor {
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     debugPrint('######## State App Response Log ########');
     debugPrint(
-        'onResponse <--- ${response.statusCode} ${response.requestOptions.path}',);
+      'onResponse <--- ${response.statusCode} ${response.requestOptions.path}',
+    );
     debugPrint('onResponse <--- Headers: ${response.headers}');
     debugPrint('onResponse <--- Response Data: ${response.data}');
     super.onResponse(response, handler);

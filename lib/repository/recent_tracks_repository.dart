@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sunrisescrob/api/endpoint/recent_tracks_endpoint.dart';
 import 'package:sunrisescrob/api/last_fm_api_service.dart';
@@ -10,7 +11,7 @@ import 'package:sunrisescrob/store/kv_store.dart';
 part 'recent_tracks_repository.g.dart';
 
 @Riverpod(dependencies: [lastFmApiService, kvStore])
-RecentTracksRepository recentTracksRepository(RecentTracksRepositoryRef ref) {
+RecentTracksRepository recentTracksRepository(Ref ref) {
   return _RecentTracksRepositoryImpl(
     apiService: ref.read(lastFmApiServiceProvider),
     kvStore: ref.read(kvStoreProvider),

@@ -7,7 +7,7 @@ import 'package:sunrisescrob/store/kv_store.dart';
 part 'session_store.g.dart';
 
 @Riverpod(keepAlive: true)
-SessionStore sessionStore(SessionStoreRef ref) {
+SessionStore sessionStore(Ref ref) {
   return SessionStoreImpl();
 }
 
