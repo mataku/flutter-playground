@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sunrisescrob/api/endpoint/artist_get_info_endpoint.dart';
 import 'package:sunrisescrob/api/last_fm_api_service.dart';
@@ -10,7 +11,7 @@ import 'package:sunrisescrob/store/kv_store.dart';
 part 'artist_repository.g.dart';
 
 @Riverpod(dependencies: [lastFmApiService, kvStore])
-ArtistRepository artistRepository(ArtistRepositoryRef ref) {
+ArtistRepository artistRepository(Ref ref) {
   return _ArtistRepositoryImpl(
     apiService: ref.read(lastFmApiServiceProvider),
     kvStore: ref.read(kvStoreProvider),

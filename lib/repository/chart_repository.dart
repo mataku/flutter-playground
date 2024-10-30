@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sunrisescrob/api/endpoint/chart_top_artists_endpoint.dart';
 import 'package:sunrisescrob/api/endpoint/chart_top_tags_endpoint.dart';
@@ -19,7 +20,7 @@ abstract class ChartRepository {
 }
 
 @Riverpod(dependencies: [lastFmApiService])
-ChartRepository chartRepository(ChartRepositoryRef ref) {
+ChartRepository chartRepository(Ref ref) {
   return _ChartRepositoryImpl(ref.read(lastFmApiServiceProvider));
 }
 

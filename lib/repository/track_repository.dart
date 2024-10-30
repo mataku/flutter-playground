@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sunrisescrob/api/endpoint/track_info_endpoint.dart';
 import 'package:sunrisescrob/api/last_fm_api_service.dart';
@@ -10,7 +11,7 @@ import 'package:sunrisescrob/store/kv_store.dart';
 part 'track_repository.g.dart';
 
 @Riverpod(dependencies: [lastFmApiService, kvStore])
-TrackRepository trackRepository(TrackRepositoryRef ref) {
+TrackRepository trackRepository(Ref ref) {
   return _TrackRepositoryImpl(
     lastFmApiService: ref.read(lastFmApiServiceProvider),
     kvStore: ref.read(kvStoreProvider),
@@ -35,8 +36,10 @@ class _TrackRepositoryImpl implements TrackRepository {
         _kvStore = kvStore;
 
   @override
-  Future<Result<Track>> getTrack(
-      {required String track, required String artist,}) async {
+  Future<Result<Track>> getTrack({
+    required String track,
+    required String artist,
+  }) async {
     final username = await _kvStore.getStringValue(KVStoreKey.username);
     final endpoint = TrackInfoEndpoint(
       params: {

@@ -1,10 +1,11 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'kv_store.g.dart';
 
 @Riverpod(keepAlive: true)
-KVStore kvStore(KvStoreRef ref) {
+KVStore kvStore(Ref ref) {
   return KVStore();
 }
 

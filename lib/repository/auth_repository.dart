@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sunrisescrob/api/endpoint/auth_get_mobile_session_endpoint.dart';
 import 'package:sunrisescrob/api/last_fm_api_service.dart';
@@ -9,7 +10,7 @@ import 'package:sunrisescrob/store/session_store.dart';
 part 'auth_repository.g.dart';
 
 @Riverpod(dependencies: [lastFmApiService])
-AuthRepository authRepository(AuthRepositoryRef ref) {
+AuthRepository authRepository(Ref ref) {
   return _AuthRepositoryImpl(
     ref.read(lastFmApiServiceProvider),
     ref.read(sessionChangeNotifierProvider),
@@ -34,8 +35,10 @@ class _AuthRepositoryImpl implements AuthRepository {
   );
 
   @override
-  Future<Result<String>> authorize(
-      {required String username, required String password,}) async {
+  Future<Result<String>> authorize({
+    required String username,
+    required String password,
+  }) async {
     Map<String, String> params = {
       'username': username,
       'password': password,
@@ -50,8 +53,9 @@ class _AuthRepositoryImpl implements AuthRepository {
     try {
       final result = await _apiService.request(endpoint);
       await _notifier.login(
-          sessionKey: result.sessionBody.key,
-          username: result.sessionBody.name,);
+        sessionKey: result.sessionBody.key,
+        username: result.sessionBody.name,
+      );
       return Result.success(result.sessionBody.name);
     } on Exception catch (error) {
       return Result.failure(AppError.getApiError(error));

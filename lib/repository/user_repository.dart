@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sunrisescrob/api/endpoint/user_top_albums_endpoint.dart';
 import 'package:sunrisescrob/api/endpoint/user_top_artists_endpoint.dart';
@@ -13,7 +14,7 @@ part 'user_repository.g.dart';
 
 // [userRepositoryProvider]
 @Riverpod(dependencies: [lastFmApiService, kvStore])
-UserRepository userRepository(UserRepositoryRef ref) {
+UserRepository userRepository(Ref ref) {
   return _UserRepositoryImpl(
     apiService: ref.read(lastFmApiServiceProvider),
     kvStore: ref.read(kvStoreProvider),

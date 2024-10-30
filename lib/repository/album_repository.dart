@@ -1,3 +1,4 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sunrisescrob/api/endpoint/album_get_info_endpoint.dart';
 import 'package:sunrisescrob/api/last_fm_api_service.dart';
@@ -11,7 +12,7 @@ part 'album_repository.g.dart';
 
 // [albumRepositoryProvider]
 @Riverpod(dependencies: [lastFmApiService, kvStore])
-AlbumRepository albumRepository(AlbumRepositoryRef ref) {
+AlbumRepository albumRepository(Ref ref) {
   return _AlbumRepositoryImpl(
     apiService: ref.read(lastFmApiServiceProvider),
     kvStore: ref.read(kvStoreProvider),
