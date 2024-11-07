@@ -465,10 +465,10 @@ packages:
     dependency: "direct main"
     description:
       name: go_router
-      sha256: "6f1b756f6e863259a99135ff3c95026c3cdca17d10ebef2bba2261a25ddc8bbc"
+      sha256: ce89c5a993ca5eea74535f798478502c30a625ecb10a1de4d7fef5cd1bcac2a4
       url: "https://pub.dev"
     source: hosted
-    version: "14.3.0"
+    version: "14.4.1"
   go_router_builder:
     dependency: "direct dev"
     description:
@@ -1214,10 +1214,10 @@ packages:
     dependency: transitive
     description:
       name: win32
-      sha256: "10169d3934549017f0ae278ccb07f828f9d6ea21573bab0fb77b0e1ef0fce454"
+      sha256: "84ba388638ed7a8cb3445a320c8273136ab2631cd5f2c57888335504ddab1bc2"
       url: "https://pub.dev"
     source: hosted
-    version: "5.7.2"
+    version: "5.8.0"
   xdg_directories:
     dependency: transitive
     description:
