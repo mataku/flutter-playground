@@ -1,39 +1,53 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:base"
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'config:recommended',
   ],
-  "timezone": "Asia/Tokyo",
-  "schedule": [
-    "after 3pm on Friday",
-    "before 5pm on Friday"
+  timezone: 'Asia/Tokyo',
+  schedule: [
+    'after 3pm on Friday',
+    'before 5pm on Friday',
   ],
-  "rangeStrategy": "replaced",
-  "rebaseWhen": "conflicted",
-  "packageRules": [
+  rangeStrategy: 'replaced',
+  rebaseWhen: 'conflicted',
+  packageRules: [
     {
-      "matchUpdateTypes": ["patch", "minor"],
-      "groupName": "dart_pub",
-      "automerge": true,
-      "platformAutomerge": true,
-      "matchManagers": ["pub"]
+      matchUpdateTypes: [
+        'patch',
+        'minor',
+      ],
+      groupName: 'dart_pub',
+      automerge: true,
+      platformAutomerge: true,
+      matchManagers: [
+        'pub',
+      ],
     },
     {
-      "matchUpdateTypes": ["major", "patch", "minor"],
-      "groupName": "GitHub Actions",
-      "matchManagers": ["github-actions"],
-      "automerge": true,
-      "platformAutomerge": true
-    }
+      matchUpdateTypes: [
+        'major',
+        'patch',
+        'minor',
+      ],
+      groupName: 'GitHub Actions',
+      matchManagers: [
+        'github-actions',
+      ],
+      automerge: true,
+      platformAutomerge: true,
+    },
   ],
-  "enabledManagers": ["github-actions", "pub"],
-  "lockFileMaintenance": {
-    "enabled": true,
-    "automerge": true,
-    "platformAutomerge": true,
-    "schedule": [
-      "after 3pm on Friday",
-      "before 5pm on Friday"
-    ]
+  enabledManagers: [
+    'github-actions',
+    'pub',
+  ],
+  lockFileMaintenance: {
+    enabled: true,
+    automerge: true,
+    platformAutomerge: true,
+    schedule: [
+      'after 3pm on Friday',
+      'before 5pm on Friday',
+    ],
   },
 }
