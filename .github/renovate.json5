@@ -12,6 +12,15 @@
   rebaseWhen: 'conflicted',
   packageRules: [
     {
+      groupName: 'envied',
+      matchPackageNames: [
+        'envied',
+        'envied_generator',
+      ],
+      automerge: true,
+      platformAutomerge: true,
+    },
+    {
       matchUpdateTypes: [
         'patch',
         'minor',
