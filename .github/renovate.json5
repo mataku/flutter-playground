@@ -55,8 +55,7 @@
     automerge: true,
     platformAutomerge: true,
     schedule: [
-      'after 3pm on Friday',
-      'before 5pm on Friday',
+      'after 3pm and before 5pm on Friday',
     ],
   },
 }
